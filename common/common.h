@@ -41,12 +41,12 @@
 #define REP_OK				L'T'	//hit
 #define REP_FALSE			L'F'	//nothing
 
-#define IMCRVMGREXE			L"imcrvmgr.exe"
-#define IMCRVCNFEXE			L"imcrvcnf.exe"
+#define IMCRVMGREXE			L"immanamgr.exe"
+#define IMCRVCNFEXE			L"immanacnf.exe"
 #ifndef _DEBUG
-#define IMCRVKRNLOBJ		L"corvus-skk-"
+#define IMCRVKRNLOBJ		L"manakonso-"
 #else
-#define IMCRVKRNLOBJ		L"corvus-skk-debug-"
+#define IMCRVKRNLOBJ		L"manakonso-debug-"
 #endif
 #define IMCRVMGRMUTEX		IMCRVKRNLOBJ L"mgr-"
 #define IMCRVCNFMUTEX		IMCRVKRNLOBJ L"cnf-"

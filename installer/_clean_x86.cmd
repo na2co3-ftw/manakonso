@@ -5,7 +5,7 @@ pushd %~dp0
 
 call _version.cmd
 
-del "%TARGETDIR%\corvusskk-%VERSION%-x86.*"
+del "%TARGETDIR%\manakonso-%VERSION%-x86.*"
 
 popd
 

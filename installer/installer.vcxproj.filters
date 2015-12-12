@@ -54,13 +54,13 @@
     <None Include="_version.cmd">
       <Filter>Installer Files</Filter>
     </None>
-    <None Include="corvusskk-version.wxi">
+    <None Include="manakonso-version.wxi">
       <Filter>Installer Files</Filter>
     </None>
-    <None Include="corvusskk-x64.wxs">
+    <None Include="manakonso-x64.wxs">
       <Filter>Installer Files</Filter>
     </None>
-    <None Include="corvusskk-x86.wxs">
+    <None Include="manakonso-x86.wxs">
       <Filter>Installer Files</Filter>
     </None>
     <None Include="license.rtf">

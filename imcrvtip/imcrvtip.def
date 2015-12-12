@@ -1,4 +1,4 @@
-LIBRARY		imcrvtip.dll
+LIBRARY		immanatip.dll
 
 EXPORTS
 	DllCanUnloadNow			PRIVATE

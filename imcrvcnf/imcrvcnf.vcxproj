@@ -21,7 +21,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{56319425-6482-41CF-8B63-BC33D6EEBB52}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>imcrvcnf</RootNamespace>
+    <RootNamespace>immanacnf</RootNamespace>
+    <ProjectName>immanacnf</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
