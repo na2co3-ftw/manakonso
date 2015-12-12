@@ -43,26 +43,26 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 		else
 		{
 			//ローマ字仮名変換 待機処理
-			rkc.roman[0] = ch;
-			rkc.roman[1] = L'\0';
+			rkc.hacm[0] = ch;
+			rkc.hacm[1] = L'\0';
 			ret = _ConvRomanKana(&rkc);
 			switch(ret)
 			{
 			case S_OK:	//一致
 			case E_PENDING:	//途中まで一致
-				if(rkc.roman[0] != L'\0' && rkc.wait)	//待機
+				if(rkc.hacm[0] != L'\0' && rkc.wait)	//待機
 				{
 					ch = L'\0';
 					switch(inputmode)
 					{
 					case im_hiragana:
-						roman.append(rkc.hiragana);
+						roman.append(rkc.yula);
 						break;
 					case im_katakana:
-						roman.append(rkc.katakana);
+						roman.append(rkc.yula);
 						break;
 					case im_katakana_ank:
-						roman.append(rkc.katakana_ank);
+						roman.append(rkc.yula);
 						break;
 					default:
 						break;
@@ -79,13 +79,13 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 			{
 				roman_conv.push_back(ch);
 			}
-			wcsncpy_s(rkc.roman, roman_conv.c_str(), _TRUNCATE);
+			wcsncpy_s(rkc.hacm, roman_conv.c_str(), _TRUNCATE);
 			ret = _ConvRomanKana(&rkc);
 
 			if(ret == E_ABORT && wParam == VK_PACKET && ch != TKB_NEXT_PAGE && ch != TKB_PREV_PAGE)
 			{
-				rkc.roman[0] = rkc.hiragana[0] = rkc.katakana[0] = rkc.katakana_ank[0] = ch;
-				rkc.roman[1] = rkc.hiragana[1] = rkc.katakana[1] = rkc.katakana_ank[1] = L'\0';
+				rkc.hacm[0] = rkc.yula[0] = ch;
+				rkc.hacm[1] = rkc.yula[1] = L'\0';
 				rkc.soku = FALSE;
 				rkc.wait = FALSE;
 				ret = S_OK;
@@ -94,20 +94,20 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 			switch(ret)
 			{
 			case S_OK:	//一致
-				if(rkc.roman[0] != L'\0' && rkc.wait)	//待機
+				if(rkc.hacm[0] != L'\0' && rkc.wait)	//待機
 				{
 					_HandleCharShift(ec, pContext);
 
 					switch(inputmode)
 					{
 					case im_hiragana:
-						roman.assign(rkc.hiragana);
+						roman.assign(rkc.yula);
 						break;
 					case im_katakana:
-						roman.assign(rkc.katakana);
+						roman.assign(rkc.yula);
 						break;
 					case im_katakana_ank:
-						roman.assign(rkc.katakana_ank);
+						roman.assign(rkc.yula);
 						break;
 					default:
 						break;
@@ -121,13 +121,13 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					switch(inputmode)
 					{
 					case im_hiragana:
-						kana_ins = rkc.hiragana;
+						kana_ins = rkc.yula;
 						break;
 					case im_katakana:
-						kana_ins = rkc.katakana;
+						kana_ins = rkc.yula;
 						break;
 					case im_katakana_ank:
-						kana_ins = rkc.katakana_ank;
+						kana_ins = rkc.yula;
 						break;
 					default:
 						break;
@@ -201,18 +201,18 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 			case E_PENDING:	//途中まで一致
 				_HandleCharShift(ec, pContext);
 
-				if(rkc.roman[0] != L'\0' && rkc.wait)	//待機
+				if(rkc.hacm[0] != L'\0' && rkc.wait)	//待機
 				{
 					switch(inputmode)
 					{
 					case im_hiragana:
-						roman.assign(rkc.hiragana);
+						roman.assign(rkc.yula);
 						break;
 					case im_katakana:
-						roman.assign(rkc.katakana);
+						roman.assign(rkc.yula);
 						break;
 					case im_katakana_ank:
-						roman.assign(rkc.katakana_ank);
+						roman.assign(rkc.yula);
 						break;
 					default:
 						break;

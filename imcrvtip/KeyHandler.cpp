@@ -164,7 +164,7 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 			ROMAN_KANA_CONV rkc;
 			std::wstring roman_conv = roman;
 			roman_conv.push_back(ch);
-			wcsncpy_s(rkc.roman, roman_conv.c_str(), _TRUNCATE);
+			wcsncpy_s(rkc.hacm, roman_conv.c_str(), _TRUNCATE);
 			hrc = _ConvRomanKana(&rkc);
 			if(hrc != E_ABORT && !rkc.wait)
 			{

@@ -161,17 +161,17 @@ HRESULT CTextService::_SearchRomanKanaNode(const ROMAN_KANA_NODE &tree, ROMAN_KA
 	HRESULT ret = E_ABORT;	//一致なし
 
 	if((pconv == NULL) ||
-		(_countof(pconv->roman) <= (depth + 1)) || (pconv->roman[depth] == L'\0'))
+		(_countof(pconv->hacm) <= (depth + 1)) || (pconv->hacm[depth] == L'\0'))
 	{
 		return ret;
 	}
 
 	auto v_itr = std::lower_bound(tree.nodes.begin(), tree.nodes.end(),
-		pconv->roman[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
+		pconv->hacm[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
 
-	if(v_itr != tree.nodes.end() && v_itr->ch == pconv->roman[depth])
+	if(v_itr != tree.nodes.end() && v_itr->ch == pconv->hacm[depth])
 	{
-		if(pconv->roman[depth + 1] == L'\0')
+		if(pconv->hacm[depth + 1] == L'\0')
 		{
 			*pconv = v_itr->conv;
 			if(v_itr->nodes.empty())
@@ -747,13 +747,13 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 		return TRUE;
 	}
 
-	wcsncpy_s(rkc.roman, roman.c_str(), _TRUNCATE);
+	wcsncpy_s(rkc.hacm, roman.c_str(), _TRUNCATE);
 	ret = _ConvRomanKana(&rkc);
 	switch(ret)
 	{
 	case S_OK:	//一致
 	case E_PENDING:	//途中まで一致
-		if(rkc.roman[0] != L'\0' && rkc.wait)	//待機
+		if(rkc.hacm[0] != L'\0' && rkc.wait)	//待機
 		{
 			if(okuriidx != 0 && okuriidx + 1 == cursoridx)
 			{
@@ -761,13 +761,13 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 				switch(inputmode)
 				{
 				case im_hiragana:
-					chN = rkc.hiragana[0];
+					chN = rkc.yula[0];
 					break;
 				case im_katakana:
-					chN = rkc.katakana[0];
+					chN = rkc.yula[0];
 					break;
 				case im_katakana_ank:
-					chN = rkc.katakana_ank[0];
+					chN = rkc.yula[0];
 					break;
 				default:
 					break;
@@ -797,13 +797,13 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 			switch(inputmode)
 			{
 			case im_hiragana:
-				kana_ins = rkc.hiragana;
+				kana_ins = rkc.yula;
 				break;
 			case im_katakana:
-				kana_ins = rkc.katakana;
+				kana_ins = rkc.yula;
 				break;
 			case im_katakana_ank:
-				kana_ins = rkc.katakana_ank;
+				kana_ins = rkc.yula;
 				break;
 			default:
 				break;
@@ -832,25 +832,25 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 	{
 		std::wstring roman_conv = roman;
 		roman_conv.push_back(ch);
-		wcsncpy_s(rkc.roman, roman_conv.c_str(), _TRUNCATE);
+		wcsncpy_s(rkc.hacm, roman_conv.c_str(), _TRUNCATE);
 		ret = _ConvRomanKana(&rkc);
 		switch(ret)
 		{
 		case S_OK:		//一致
 		case E_PENDING:	//途中まで一致
-			if(rkc.roman[0] != L'\0' && rkc.soku)
+			if(rkc.hacm[0] != L'\0' && rkc.soku)
 			{
 				std::wstring kana_ins;
 				switch(inputmode)
 				{
 				case im_hiragana:
-					kana_ins = rkc.hiragana;
+					kana_ins = rkc.yula;
 					break;
 				case im_katakana:
-					kana_ins = rkc.katakana;
+					kana_ins = rkc.yula;
 					break;
 				case im_katakana_ank:
-					kana_ins = rkc.katakana_ank;
+					kana_ins = rkc.yula;
 					break;
 				default:
 					break;
@@ -896,25 +896,25 @@ BOOL CTextService::_ConvN()
 	ROMAN_KANA_CONV rkc;
 	HRESULT ret;
 
-	wcsncpy_s(rkc.roman, roman.c_str(), _TRUNCATE);
+	wcsncpy_s(rkc.hacm, roman.c_str(), _TRUNCATE);
 	ret = _ConvRomanKana(&rkc);
 	switch(ret)
 	{
 	case S_OK:	//一致
 	case E_PENDING:	//途中まで一致
-		if(rkc.roman[0] != L'\0')
+		if(rkc.hacm[0] != L'\0')
 		{
 			std::wstring kana_ins;
 			switch(inputmode)
 			{
 			case im_hiragana:
-				kana_ins = rkc.hiragana;
+				kana_ins = rkc.yula;
 				break;
 			case im_katakana:
-				kana_ins = rkc.katakana;
+				kana_ins = rkc.yula;
 				break;
 			case im_katakana_ank:
-				kana_ins = rkc.katakana_ank;
+				kana_ins = rkc.yula;
 				break;
 			default:
 				break;
@@ -949,114 +949,5 @@ BOOL CTextService::_ConvN()
 
 void CTextService::_ConvKanaToKana(const std::wstring &src, int srcmode, std::wstring &dst, int dstmode)
 {
-	BOOL exist;
-	WCHAR *convkana = NULL;
-	WCHAR srckana[3];
-	std::wstring dsttmp;
-
-	switch(srcmode)
-	{
-	case im_hiragana:
-	case im_katakana:
-		break;
-	default:
-		return;
-		break;
-	}
-	switch(dstmode)
-	{
-	case im_hiragana:
-	case im_katakana:
-	case im_katakana_ank:
-		break;
-	default:
-		return;
-		break;
-	}
-
-	for(size_t i = 0; i < src.size(); i++)
-	{
-		// surrogate pair, 「う゛」
-		if(((i + 1) < src.size()) &&
-			(IS_SURROGATE_PAIR(src[i], src[i + 1]) || (src[i] == L'う' && src[i + 1] == L'゛')))
-		{
-			srckana[0] = src[i];
-			srckana[1] = src[i + 1];
-			srckana[2] = L'\0';
-			i++;
-		}
-		else
-		{
-			srckana[0] = src[i];
-			srckana[1] = L'\0';
-		}
-
-		exist = _SearchKanaByKana(roman_kana_tree, srckana, srcmode, dsttmp, dstmode);
-
-		if(!exist)	//ローマ字仮名変換表に無ければそのまま
-		{
-			dsttmp.append(srckana);
-		}
-	}
-
-	dst.assign(dsttmp);
-}
-
-BOOL CTextService::_SearchKanaByKana(const ROMAN_KANA_NODE &tree, const WCHAR *src, int srcmode, std::wstring &dst, int dstmode)
-{
-	ROMAN_KANA_CONV rkc;
-	BOOL exist = FALSE;
-
-	FORWARD_ITERATION_I(v_itr, tree.nodes)
-	{
-		switch(srcmode)
-		{
-		case im_hiragana:
-			if(wcscmp(src, v_itr->conv.hiragana) == 0)
-			{
-				rkc = v_itr->conv;
-				exist = TRUE;
-			}
-			break;
-		case im_katakana:
-			if(wcscmp(src, v_itr->conv.katakana) == 0)
-			{
-				rkc = v_itr->conv;
-				exist = TRUE;
-			}
-			break;
-		default:
-			break;
-		}
-
-		if(exist)
-		{
-			switch(dstmode)
-			{
-			case im_hiragana:
-				dst.append(rkc.hiragana);
-				break;
-			case im_katakana:
-				dst.append(rkc.katakana);
-				break;
-			case im_katakana_ank:
-				dst.append(rkc.katakana_ank);
-				break;
-			default:
-				break;
-			}
-			break;
-		}
-		else if(!v_itr->nodes.empty())
-		{
-			exist = _SearchKanaByKana(*v_itr, src, srcmode, dst, dstmode);
-
-			if(exist)
-			{
-				break;
-			}
-		}
-	}
-
-	return exist;
+	dst.assign(src);
 }

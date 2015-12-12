@@ -192,8 +192,6 @@
 #define IDC_LIST_KANATBL                        4201
 #define IDC_EDIT_KANATBL_R                      4202
 #define IDC_EDIT_KANATBL_H                      4203
-#define IDC_EDIT_KANATBL_K                      4204
-#define IDC_EDIT_KANATBL_KA                     4205
 #define IDC_CHECKBOX_KANATBL_SOKU               4206
 #define IDC_CHECKBOX_KANATBL_WAIT               4207
 #define IDC_BUTTON_KANATBL_UP                   4208

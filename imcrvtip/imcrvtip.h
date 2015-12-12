@@ -74,7 +74,7 @@ typedef struct ROMAN_KANA_NODE {
 	WCHAR ch;
 	//ローマ字仮名変換
 	// ルートノードの各メンバーは空文字列
-	// 仮名があるとき、最短で探索したchとconv.romanは等しい
+	// 仮名があるとき、最短で探索したchとconv.hacmは等しい
 	// 仮名がないとき、各メンバーは空文字列
 	ROMAN_KANA_CONV conv;
 	//子ノード、メンバーchで昇順ソート

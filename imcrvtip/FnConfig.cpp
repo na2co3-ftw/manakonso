@@ -699,23 +699,13 @@ void CTextService::_LoadKana()
 
 				if(r_itr->first == AttributeRoman)
 				{
-					pszb = rkc.roman;
-					blen = _countof(rkc.roman);
+					pszb = rkc.hacm;
+					blen = _countof(rkc.hacm);
 				}
 				else if(r_itr->first == AttributeHiragana)
 				{
-					pszb = rkc.hiragana;
-					blen = _countof(rkc.hiragana);
-				}
-				else if(r_itr->first == AttributeKatakana)
-				{
-					pszb = rkc.katakana;
-					blen = _countof(rkc.katakana);
-				}
-				else if(r_itr->first == AttributeKatakanaAnk)
-				{
-					pszb = rkc.katakana_ank;
-					blen = _countof(rkc.katakana_ank);
+					pszb = rkc.yula;
+					blen = _countof(rkc.yula);
 				}
 				else if(r_itr->first == AttributeSpOp)
 				{
@@ -740,10 +730,8 @@ void CTextService::_LoadKana()
 
 		for(WCHAR ch = 0x20; ch <= 0x7E; ch++)
 		{
-			rkc.roman[0] = ch;
-			rkc.hiragana[0] = ch;
-			rkc.katakana[0] = ch;
-			rkc.katakana_ank[0] = ch;
+			rkc.hacm[0] = ch;
+			rkc.yula [0] = ch;
 
 			_AddKanaTree(roman_kana_tree, rkc, 0);
 		}
@@ -754,19 +742,19 @@ BOOL CTextService::_AddKanaTree(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int 
 {
 	BOOL added = FALSE;
 
-	if((_countof(rkc.roman) <= (depth + 1)) || (rkc.roman[depth] == L'\0'))
+	if((_countof(rkc.hacm) <= (depth + 1)) || (rkc.hacm[depth] == L'\0'))
 	{
 		return FALSE;
 	}
 
 	auto v_itr = std::lower_bound(tree.nodes.begin(), tree.nodes.end(),
-		rkc.roman[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
+		rkc.hacm[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
 
-	if(v_itr != tree.nodes.end() && v_itr->ch == rkc.roman[depth])
+	if(v_itr != tree.nodes.end() && v_itr->ch == rkc.hacm[depth])
 	{
-		if(rkc.roman[depth + 1] == L'\0')
+		if(rkc.hacm[depth + 1] == L'\0')
 		{
-			if(v_itr->conv.roman[0] == L'\0')
+			if(v_itr->conv.hacm[0] == L'\0')
 			{
 				//ローマ字探索最後のノードにローマ字仮名変換がなければ更新
 				v_itr->conv = rkc;
@@ -796,17 +784,17 @@ void CTextService::_AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, 
 
 	ZeroMemory(&rkn, sizeof(rkn));
 
-	if((_countof(rkc.roman) <= (depth + 1)) || (rkc.roman[depth] == L'\0'))
+	if((_countof(rkc.hacm) <= (depth + 1)) || (rkc.hacm[depth] == L'\0'))
 	{
 		return;
 	}
 
-	rkn.ch = rkc.roman[depth];
+	rkn.ch = rkc.hacm[depth];
 
 	auto v_itr = std::lower_bound(tree.nodes.begin(), tree.nodes.end(),
 		rkn.ch, [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
 
-	if(rkc.roman[depth + 1] == L'\0')
+	if(rkc.hacm[depth + 1] == L'\0')
 	{
 		//ローマ字探索最後のノードにローマ字仮名変換ありの子ノードを追加
 		rkn.conv = rkc;

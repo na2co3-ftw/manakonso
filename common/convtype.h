@@ -8,10 +8,8 @@
 
 //ローマ字仮名変換
 typedef struct {
-	WCHAR roman[ROMAN_NUM];
-	WCHAR hiragana[KANA_NUM];
-	WCHAR katakana[KANA_NUM];
-	WCHAR katakana_ank[KANA_NUM];
+	WCHAR hacm[ROMAN_NUM];
+	WCHAR yula[KANA_NUM];
 	BOOL  soku;
 	BOOL  wait;
 } ROMAN_KANA_CONV;

@@ -57,8 +57,6 @@ extern LPCWSTR AttributeCPAlter;
 extern LPCWSTR AttributeCPOkuri;
 extern LPCWSTR AttributeRoman;
 extern LPCWSTR AttributeHiragana;
-extern LPCWSTR AttributeKatakana;
-extern LPCWSTR AttributeKatakanaAnk;
 extern LPCWSTR AttributeSpOp;
 extern LPCWSTR AttributeLatin;
 extern LPCWSTR AttributeJLatin;
