@@ -59,7 +59,7 @@
 
     <DirectoryRef Id="TARGETDIR">
       <Merge Id="CRT_X86" DiskId="1" Language="0"
-        SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC120_CRT_x86.msm" />
+        SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC140_CRT_x86.msm" />
     </DirectoryRef>
     <Feature Id="CRT" Title="VCRuntime" AllowAdvertise="no" Display="hidden" Level="1">
       <MergeRef Id="CRT_X86" />

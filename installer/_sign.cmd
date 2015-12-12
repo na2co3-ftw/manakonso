@@ -9,7 +9,7 @@ set TIMESTAMPSERVER=%3
 set PFXFILE=%4
 set PASSWORD=%5
 
-call "%VS120COMNTOOLS%VsDevCmd.bat"
+call "%VS140COMNTOOLS%VsDevCmd.bat"
 
 call _version.cmd
 

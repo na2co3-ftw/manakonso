@@ -8,13 +8,13 @@ call _version.cmd
 del "%TARGETDIR%\config-sample.zip"
 
 pushd config-sample
-7za.exe a -tzip -mtc=off "..\%TARGETDIR%\config-sample.zip" *.xml *.txt
+"C:\Program Files\7-Zip\7z.exe" a -tzip -mtc=off "..\%TARGETDIR%\config-sample.zip" *.xml *.txt
 popd
 
 del "%TARGETDIR%\corvusskk-%VERSION%.zip"
 
 pushd "%TARGETDIR%"
-7za.exe a -tzip -mtc=off corvusskk-%VERSION%.zip corvusskk-%VERSION%-x86.msi corvusskk-%VERSION%-x64.msi ..\README.TXT ..\..\LICENSE.TXT config-sample.zip
+"C:\Program Files\7-Zip\7z.exe" a -tzip -mtc=off corvusskk-%VERSION%.zip corvusskk-%VERSION%-x86.msi corvusskk-%VERSION%-x64.msi ..\README.TXT ..\..\LICENSE.TXT config-sample.zip
 popd
 
 popd
