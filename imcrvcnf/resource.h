@@ -18,7 +18,6 @@
 #define IDD_DIALOG_KEYMAP2                      134
 #define IDD_DIALOG_CONVPOINT                    141
 #define IDD_DIALOG_KANATBL                      142
-#define IDD_DIALOG_JLATTBL                      143
 
 #define IDC_LIST_SKK_DIC                        1001
 #define IDC_BUTTON_SKK_DIC_ADD_FILE             1002
@@ -194,13 +193,5 @@
 #define IDC_BUTTON_KANATBL_D                    4211
 #define IDC_BUTTON_LOADKANA                     4212
 #define IDC_BUTTON_SAVEKANA                     4213
-
-#define IDC_LIST_JLATTBL                        4301
-#define IDC_EDIT_JLATTBL_A                      4302
-#define IDC_EDIT_JLATTBL_J                      4303
-#define IDC_BUTTON_JLATTBL_UP                   4304
-#define IDC_BUTTON_JLATTBL_DOWN                 4305
-#define IDC_BUTTON_JLATTBL_W                    4306
-#define IDC_BUTTON_JLATTBL_D                    4307
 
 #endif //RESOURCE_H

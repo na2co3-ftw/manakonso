@@ -30,8 +30,6 @@ void LoadConvPoint(HWND hwnd);
 void SaveConvPoint(HWND hwnd);
 void LoadKana(HWND hwnd);
 void SaveKana(HWND hwnd);
-void LoadJLatin(HWND hwnd);
-void SaveJLatin(HWND hwnd);
 void LoadConfigKanaTxt(LPCWSTR path);
 void LoadKanaTxt(HWND hwnd, LPCWSTR path);
 void SaveKanaTxt(HWND hwnd, LPCWSTR path);

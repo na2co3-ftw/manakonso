@@ -47,9 +47,6 @@
     <ClCompile Include="DlgProcDictionary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DlgProcJLatin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgProcKana.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

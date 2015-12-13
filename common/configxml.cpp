@@ -168,10 +168,6 @@ LPCWSTR SectionConvPoint = L"convpoint";
 
 LPCWSTR SectionKana = L"kana";
 
-//jlatin section
-
-LPCWSTR SectionJLatin = L"jlatin";
-
 HRESULT CreateStreamReader(LPCWSTR path, IXmlReader **ppReader, IStream **ppFileStream)
 {
 	HRESULT hr = S_FALSE;

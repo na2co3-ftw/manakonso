@@ -243,6 +243,13 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
 		case PSN_APPLY:
 			SaveKana(hDlg);
+
+			WriterEndElement(pXmlWriter);	//TagRoot
+
+			WriterNewLine(pXmlWriter);
+
+			WriterFinal(&pXmlWriter, &pXmlFileStream);
+			
 			return TRUE;
 
 		default:

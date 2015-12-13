@@ -207,7 +207,6 @@
     <ClCompile Include="DlgProcConvPoint.cpp" />
     <ClCompile Include="DlgProcDictionary.cpp" />
     <ClCompile Include="DlgProcDisplayAttr.cpp" />
-    <ClCompile Include="DlgProcJLatin.cpp" />
     <ClCompile Include="DlgProcKana.cpp" />
     <ClCompile Include="DlgProcKeyMap.cpp" />
     <ClCompile Include="DlgProcPreservedKey.cpp" />

@@ -198,8 +198,4 @@ extern LPCWSTR SectionConvPoint;
 
 extern LPCWSTR SectionKana;
 
-//jlatin section
-
-extern LPCWSTR SectionJLatin;
-
 #endif //CONFIGXML_H
