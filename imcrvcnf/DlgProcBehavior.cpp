@@ -21,7 +21,6 @@ INT_PTR CALLBACK DlgProcBehavior(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 		LoadCheckButton(hDlg, IDC_CHECKBOX_DELCVPOSCNCL, SectionBehavior, ValueDelCvPosCncl, L"1");
 		LoadCheckButton(hDlg, IDC_CHECKBOX_DELOKURICNCL, SectionBehavior, ValueDelOkuriCncl);
 		LoadCheckButton(hDlg, IDC_CHECKBOX_BACKINCENTER, SectionBehavior, ValueBackIncEnter, L"1");
-		LoadCheckButton(hDlg, IDC_CHECKBOX_ADDCANDKTKN, SectionBehavior, ValueAddCandKtkn);
 		LoadCheckButton(hDlg, IDC_CHECKBOX_STACOMPMULTI, SectionBehavior, ValueStaCompMulti);
 		LoadCheckButton(hDlg, IDC_CHECKBOX_DYNAMINCOMP, SectionBehavior, ValueDynamicComp);
 		LoadCheckButton(hDlg, IDC_CHECKBOX_DYNCOMPMULTI, SectionBehavior, ValueDynCompMulti);
@@ -42,7 +41,6 @@ INT_PTR CALLBACK DlgProcBehavior(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 		case IDC_CHECKBOX_DELCVPOSCNCL:
 		case IDC_CHECKBOX_DELOKURICNCL:
 		case IDC_CHECKBOX_BACKINCENTER:
-		case IDC_CHECKBOX_ADDCANDKTKN:
 		case IDC_CHECKBOX_STACOMPMULTI:
 		case IDC_CHECKBOX_DYNAMINCOMP:
 		case IDC_CHECKBOX_DYNCOMPMULTI:
@@ -72,7 +70,6 @@ INT_PTR CALLBACK DlgProcBehavior(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 			SaveCheckButton(hDlg, IDC_CHECKBOX_DELCVPOSCNCL, ValueDelCvPosCncl);
 			SaveCheckButton(hDlg, IDC_CHECKBOX_DELOKURICNCL, ValueDelOkuriCncl);
 			SaveCheckButton(hDlg, IDC_CHECKBOX_BACKINCENTER, ValueBackIncEnter);
-			SaveCheckButton(hDlg, IDC_CHECKBOX_ADDCANDKTKN, ValueAddCandKtkn);
 			SaveCheckButton(hDlg, IDC_CHECKBOX_STACOMPMULTI, ValueStaCompMulti);
 			SaveCheckButton(hDlg, IDC_CHECKBOX_DYNAMINCOMP, ValueDynamicComp);
 			SaveCheckButton(hDlg, IDC_CHECKBOX_DYNCOMPMULTI, ValueDynCompMulti);

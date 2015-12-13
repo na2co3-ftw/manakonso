@@ -62,7 +62,6 @@ LPCWSTR ValueSrchAllOkuri = L"srchallokuri";
 LPCWSTR ValueDelCvPosCncl = L"delcvposcncl";
 LPCWSTR ValueDelOkuriCncl = L"delokuricncl";
 LPCWSTR ValueBackIncEnter = L"backincenter";
-LPCWSTR ValueAddCandKtkn = L"addcandktkn";
 LPCWSTR ValueStaCompMulti = L"stacompmulti";
 LPCWSTR ValueDynamicComp = L"dynamiccomp";
 LPCWSTR ValueDynCompMulti = L"dyncompmulti";

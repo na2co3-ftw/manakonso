@@ -174,7 +174,6 @@ public:
 	BOOL _ConvShift(WCHAR ch);
 	BOOL _ConvN();
 	void _ConvKanaToKana(const std::wstring &src, int srcmode, std::wstring &dst, int dstmode);
-	BOOL _SearchKanaByKana(const ROMAN_KANA_NODE &tree, const WCHAR *src, int srcmode, std::wstring &dst, int dstmode);
 
 	// KeyHandlerDictionary
 	void _ConnectDic();
@@ -307,7 +306,7 @@ public:
 	BOOL _ShowInputMode;	//InputModeWindow
 
 	//状態
-	int inputmode;			//入力モード (無し/ひらがな/カタカナ/半角ｶﾀｶﾅ/全英/アスキー)
+	int inputmode;			//入力モード (無し/京極)
 	BOOL inputkey;			//見出し入力▽モード
 	BOOL abbrevmode;		//abbrevモード
 	BOOL showentry;			//候補表示▼モード
@@ -342,7 +341,6 @@ public:
 	BOOL cx_delcvposcncl;		//取消のとき変換位置を削除する
 	BOOL cx_delokuricncl;		//取消のとき送り仮名を削除する
 	BOOL cx_backincenter;		//後退に確定を含める
-	BOOL cx_addcandktkn;		//候補に片仮名変換を追加する
 	BOOL cx_stacompmulti;		//複数補完を使用する
 	BOOL cx_dynamiccomp;		//動的補完を使用する
 	BOOL cx_dyncompmulti;		//複数動的補完を使用する

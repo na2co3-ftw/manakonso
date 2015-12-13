@@ -230,16 +230,7 @@ void CTextService::_StartSubConv(WCHAR command)
 	searchkey.clear();
 	searchkeyorg.clear();
 
-	//仮名を平仮名にして検索
-	if(okuriidx != 0)
-	{
-		_ConvKanaToKana(kana.substr(0, okuriidx), inputmode, searchkey, im_hiragana);
-		searchkey += kana.substr(okuriidx, 1);
-	}
-	else
-	{
-		_ConvKanaToKana(kana, inputmode, searchkey, im_hiragana);
-	}
+	searchkey = kana;
 
 	candidates.clear();
 	candidates.shrink_to_fit();
@@ -282,43 +273,6 @@ void CTextService::_StartSubConv(WCHAR command)
 		if(!candidates_bak.empty())
 		{
 			candidates.insert(candidates.begin(), candidates_bak.begin(), candidates_bak.end());
-		}
-	}
-
-	//片仮名変換
-	if(cx_addcandktkn && !abbrevmode)
-	{
-		switch(inputmode)
-		{
-		case im_hiragana:
-			if(okuriidx != 0)
-			{
-				kanaconv.assign(kana.substr(0, okuriidx));
-			}
-			else
-			{
-				kanaconv.assign(kana);
-			}
-
-			if(!kanaconv.empty())
-			{
-				FORWARD_ITERATION_I(candidates_itr, candidates)
-				{
-					if(candidates_itr->first.first == kanaconv)
-					{
-						kanaconv.clear();
-						break;
-					}
-				}
-
-				if(!kanaconv.empty())
-				{
-					candidates.push_back(CANDIDATE(CANDIDATEBASE(kanaconv, L""), CANDIDATEBASE(kanaconv, L"")));
-				}
-			}
-			break;
-		default:
-			break;
 		}
 	}
 
@@ -421,14 +375,7 @@ void CTextService::_NextComp()
 		searchkey.clear();
 		searchkeyorg.clear();
 
-		if(abbrevmode)
-		{
-			searchkey = kana;
-		}
-		else
-		{
-			_ConvKanaToKana(kana, inputmode, searchkey, im_hiragana);
-		}
+		searchkey = kana;
 
 		candidates.clear();
 		candidates.shrink_to_fit();
@@ -477,14 +424,7 @@ void CTextService::_SetComp(const std::wstring &candidate)
 {
 	kana.clear();
 
-	if(abbrevmode)
-	{
-		kana = candidate;
-	}
-	else
-	{
-		_ConvKanaToKana(candidate, im_hiragana, kana, inputmode);
-	}
+	kana = candidate;
 
 	if(cursoridx > kana.size())
 	{
@@ -838,9 +778,4 @@ BOOL CTextService::_ConvN()
 	}
 
 	return FALSE;
-}
-
-void CTextService::_ConvKanaToKana(const std::wstring &src, int srcmode, std::wstring &dst, int dstmode)
-{
-	dst.assign(src);
 }
