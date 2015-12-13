@@ -140,12 +140,6 @@ LPCWSTR SectionVKeyMap = L"vkeymap";
 
 //keymap and vkeymap keys
 
-LPCWSTR ValueKeyMapKana = L"kana";
-LPCWSTR ValueKeyMapConvChar = L"convchar";
-LPCWSTR ValueKeyMapJLatin = L"jlatin";
-LPCWSTR ValueKeyMapAscii = L"ascii";
-LPCWSTR ValueKeyMapJMode = L"jmode";
-LPCWSTR ValueKeyMapAbbrev = L"abbrev";
 LPCWSTR ValueKeyMapAffix = L"affix";
 LPCWSTR ValueKeyMapNextCand = L"nextcand";
 LPCWSTR ValueKeyMapPrevCand = L"prevcand";

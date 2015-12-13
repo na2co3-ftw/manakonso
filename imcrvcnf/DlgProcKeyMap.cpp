@@ -7,15 +7,9 @@ static const struct {
 	int idd;
 	LPCWSTR keyName;
 	LPCWSTR defaultValue;
-} KeyMap[2][25] =
+} KeyMap[2][19] =
 {
 	{
-		{IDC_EDIT_KANA,			ValueKeyMapKana,		L"q"},
-		{IDC_EDIT_CONV_CHAR,	ValueKeyMapConvChar,	L"\\cq"},
-		{IDC_EDIT_JLATIN,		ValueKeyMapJLatin,		L"L"},
-		{IDC_EDIT_ASCII,		ValueKeyMapAscii,		L"l"},
-		{IDC_EDIT_JMODE,		ValueKeyMapJMode,		L""},
-		{IDC_EDIT_ABBREV,		ValueKeyMapAbbrev,		L"/"},
 		{IDC_EDIT_AFFIX,		ValueKeyMapAffix,		L"<|>"},
 		{IDC_EDIT_NEXT_CAND,	ValueKeyMapNextCand,	L"\\x20|\\cn"},
 		{IDC_EDIT_PREV_CAND,	ValueKeyMapPrevCand,	L"x|\\cp"},
@@ -37,12 +31,6 @@ static const struct {
 		{IDC_EDIT_PASTE,		ValueKeyMapPaste,		L"\\cy|\\cv"}
 	},
 	{
-		{IDC_EDIT_KANA,			ValueKeyMapKana,		L""},
-		{IDC_EDIT_CONV_CHAR,	ValueKeyMapConvChar,	L""},
-		{IDC_EDIT_JLATIN,		ValueKeyMapJLatin,		L""},
-		{IDC_EDIT_ASCII,		ValueKeyMapAscii,		L""},
-		{IDC_EDIT_JMODE,		ValueKeyMapJMode,		L"C\\x4A"},
-		{IDC_EDIT_ABBREV,		ValueKeyMapAbbrev,		L""},
 		{IDC_EDIT_AFFIX,		ValueKeyMapAffix,		L""},
 		{IDC_EDIT_NEXT_CAND,	ValueKeyMapNextCand,	L""},
 		{IDC_EDIT_PREV_CAND,	ValueKeyMapPrevCand,	L""},
@@ -93,12 +81,6 @@ INT_PTR CALLBACK DlgProcKeyMap(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 	case WM_COMMAND:
 		switch(LOWORD(wParam))
 		{
-		case IDC_EDIT_KANA:
-		case IDC_EDIT_CONV_CHAR:
-		case IDC_EDIT_JLATIN:
-		case IDC_EDIT_ASCII:
-		case IDC_EDIT_JMODE:
-		case IDC_EDIT_ABBREV:
 		case IDC_EDIT_AFFIX:
 		case IDC_EDIT_NEXT_CAND:
 		case IDC_EDIT_PREV_CAND:

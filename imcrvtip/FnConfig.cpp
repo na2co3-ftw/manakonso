@@ -9,12 +9,6 @@ static const struct {
 	LPCWSTR keyname;
 } configkeymap[] =
 {
-	{SKK_KANA,		ValueKeyMapKana},
-	{SKK_CONV_CHAR,	ValueKeyMapConvChar},
-	{SKK_JLATIN,	ValueKeyMapJLatin},
-	{SKK_ASCII,		ValueKeyMapAscii},
-	{SKK_JMODE,		ValueKeyMapJMode},
-	{SKK_ABBREV,	ValueKeyMapAbbrev},
 	{SKK_AFFIX,		ValueKeyMapAffix},
 	{SKK_NEXT_CAND,	ValueKeyMapNextCand},
 	{SKK_PREV_CAND,	ValueKeyMapPrevCand},
@@ -329,7 +323,6 @@ void CTextService::_LoadCKeyMap()
 		//全英/アスキーモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_ENTER:
 		case SKK_CANCEL:
 		case SKK_BACK:
@@ -349,10 +342,7 @@ void CTextService::_LoadCKeyMap()
 					re.assign(keyre);
 					if(std::regex_match(s, re))
 					{
-						if(ckeymap.keylatin[ch] != SKK_JMODE)	//「ひらがな」が優先
-						{
-							ckeymap.keylatin[ch] = configkeymap[i].skkfunc;
-						}
+						ckeymap.keylatin[ch] = configkeymap[i].skkfunc;
 					}
 				}
 				catch(...)
@@ -368,7 +358,6 @@ void CTextService::_LoadCKeyMap()
 		//ひらがな/カタカナモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_VOID:
 			break;
 		default:
@@ -452,7 +441,6 @@ void CTextService::_LoadVKeyMap()
 		//全英/アスキーモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_ENTER:
 		case SKK_CANCEL:
 		case SKK_BACK:
@@ -491,10 +479,7 @@ void CTextService::_LoadVKeyMap()
 						re.assign(keyre);
 						if(std::regex_match(s, re))
 						{
-							if(pkeymaps[j]->keylatin[ch] != SKK_JMODE)	//「ひらがな」が優先
-							{
-								pkeymaps[j]->keylatin[ch] = configkeymap[i].skkfunc;
-							}
+							pkeymaps[j]->keylatin[ch] = configkeymap[i].skkfunc;
 						}
 					}
 					catch(...)
@@ -511,7 +496,6 @@ void CTextService::_LoadVKeyMap()
 		//ひらがな/カタカナモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_VOID:
 			break;
 		default:

@@ -170,12 +170,6 @@ extern LPCWSTR SectionVKeyMap;
 
 //keymap and vkeymap keys
 
-extern LPCWSTR ValueKeyMapKana;
-extern LPCWSTR ValueKeyMapConvChar;
-extern LPCWSTR ValueKeyMapJLatin;
-extern LPCWSTR ValueKeyMapAscii;
-extern LPCWSTR ValueKeyMapJMode;
-extern LPCWSTR ValueKeyMapAbbrev;
 extern LPCWSTR ValueKeyMapAffix;
 extern LPCWSTR ValueKeyMapNextCand;
 extern LPCWSTR ValueKeyMapPrevCand;

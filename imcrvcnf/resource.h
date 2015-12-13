@@ -154,12 +154,6 @@
 #define IDC_BUTTON_PRSRVKEY_D                   3212
 #define IDC_EDIT_DISPVKEY                       3221
 
-#define IDC_EDIT_KANA                           3301
-#define IDC_EDIT_CONV_CHAR                      3302
-#define IDC_EDIT_JLATIN                         3303
-#define IDC_EDIT_ASCII                          3304
-#define IDC_EDIT_JMODE                          3305
-#define IDC_EDIT_ABBREV                         3306
 #define IDC_EDIT_AFFIX                          3307
 #define IDC_EDIT_NEXT_CAND                      3308
 #define IDC_EDIT_PREV_CAND                      3309
