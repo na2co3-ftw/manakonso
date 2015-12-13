@@ -18,7 +18,6 @@
 #define IDD_DIALOG_KEYMAP2                      134
 #define IDD_DIALOG_CONVPOINT                    141
 #define IDD_DIALOG_KANATBL                      142
-#define IDD_DIALOG_JLATTBL                      143
 
 #define IDC_LIST_SKK_DIC                        1001
 #define IDC_BUTTON_SKK_DIC_ADD_FILE             1002
@@ -49,7 +48,6 @@
 #define IDC_CHECKBOX_DELCVPOSCNCL               1208
 #define IDC_CHECKBOX_DELOKURICNCL               1209
 #define IDC_CHECKBOX_BACKINCENTER               1210
-#define IDC_CHECKBOX_ADDCANDKTKN                1211
 #define IDC_CHECKBOX_STACOMPMULTI               1212
 #define IDC_CHECKBOX_DYNAMINCOMP                1213
 #define IDC_CHECKBOX_DYNCOMPMULTI               1214
@@ -154,12 +152,6 @@
 #define IDC_BUTTON_PRSRVKEY_D                   3212
 #define IDC_EDIT_DISPVKEY                       3221
 
-#define IDC_EDIT_KANA                           3301
-#define IDC_EDIT_CONV_CHAR                      3302
-#define IDC_EDIT_JLATIN                         3303
-#define IDC_EDIT_ASCII                          3304
-#define IDC_EDIT_JMODE                          3305
-#define IDC_EDIT_ABBREV                         3306
 #define IDC_EDIT_AFFIX                          3307
 #define IDC_EDIT_NEXT_CAND                      3308
 #define IDC_EDIT_PREV_CAND                      3309
@@ -192,8 +184,6 @@
 #define IDC_LIST_KANATBL                        4201
 #define IDC_EDIT_KANATBL_R                      4202
 #define IDC_EDIT_KANATBL_H                      4203
-#define IDC_EDIT_KANATBL_K                      4204
-#define IDC_EDIT_KANATBL_KA                     4205
 #define IDC_CHECKBOX_KANATBL_SOKU               4206
 #define IDC_CHECKBOX_KANATBL_WAIT               4207
 #define IDC_BUTTON_KANATBL_UP                   4208
@@ -202,13 +192,5 @@
 #define IDC_BUTTON_KANATBL_D                    4211
 #define IDC_BUTTON_LOADKANA                     4212
 #define IDC_BUTTON_SAVEKANA                     4213
-
-#define IDC_LIST_JLATTBL                        4301
-#define IDC_EDIT_JLATTBL_A                      4302
-#define IDC_EDIT_JLATTBL_J                      4303
-#define IDC_BUTTON_JLATTBL_UP                   4304
-#define IDC_BUTTON_JLATTBL_DOWN                 4305
-#define IDC_BUTTON_JLATTBL_W                    4306
-#define IDC_BUTTON_JLATTBL_D                    4307
 
 #endif //RESOURCE_H

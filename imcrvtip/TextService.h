@@ -161,7 +161,6 @@ public:
 	BYTE _GetSf(BYTE vk, WCHAR ch);
 	HRESULT _ConvRomanKana(ROMAN_KANA_CONV *pconv);
 	HRESULT _SearchRomanKanaNode(const ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV *pconv, int depth);
-	HRESULT _ConvAsciiJLatin(ASCII_JLATIN_CONV *pconv);
 	void _StartConv(TfEditCookie ec, ITfContext *pContext);
 	void _StartSubConv(WCHAR command);
 	void _NextConv();
@@ -175,7 +174,6 @@ public:
 	BOOL _ConvShift(WCHAR ch);
 	BOOL _ConvN();
 	void _ConvKanaToKana(const std::wstring &src, int srcmode, std::wstring &dst, int dstmode);
-	BOOL _SearchKanaByKana(const ROMAN_KANA_NODE &tree, const WCHAR *src, int srcmode, std::wstring &dst, int dstmode);
 
 	// KeyHandlerDictionary
 	void _ConnectDic();
@@ -203,7 +201,6 @@ public:
 	void _LoadKana();
 	BOOL _AddKanaTree(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int depth);
 	void _AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int depth);
-	void _LoadJLatin();
 
 	// InputModeWindow
 	void _StartInputModeWindow();
@@ -292,9 +289,6 @@ private:
 
 	//ローマ字仮名変換木
 	ROMAN_KANA_NODE roman_kana_tree;
-	//ASCII全英変換テーブル
-	// メンバーasciiで昇順ソート
-	std::vector<ASCII_JLATIN_CONV> ascii_jlatin_conv;
 
 public:
 	ID2D1Factory *_pD2DFactory;
@@ -312,9 +306,8 @@ public:
 	BOOL _ShowInputMode;	//InputModeWindow
 
 	//状態
-	int inputmode;			//入力モード (無し/ひらがな/カタカナ/半角ｶﾀｶﾅ/全英/アスキー)
+	int inputmode;			//入力モード (無し/京極)
 	BOOL inputkey;			//見出し入力▽モード
-	BOOL abbrevmode;		//abbrevモード
 	BOOL showentry;			//候補表示▼モード
 	BOOL showcandlist;		//候補リスト表示
 	BOOL complement;		//補完
@@ -347,7 +340,6 @@ public:
 	BOOL cx_delcvposcncl;		//取消のとき変換位置を削除する
 	BOOL cx_delokuricncl;		//取消のとき送り仮名を削除する
 	BOOL cx_backincenter;		//後退に確定を含める
-	BOOL cx_addcandktkn;		//候補に片仮名変換を追加する
 	BOOL cx_stacompmulti;		//複数補完を使用する
 	BOOL cx_dynamiccomp;		//動的補完を使用する
 	BOOL cx_dyncompmulti;		//複数動的補完を使用する

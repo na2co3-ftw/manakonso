@@ -27,8 +27,6 @@ LPCWSTR AttributeCPAlter = L"al";
 LPCWSTR AttributeCPOkuri = L"ok";
 LPCWSTR AttributeRoman = L"ro";
 LPCWSTR AttributeHiragana = L"hi";
-LPCWSTR AttributeKatakana = L"ka";
-LPCWSTR AttributeKatakanaAnk = L"an";
 LPCWSTR AttributeSpOp = L"so";
 LPCWSTR AttributeLatin = L"la";
 LPCWSTR AttributeJLatin = L"jl";
@@ -64,7 +62,6 @@ LPCWSTR ValueSrchAllOkuri = L"srchallokuri";
 LPCWSTR ValueDelCvPosCncl = L"delcvposcncl";
 LPCWSTR ValueDelOkuriCncl = L"delokuricncl";
 LPCWSTR ValueBackIncEnter = L"backincenter";
-LPCWSTR ValueAddCandKtkn = L"addcandktkn";
 LPCWSTR ValueStaCompMulti = L"stacompmulti";
 LPCWSTR ValueDynamicComp = L"dynamiccomp";
 LPCWSTR ValueDynCompMulti = L"dyncompmulti";
@@ -142,12 +139,6 @@ LPCWSTR SectionVKeyMap = L"vkeymap";
 
 //keymap and vkeymap keys
 
-LPCWSTR ValueKeyMapKana = L"kana";
-LPCWSTR ValueKeyMapConvChar = L"convchar";
-LPCWSTR ValueKeyMapJLatin = L"jlatin";
-LPCWSTR ValueKeyMapAscii = L"ascii";
-LPCWSTR ValueKeyMapJMode = L"jmode";
-LPCWSTR ValueKeyMapAbbrev = L"abbrev";
 LPCWSTR ValueKeyMapAffix = L"affix";
 LPCWSTR ValueKeyMapNextCand = L"nextcand";
 LPCWSTR ValueKeyMapPrevCand = L"prevcand";
@@ -175,10 +166,6 @@ LPCWSTR SectionConvPoint = L"convpoint";
 //kana section
 
 LPCWSTR SectionKana = L"kana";
-
-//jlatin section
-
-LPCWSTR SectionJLatin = L"jlatin";
 
 HRESULT CreateStreamReader(LPCWSTR path, IXmlReader **ppReader, IStream **ppFileStream)
 {

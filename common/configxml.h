@@ -57,8 +57,6 @@ extern LPCWSTR AttributeCPAlter;
 extern LPCWSTR AttributeCPOkuri;
 extern LPCWSTR AttributeRoman;
 extern LPCWSTR AttributeHiragana;
-extern LPCWSTR AttributeKatakana;
-extern LPCWSTR AttributeKatakanaAnk;
 extern LPCWSTR AttributeSpOp;
 extern LPCWSTR AttributeLatin;
 extern LPCWSTR AttributeJLatin;
@@ -94,7 +92,6 @@ extern LPCWSTR ValueSrchAllOkuri;
 extern LPCWSTR ValueDelCvPosCncl;
 extern LPCWSTR ValueDelOkuriCncl;
 extern LPCWSTR ValueBackIncEnter;
-extern LPCWSTR ValueAddCandKtkn;
 extern LPCWSTR ValueStaCompMulti;
 extern LPCWSTR ValueDynamicComp;
 extern LPCWSTR ValueDynCompMulti;
@@ -172,12 +169,6 @@ extern LPCWSTR SectionVKeyMap;
 
 //keymap and vkeymap keys
 
-extern LPCWSTR ValueKeyMapKana;
-extern LPCWSTR ValueKeyMapConvChar;
-extern LPCWSTR ValueKeyMapJLatin;
-extern LPCWSTR ValueKeyMapAscii;
-extern LPCWSTR ValueKeyMapJMode;
-extern LPCWSTR ValueKeyMapAbbrev;
 extern LPCWSTR ValueKeyMapAffix;
 extern LPCWSTR ValueKeyMapNextCand;
 extern LPCWSTR ValueKeyMapPrevCand;
@@ -205,9 +196,5 @@ extern LPCWSTR SectionConvPoint;
 //kana section
 
 extern LPCWSTR SectionKana;
-
-//jlatin section
-
-extern LPCWSTR SectionJLatin;
 
 #endif //CONFIGXML_H

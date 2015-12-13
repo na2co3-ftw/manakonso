@@ -7,177 +7,8 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 {
 	switch(sf)
 	{
-	case SKK_KANA:
-		if(abbrevmode && !showentry)
-		{
-			break;
-		}
-
-		switch(inputmode)
-		{
-		case im_hiragana:
-		case im_katakana:
-			_ConvRoman();
-			if(inputkey && !showentry)
-			{
-				if(okuriidx != 0)
-				{
-					kana.erase(okuriidx, 1);
-					okuriidx = 0;
-				}
-				//ひらがな/カタカナに変換
-				_ConvKanaToKana(kana, inputmode, kana, (inputmode == im_hiragana ? im_katakana : im_hiragana));
-				_HandleCharReturn(ec, pContext);
-			}
-			else
-			{
-				_HandleCharReturn(ec, pContext);
-				//ひらがな/カタカナモードへ
-				inputmode = (inputmode == im_hiragana ? im_katakana : im_hiragana);
-				_UpdateLanguageBar();
-			}
-			return S_OK;
-			break;
-		case im_katakana_ank:
-			_ConvRoman();
-			_HandleCharReturn(ec, pContext);
-			//ひらがなモードへ
-			inputmode = im_hiragana;
-			_UpdateLanguageBar();
-			return S_OK;
-			break;
-		default:
-			break;
-		}
-		break;
-
-	case SKK_CONV_CHAR:
-		if(abbrevmode && !showentry)
-		{
-			//全英に変換
-			ASCII_JLATIN_CONV ajc;
-			ajc.ascii[1] = L'\0';
-			roman = kana;
-			kana.clear();
-			cursoridx = 0;
-			for(size_t i = 0; i < roman.size(); i++)
-			{
-				ajc.ascii[0] = roman[i];
-				if(_ConvAsciiJLatin(&ajc) == S_OK)
-				{
-					kana.append(ajc.jlatin);
-				}
-			}
-			_HandleCharReturn(ec, pContext);
-			return S_OK;
-			break;
-		}
-
-		switch(inputmode)
-		{
-		case im_hiragana:
-		case im_katakana:
-			_ConvRoman();
-			if(inputkey && !showentry)
-			{
-				if(okuriidx != 0)
-				{
-					kana.erase(okuriidx, 1);
-					okuriidx = 0;
-				}
-				//半角ｶﾀｶﾅに変換
-				_ConvKanaToKana(kana, inputmode, kana, im_katakana_ank);
-				_HandleCharReturn(ec, pContext);
-			}
-			else
-			{
-				_HandleCharReturn(ec, pContext);
-				//半角ｶﾀｶﾅモードへ
-				inputmode = im_katakana_ank;
-				_UpdateLanguageBar();
-			}
-			return S_OK;
-			break;
-		case im_katakana_ank:
-			_ConvRoman();
-			_HandleCharReturn(ec, pContext);
-			//ひらがなモードへ
-			inputmode = im_hiragana;
-			_UpdateLanguageBar();
-			return S_OK;
-			break;
-		default:
-			break;
-		}
-		break;
-
-	case SKK_JLATIN:
-	case SKK_ASCII:
-		if(abbrevmode && !showentry)
-		{
-			break;
-		}
-
-		switch(inputmode)
-		{
-		case im_hiragana:
-		case im_katakana:
-		case im_katakana_ank:
-			_ConvRoman();
-			_HandleCharReturn(ec, pContext);
-			//アスキー/全英モードへ
-			inputmode = (sf == SKK_ASCII ? im_ascii : im_jlatin);
-			_UpdateLanguageBar();
-			return S_OK;
-			break;
-		default:
-			break;
-		}
-		break;
-
-	case SKK_JMODE:
-		switch(inputmode)
-		{
-		case im_jlatin:
-		case im_ascii:
-			//ひらがなモードへ
-			inputmode = im_hiragana;
-			_UpdateLanguageBar();
-			return S_OK;
-			break;
-		default:
-			break;
-		}
-		break;
-
-	case SKK_ABBREV:
-		if(abbrevmode && !showentry)
-		{
-			break;
-		}
-
-		switch(inputmode)
-		{
-		case im_hiragana:
-		case im_katakana:
-			_ConvRoman();
-			if(!inputkey || showentry)
-			{
-				_HandleCharShift(ec, pContext);
-				//見出し入力開始(abbrev)
-				inputkey = TRUE;
-				abbrevmode = TRUE;
-			}
-			_Update(ec, pContext);
-			return S_OK;
-			break;
-		default:
-			break;
-		}
-		break;
-
 	case SKK_AFFIX:
-		if(!inputkey || (abbrevmode && !showentry))
+		if(!inputkey)
 		{
 			break;
 		}
@@ -200,7 +31,6 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 		switch(inputmode)
 		{
 		case im_hiragana:
-		case im_katakana:
 			_ConvRoman();
 			if(!kana.empty() && okuriidx == 0)
 			{
@@ -422,7 +252,7 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 		break;
 
 	case SKK_HINT:
-		if(!inputkey || abbrevmode)
+		if(!inputkey)
 		{
 			break;
 		}
@@ -455,15 +285,9 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 		break;
 
 	case SKK_CONV_POINT:
-		if(abbrevmode && !showentry)
-		{
-			break;
-		}
-
 		switch(inputmode)
 		{
 		case im_hiragana:
-		case im_katakana:
 			if(showentry)
 			{
 				_HandleCharShift(ec, pContext);

@@ -47,7 +47,6 @@ void CreateProperty()
 		{IDD_DIALOG_KEYMAP2,		DlgProcKeyMap2},
 		{IDD_DIALOG_CONVPOINT,		DlgProcConvPoint},
 		{IDD_DIALOG_KANATBL,		DlgProcKana},
-		{IDD_DIALOG_JLATTBL,		DlgProcJLatin}
 	};
 
 	PROPSHEETPAGEW psp[_countof(DlgPage)];

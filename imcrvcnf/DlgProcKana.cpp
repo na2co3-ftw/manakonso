@@ -27,29 +27,19 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
 		lvc.iSubItem = 0;
 		lvc.cx = GetScaledSizeX(hDlg, 60);
-		lvc.pszText = L"ﾛｰﾏ字";
+		lvc.pszText = L"幻字";
 		ListView_InsertColumn(hWndListView, 0, &lvc);
 		lvc.iSubItem = 1;
 		lvc.cx = GetScaledSizeX(hDlg, 60);
-		lvc.pszText = L"かな";
+		lvc.pszText = L"京字";
 		ListView_InsertColumn(hWndListView, 1, &lvc);
-		lvc.iSubItem = 2;
-		lvc.cx = GetScaledSizeX(hDlg, 60);
-		lvc.pszText = L"カナ";
-		ListView_InsertColumn(hWndListView, 2, &lvc);
-		lvc.iSubItem = 3;
-		lvc.cx = GetScaledSizeX(hDlg, 60);
-		lvc.pszText = L"ｶﾅ";
-		ListView_InsertColumn(hWndListView, 3, &lvc);
 		lvc.iSubItem = 4;
 		lvc.cx = GetScaledSizeX(hDlg, 30);
 		lvc.pszText = L"…";
-		ListView_InsertColumn(hWndListView, 4, &lvc);
+		ListView_InsertColumn(hWndListView, 2, &lvc);
 
 		SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, L"");
 		SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, L"");
-		SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, L"");
-		SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, L"");
 		CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_SOKU, BST_UNCHECKED);
 		CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_WAIT, BST_UNCHECKED);
 
@@ -103,54 +93,36 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			{
 				PropSheet_Changed(GetParent(hDlg), hDlg);
 
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.roman, _countof(rkc.roman));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.hiragana, _countof(rkc.hiragana));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, rkc.katakana, _countof(rkc.katakana));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, rkc.katakana_ank, _countof(rkc.katakana_ank));
+				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.hacm, _countof(rkc.hacm));
+				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.yula, _countof(rkc.yula));;
 				IsDlgButtonChecked(hDlg, IDC_CHECKBOX_KANATBL_SOKU) == BST_CHECKED ? rkc.soku = TRUE : rkc.soku = FALSE;
 				IsDlgButtonChecked(hDlg, IDC_CHECKBOX_KANATBL_WAIT) == BST_CHECKED ? rkc.wait = TRUE : rkc.wait = FALSE;
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.roman);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.hiragana);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, rkc.katakana);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, rkc.katakana_ank);
-				ListView_SetItemText(hWndListView, index, 0, rkc.roman);
-				ListView_SetItemText(hWndListView, index, 1, rkc.hiragana);
-				ListView_SetItemText(hWndListView, index, 2, rkc.katakana);
-				ListView_SetItemText(hWndListView, index, 3, rkc.katakana_ank);
+				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.hacm);
+				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.yula);
+				ListView_SetItemText(hWndListView, index, 0, rkc.hacm);
+				ListView_SetItemText(hWndListView, index, 1, rkc.yula);
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkc.soku ? 1 : 0) + (rkc.wait ? 2 : 0);
-				ListView_SetItemText(hWndListView, index, 4, soku);
+				ListView_SetItemText(hWndListView, index, 2, soku);
 			}
 			else if(count < ROMAN_KANA_TBL_MAX)
 			{
 				PropSheet_Changed(GetParent(hDlg), hDlg);
 
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.roman, _countof(rkc.roman));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.hiragana, _countof(rkc.hiragana));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, rkc.katakana, _countof(rkc.katakana));
-				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, rkc.katakana_ank, _countof(rkc.katakana_ank));
+				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.hacm, _countof(rkc.hacm));
+				GetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.yula, _countof(rkc.yula));
 				IsDlgButtonChecked(hDlg, IDC_CHECKBOX_KANATBL_SOKU) == BST_CHECKED ? rkc.soku = TRUE : rkc.soku = FALSE;
 				IsDlgButtonChecked(hDlg, IDC_CHECKBOX_KANATBL_WAIT) == BST_CHECKED ? rkc.wait = TRUE : rkc.wait = FALSE;
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.roman);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.hiragana);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, rkc.katakana);
-				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, rkc.katakana_ank);
+				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.hacm);
+				SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.yula);
 				item.mask = LVIF_TEXT;
-				item.pszText = rkc.roman;
+				item.pszText = rkc.hacm;
 				item.iItem = count;
 				item.iSubItem = 0;
 				ListView_InsertItem(hWndListView, &item);
-				item.pszText = rkc.hiragana;
+				item.pszText = rkc.yula;
 				item.iItem = count;
 				item.iSubItem = 1;
-				ListView_SetItem(hWndListView, &item);
-				item.pszText = rkc.katakana;
-				item.iItem = count;
-				item.iSubItem = 2;
-				ListView_SetItem(hWndListView, &item);
-				item.pszText = rkc.katakana_ank;
-				item.iItem = count;
-				item.iSubItem = 3;
 				ListView_SetItem(hWndListView, &item);
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkc.soku ? 1 : 0) + (rkc.wait ? 2 : 0);
@@ -177,34 +149,26 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			{
 				PropSheet_Changed(GetParent(hDlg), hDlg);
 
-				ListView_GetItemText(hWndListView, index - 1, 0, rkcBak.roman, _countof(rkcBak.roman));
-				ListView_GetItemText(hWndListView, index - 1, 1, rkcBak.hiragana, _countof(rkcBak.hiragana));
-				ListView_GetItemText(hWndListView, index - 1, 2, rkcBak.katakana, _countof(rkcBak.katakana));
-				ListView_GetItemText(hWndListView, index - 1, 3, rkcBak.katakana_ank, _countof(rkcBak.katakana_ank));
-				ListView_GetItemText(hWndListView, index - 1, 4, soku, _countof(soku));
+				ListView_GetItemText(hWndListView, index - 1, 0, rkcBak.hacm, _countof(rkcBak.hacm));
+				ListView_GetItemText(hWndListView, index - 1, 1, rkcBak.yula, _countof(rkcBak.yula));
+				ListView_GetItemText(hWndListView, index - 1, 2, soku, _countof(soku));
 				((soku[0] - L'0') & 0x1) ? rkcBak.soku = TRUE : rkcBak.soku = FALSE;
 				((soku[0] - L'0') & 0x2) ? rkcBak.wait = TRUE : rkcBak.wait = FALSE;
-				ListView_GetItemText(hWndListView, index, 0, rkc.roman, _countof(rkc.roman));
-				ListView_GetItemText(hWndListView, index, 1, rkc.hiragana, _countof(rkc.hiragana));
-				ListView_GetItemText(hWndListView, index, 2, rkc.katakana, _countof(rkc.katakana));
-				ListView_GetItemText(hWndListView, index, 3, rkc.katakana_ank, _countof(rkc.katakana_ank));
-				ListView_GetItemText(hWndListView, index, 4, soku, _countof(soku));
+				ListView_GetItemText(hWndListView, index, 0, rkc.hacm, _countof(rkc.hacm));
+				ListView_GetItemText(hWndListView, index, 1, rkc.yula, _countof(rkc.yula));
+				ListView_GetItemText(hWndListView, index, 2, soku, _countof(soku));
 				((soku[0] - L'0') & 0x1) ? rkc.soku = TRUE : rkc.soku = FALSE;
 				((soku[0] - L'0') & 0x2) ? rkc.wait = TRUE : rkc.wait = FALSE;
-				ListView_SetItemText(hWndListView, index - 1, 0, rkc.roman);
-				ListView_SetItemText(hWndListView, index - 1, 1, rkc.hiragana);
-				ListView_SetItemText(hWndListView, index - 1, 2, rkc.katakana);
-				ListView_SetItemText(hWndListView, index - 1, 3, rkc.katakana_ank);
+				ListView_SetItemText(hWndListView, index - 1, 0, rkc.hacm);
+				ListView_SetItemText(hWndListView, index - 1, 1, rkc.yula);;
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkc.soku ? 1 : 0) + (rkc.wait ? 2 : 0);
-				ListView_SetItemText(hWndListView, index - 1, 4, soku);
-				ListView_SetItemText(hWndListView, index, 0, rkcBak.roman);
-				ListView_SetItemText(hWndListView, index, 1, rkcBak.hiragana);
-				ListView_SetItemText(hWndListView, index, 2, rkcBak.katakana);
-				ListView_SetItemText(hWndListView, index, 3, rkcBak.katakana_ank);
+				ListView_SetItemText(hWndListView, index - 1, 2, soku);
+				ListView_SetItemText(hWndListView, index, 0, rkcBak.hacm);
+				ListView_SetItemText(hWndListView, index, 1, rkcBak.yula);
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkcBak.soku ? 1 : 0) + (rkcBak.wait ? 2 : 0);
-				ListView_SetItemText(hWndListView, index, 4, soku);
+				ListView_SetItemText(hWndListView, index, 2, soku);
 				ListView_SetItemState(hWndListView, index - 1, LVIS_FOCUSED | LVIS_SELECTED, 0x000F);
 			}
 			return TRUE;
@@ -216,34 +180,26 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			{
 				PropSheet_Changed(GetParent(hDlg), hDlg);
 
-				ListView_GetItemText(hWndListView, index + 1, 0, rkcBak.roman, _countof(rkcBak.roman));
-				ListView_GetItemText(hWndListView, index + 1, 1, rkcBak.hiragana, _countof(rkcBak.hiragana));
-				ListView_GetItemText(hWndListView, index + 1, 2, rkcBak.katakana, _countof(rkcBak.katakana));
-				ListView_GetItemText(hWndListView, index + 1, 3, rkcBak.katakana_ank, _countof(rkcBak.katakana_ank));
-				ListView_GetItemText(hWndListView, index + 1, 4, soku, _countof(soku));
+				ListView_GetItemText(hWndListView, index + 1, 0, rkcBak.hacm, _countof(rkcBak.hacm));
+				ListView_GetItemText(hWndListView, index + 1, 1, rkcBak.yula, _countof(rkcBak.yula));
+				ListView_GetItemText(hWndListView, index + 1, 2, soku, _countof(soku));
 				((soku[0] - L'0') & 0x1) ? rkcBak.soku = TRUE : rkcBak.soku = FALSE;
 				((soku[0] - L'0') & 0x2) ? rkcBak.wait = TRUE : rkcBak.wait = FALSE;
-				ListView_GetItemText(hWndListView, index, 0, rkc.roman, _countof(rkc.roman));
-				ListView_GetItemText(hWndListView, index, 1, rkc.hiragana, _countof(rkc.hiragana));
-				ListView_GetItemText(hWndListView, index, 2, rkc.katakana, _countof(rkc.katakana));
-				ListView_GetItemText(hWndListView, index, 3, rkc.katakana_ank, _countof(rkc.katakana_ank));
-				ListView_GetItemText(hWndListView, index, 4, soku, _countof(soku));
+				ListView_GetItemText(hWndListView, index, 0, rkc.hacm, _countof(rkc.hacm));
+				ListView_GetItemText(hWndListView, index, 1, rkc.yula, _countof(rkc.yula));
+				ListView_GetItemText(hWndListView, index, 2, soku, _countof(soku));
 				((soku[0] - L'0') & 0x1) ? rkc.soku = TRUE : rkc.soku = FALSE;
 				((soku[0] - L'0') & 0x2) ? rkc.wait = TRUE : rkc.wait = FALSE;
-				ListView_SetItemText(hWndListView, index + 1, 0, rkc.roman);
-				ListView_SetItemText(hWndListView, index + 1, 1, rkc.hiragana);
-				ListView_SetItemText(hWndListView, index + 1, 2, rkc.katakana);
-				ListView_SetItemText(hWndListView, index + 1, 3, rkc.katakana_ank);
+				ListView_SetItemText(hWndListView, index + 1, 0, rkc.hacm);
+				ListView_SetItemText(hWndListView, index + 1, 1, rkc.yula);
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkc.soku ? 1 : 0) + (rkc.wait ? 2 : 0);
-				ListView_SetItemText(hWndListView, index + 1, 4, soku);
-				ListView_SetItemText(hWndListView, index, 0, rkcBak.roman);
-				ListView_SetItemText(hWndListView, index, 1, rkcBak.hiragana);
-				ListView_SetItemText(hWndListView, index, 2, rkcBak.katakana);
-				ListView_SetItemText(hWndListView, index, 3, rkcBak.katakana_ank);
+				ListView_SetItemText(hWndListView, index + 1, 2, soku);
+				ListView_SetItemText(hWndListView, index, 0, rkcBak.hacm);
+				ListView_SetItemText(hWndListView, index, 1, rkcBak.yula);
 				soku[1] = L'\0';
 				soku[0] = L'0' + (rkcBak.soku ? 1 : 0) + (rkcBak.wait ? 2 : 0);
-				ListView_SetItemText(hWndListView, index, 4, soku);
+				ListView_SetItemText(hWndListView, index, 2, soku);
 				ListView_SetItemState(hWndListView, index + 1, LVIS_FOCUSED | LVIS_SELECTED, 0x000F);
 			}
 			return TRUE;
@@ -266,24 +222,18 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				{
 					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, L"");
 					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, L"");
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, L"");
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, L"");
 					CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_SOKU, BST_UNCHECKED);
 					CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_WAIT, BST_UNCHECKED);
 				}
 				else
 				{
-					ListView_GetItemText(hWndListView, index, 0, rkc.roman, _countof(rkc.roman));
-					ListView_GetItemText(hWndListView, index, 1, rkc.hiragana, _countof(rkc.roman));
-					ListView_GetItemText(hWndListView, index, 2, rkc.katakana, _countof(rkc.roman));
-					ListView_GetItemText(hWndListView, index, 3, rkc.katakana_ank, _countof(rkc.roman));
-					ListView_GetItemText(hWndListView, index, 4, soku, _countof(soku));
+					ListView_GetItemText(hWndListView, index, 0, rkc.hacm, _countof(rkc.hacm));
+					ListView_GetItemText(hWndListView, index, 1, rkc.yula, _countof(rkc.hacm));
+					ListView_GetItemText(hWndListView, index, 2, soku, _countof(soku));
 					((soku[0] - L'0') & 0x1) ? rkc.soku = TRUE : rkc.soku = FALSE;
 					((soku[0] - L'0') & 0x2) ? rkc.wait = TRUE : rkc.wait = FALSE;
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.roman);
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.hiragana);
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_K, rkc.katakana);
-					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_KA, rkc.katakana_ank);
+					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_R, rkc.hacm);
+					SetDlgItemTextW(hDlg, IDC_EDIT_KANATBL_H, rkc.yula);
 					CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_SOKU, (rkc.soku ? BST_CHECKED : BST_UNCHECKED));
 					CheckDlgButton(hDlg, IDC_CHECKBOX_KANATBL_WAIT, (rkc.wait ? BST_CHECKED : BST_UNCHECKED));
 				}
@@ -293,6 +243,13 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
 		case PSN_APPLY:
 			SaveKana(hDlg);
+
+			WriterEndElement(pXmlWriter);	//TagRoot
+
+			WriterNewLine(pXmlWriter);
+
+			WriterFinal(&pXmlWriter, &pXmlFileStream);
+			
 			return TRUE;
 
 		default:

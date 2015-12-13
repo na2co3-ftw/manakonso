@@ -524,10 +524,6 @@ void CTextService::_StartInputModeWindow()
 	{
 	case im_default:
 	case im_hiragana:
-	case im_katakana:
-	case im_katakana_ank:
-	case im_jlatin:
-	case im_ascii:
 		_EndInputModeWindow();
 
 		ITfDocumentMgr *pDocumentMgr;

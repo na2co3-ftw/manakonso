@@ -9,12 +9,6 @@ static const struct {
 	LPCWSTR keyname;
 } configkeymap[] =
 {
-	{SKK_KANA,		ValueKeyMapKana},
-	{SKK_CONV_CHAR,	ValueKeyMapConvChar},
-	{SKK_JLATIN,	ValueKeyMapJLatin},
-	{SKK_ASCII,		ValueKeyMapAscii},
-	{SKK_JMODE,		ValueKeyMapJMode},
-	{SKK_ABBREV,	ValueKeyMapAbbrev},
 	{SKK_AFFIX,		ValueKeyMapAffix},
 	{SKK_NEXT_CAND,	ValueKeyMapNextCand},
 	{SKK_PREV_CAND,	ValueKeyMapPrevCand},
@@ -115,7 +109,6 @@ void CTextService::_LoadBehavior()
 	_ReadBoolValue(SectionBehavior, ValueDelCvPosCncl, cx_delcvposcncl, TRUE);
 	_ReadBoolValue(SectionBehavior, ValueDelOkuriCncl, cx_delokuricncl, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueBackIncEnter, cx_backincenter, TRUE);
-	_ReadBoolValue(SectionBehavior, ValueAddCandKtkn, cx_addcandktkn, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueStaCompMulti, cx_stacompmulti, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueDynamicComp, cx_dynamiccomp, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueDynCompMulti, cx_dyncompmulti, FALSE);
@@ -329,7 +322,6 @@ void CTextService::_LoadCKeyMap()
 		//全英/アスキーモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_ENTER:
 		case SKK_CANCEL:
 		case SKK_BACK:
@@ -349,10 +341,7 @@ void CTextService::_LoadCKeyMap()
 					re.assign(keyre);
 					if(std::regex_match(s, re))
 					{
-						if(ckeymap.keylatin[ch] != SKK_JMODE)	//「ひらがな」が優先
-						{
-							ckeymap.keylatin[ch] = configkeymap[i].skkfunc;
-						}
+						ckeymap.keylatin[ch] = configkeymap[i].skkfunc;
 					}
 				}
 				catch(...)
@@ -368,7 +357,6 @@ void CTextService::_LoadCKeyMap()
 		//ひらがな/カタカナモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_VOID:
 			break;
 		default:
@@ -452,7 +440,6 @@ void CTextService::_LoadVKeyMap()
 		//全英/アスキーモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_ENTER:
 		case SKK_CANCEL:
 		case SKK_BACK:
@@ -491,10 +478,7 @@ void CTextService::_LoadVKeyMap()
 						re.assign(keyre);
 						if(std::regex_match(s, re))
 						{
-							if(pkeymaps[j]->keylatin[ch] != SKK_JMODE)	//「ひらがな」が優先
-							{
-								pkeymaps[j]->keylatin[ch] = configkeymap[i].skkfunc;
-							}
+							pkeymaps[j]->keylatin[ch] = configkeymap[i].skkfunc;
 						}
 					}
 					catch(...)
@@ -511,7 +495,6 @@ void CTextService::_LoadVKeyMap()
 		//ひらがな/カタカナモード
 		switch(configkeymap[i].skkfunc)
 		{
-		case SKK_JMODE:
 		case SKK_VOID:
 			break;
 		default:
@@ -699,23 +682,13 @@ void CTextService::_LoadKana()
 
 				if(r_itr->first == AttributeRoman)
 				{
-					pszb = rkc.roman;
-					blen = _countof(rkc.roman);
+					pszb = rkc.hacm;
+					blen = _countof(rkc.hacm);
 				}
 				else if(r_itr->first == AttributeHiragana)
 				{
-					pszb = rkc.hiragana;
-					blen = _countof(rkc.hiragana);
-				}
-				else if(r_itr->first == AttributeKatakana)
-				{
-					pszb = rkc.katakana;
-					blen = _countof(rkc.katakana);
-				}
-				else if(r_itr->first == AttributeKatakanaAnk)
-				{
-					pszb = rkc.katakana_ank;
-					blen = _countof(rkc.katakana_ank);
+					pszb = rkc.yula;
+					blen = _countof(rkc.yula);
 				}
 				else if(r_itr->first == AttributeSpOp)
 				{
@@ -740,10 +713,8 @@ void CTextService::_LoadKana()
 
 		for(WCHAR ch = 0x20; ch <= 0x7E; ch++)
 		{
-			rkc.roman[0] = ch;
-			rkc.hiragana[0] = ch;
-			rkc.katakana[0] = ch;
-			rkc.katakana_ank[0] = ch;
+			rkc.hacm[0] = ch;
+			rkc.yula [0] = ch;
 
 			_AddKanaTree(roman_kana_tree, rkc, 0);
 		}
@@ -754,19 +725,19 @@ BOOL CTextService::_AddKanaTree(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int 
 {
 	BOOL added = FALSE;
 
-	if((_countof(rkc.roman) <= (depth + 1)) || (rkc.roman[depth] == L'\0'))
+	if((_countof(rkc.hacm) <= (depth + 1)) || (rkc.hacm[depth] == L'\0'))
 	{
 		return FALSE;
 	}
 
 	auto v_itr = std::lower_bound(tree.nodes.begin(), tree.nodes.end(),
-		rkc.roman[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
+		rkc.hacm[depth], [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
 
-	if(v_itr != tree.nodes.end() && v_itr->ch == rkc.roman[depth])
+	if(v_itr != tree.nodes.end() && v_itr->ch == rkc.hacm[depth])
 	{
-		if(rkc.roman[depth + 1] == L'\0')
+		if(rkc.hacm[depth + 1] == L'\0')
 		{
-			if(v_itr->conv.roman[0] == L'\0')
+			if(v_itr->conv.hacm[0] == L'\0')
 			{
 				//ローマ字探索最後のノードにローマ字仮名変換がなければ更新
 				v_itr->conv = rkc;
@@ -796,17 +767,17 @@ void CTextService::_AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, 
 
 	ZeroMemory(&rkn, sizeof(rkn));
 
-	if((_countof(rkc.roman) <= (depth + 1)) || (rkc.roman[depth] == L'\0'))
+	if((_countof(rkc.hacm) <= (depth + 1)) || (rkc.hacm[depth] == L'\0'))
 	{
 		return;
 	}
 
-	rkn.ch = rkc.roman[depth];
+	rkn.ch = rkc.hacm[depth];
 
 	auto v_itr = std::lower_bound(tree.nodes.begin(), tree.nodes.end(),
 		rkn.ch, [] (ROMAN_KANA_NODE m, WCHAR v) { return (m.ch < v); });
 
-	if(rkc.roman[depth + 1] == L'\0')
+	if(rkc.hacm[depth + 1] == L'\0')
 	{
 		//ローマ字探索最後のノードにローマ字仮名変換ありの子ノードを追加
 		rkn.conv = rkc;
@@ -818,77 +789,6 @@ void CTextService::_AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, 
 		v_itr = tree.nodes.insert(v_itr, rkn);
 		//子ノードを探索
 		_AddKanaTreeItem(*v_itr, rkc, depth + 1);
-	}
-}
-
-void CTextService::_LoadJLatin()
-{
-	APPDATAXMLLIST list;
-	ASCII_JLATIN_CONV ajc;
-	std::wregex re(L"[\\x00-\\x19]");
-	std::wstring fmt(L"");
-
-	ascii_jlatin_conv.clear();
-	ascii_jlatin_conv.shrink_to_fit();
-
-	HRESULT hr = ReadList(pathconfigxml, SectionJLatin, list);
-
-	if(hr == S_OK && list.size() != 0)
-	{
-		int i = 0;
-		FORWARD_ITERATION_I(l_itr, list)
-		{
-			if(i >= ASCII_JLATIN_TBL_NUM)
-			{
-				break;
-			}
-
-			ZeroMemory(&ajc, sizeof(ajc));
-
-			FORWARD_ITERATION_I(r_itr, *l_itr)
-			{
-				WCHAR *pszb = NULL;
-				size_t blen = 0;
-
-				if(r_itr->first == AttributeLatin)
-				{
-					pszb = ajc.ascii;
-					blen = _countof(ajc.ascii);
-				}
-				else if(r_itr->first == AttributeJLatin)
-				{
-					pszb = ajc.jlatin;
-					blen = _countof(ajc.jlatin);
-				}
-
-				if(pszb != NULL)
-				{
-					wcsncpy_s(pszb, blen, std::regex_replace(r_itr->second, re, fmt).c_str(), _TRUNCATE);
-				}
-			}
-
-			auto v_itr = std::lower_bound(ascii_jlatin_conv.begin(), ascii_jlatin_conv.end(),
-				ajc.ascii[0], [] (ASCII_JLATIN_CONV m, WCHAR v) { return (m.ascii[0] < v); });
-
-			if(v_itr == ascii_jlatin_conv.end() || ajc.ascii[0] != v_itr->ascii[0])
-			{
-				ascii_jlatin_conv.insert(v_itr, ajc);
-			}
-
-			i++;
-		}
-	}
-	else if(hr != S_OK)
-	{
-		ZeroMemory(&ajc, sizeof(ajc));
-
-		for(WCHAR ch = 0x20; ch <= 0x7E; ch++)
-		{
-			ajc.ascii[0] = ch;
-			ajc.jlatin[0] = ch;
-
-			ascii_jlatin_conv.push_back(ajc);
-		}
 	}
 }
 

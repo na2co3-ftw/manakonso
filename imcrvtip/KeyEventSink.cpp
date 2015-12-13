@@ -25,10 +25,7 @@ BOOL CTextService::_IsKeyEaten(ITfContext *pContext, WPARAM wParam)
 
 	if(_IsComposing())
 	{
-		if(inputmode != im_ascii)
-		{
-			return TRUE;
-		}
+		return TRUE;
 	}
 
 	SHORT vk_ctrl = GetKeyState(VK_CONTROL) & 0x8000;
@@ -40,40 +37,10 @@ BOOL CTextService::_IsKeyEaten(ITfContext *pContext, WPARAM wParam)
 	//確定状態で処理する機能
 	switch(inputmode)
 	{
-	case im_jlatin:
-	case im_ascii:
-		switch(sf)
-		{
-		case SKK_JMODE:
-			return TRUE;
-			break;
-		default:
-			break;
-		}
-		break;
 	case im_hiragana:
-	case im_katakana:
 		switch(sf)
 		{
 		case SKK_CONV_POINT:
-		case SKK_KANA:
-		case SKK_CONV_CHAR:
-		case SKK_JLATIN:
-		case SKK_ASCII:
-		case SKK_ABBREV:
-			return TRUE;
-			break;
-		default:
-			break;
-		}
-		break;
-	case im_katakana_ank:
-		switch(sf)
-		{
-		case SKK_KANA:
-		case SKK_CONV_CHAR:
-		case SKK_JLATIN:
-		case SKK_ASCII:
 			return TRUE;
 			break;
 		default:
@@ -92,12 +59,6 @@ BOOL CTextService::_IsKeyEaten(ITfContext *pContext, WPARAM wParam)
 
 	//処理しないCtrlキー
 	if(vk_ctrl != 0)
-	{
-		return FALSE;
-	}
-
-	//ASCIIモード、かなキーロックOFF
-	if(inputmode == im_ascii && vk_kana == 0)
 	{
 		return FALSE;
 	}

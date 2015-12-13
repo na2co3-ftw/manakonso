@@ -157,14 +157,12 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 	switch(inputmode)
 	{
 	case im_hiragana:
-	case im_katakana:
-	case im_katakana_ank:
-		if(!abbrevmode && !roman.empty() && ch != L'\0')
+		if(!roman.empty() && ch != L'\0')
 		{
 			ROMAN_KANA_CONV rkc;
 			std::wstring roman_conv = roman;
 			roman_conv.push_back(ch);
-			wcsncpy_s(rkc.roman, roman_conv.c_str(), _TRUNCATE);
+			wcsncpy_s(rkc.hacm, roman_conv.c_str(), _TRUNCATE);
 			hrc = _ConvRomanKana(&rkc);
 			if(hrc != E_ABORT && !rkc.wait)
 			{
@@ -179,23 +177,20 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 	//skk-sticky-key
 	if(sf == SKK_CONV_POINT)
 	{
-		if(!abbrevmode || showentry)
+		if(inputkey && !showentry && roman.empty() && kana.empty())
 		{
-			if(inputkey && !showentry && roman.empty() && kana.empty())
+			//";;" -> ";"
+			if(kana.empty() && ch >= L'\x20')
 			{
-				//";;" -> ";"
-				if(kana.empty() && ch >= L'\x20')
-				{
-					kana.push_back(ch);
-					_HandleCharReturn(ec, pContext);
-				}
-				return S_OK;
+				kana.push_back(ch);
+				_HandleCharReturn(ec, pContext);
 			}
-			//"n;" -> "ん▽"
-			if(_ConvShift(WCHAR_MAX))
-			{
-				ch = L'\0';
-			}
+			return S_OK;
+		}
+		//"n;" -> "ん▽"
+		if(_ConvShift(WCHAR_MAX))
+		{
+			ch = L'\0';
 		}
 	}
 
@@ -221,9 +216,6 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 		switch(inputmode)
 		{
 		case im_hiragana:
-		case im_katakana:
-		case im_katakana_ank:
-			if(!abbrevmode || showentry)
 			{
 				if(hrc != E_ABORT)
 				{
@@ -285,9 +277,7 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 			switch(inputmode)
 			{
 			case im_hiragana:
-			case im_katakana:
-			case im_katakana_ank:
-				if(!abbrevmode && !romanN.empty())
+				if(!romanN.empty())
 				{
 					//「ん」または待機中の文字を送り出し
 					roman = romanN;
@@ -355,7 +345,6 @@ void CTextService::_KeyboardOpenCloseChanged(BOOL showinputmode)
 		_LoadVKeyMap();
 		_LoadConvPoint();
 		_LoadKana();
-		_LoadJLatin();
 
 		_GetActiveFlags();
 
@@ -413,16 +402,16 @@ void CTextService::_KeyboardInputConversionChanged()
 				inputmode = im_hiragana;
 				break;
 			case TF_CONVERSIONMODE_NATIVE | TF_CONVERSIONMODE_KATAKANA | TF_CONVERSIONMODE_FULLSHAPE:
-				inputmode = im_katakana;
+				inputmode = im_hiragana;
 				break;
 			case TF_CONVERSIONMODE_NATIVE | TF_CONVERSIONMODE_KATAKANA:
-				inputmode = im_katakana_ank;
+				inputmode = im_hiragana;
 				break;
 			case TF_CONVERSIONMODE_ALPHANUMERIC | TF_CONVERSIONMODE_FULLSHAPE:
-				inputmode = im_jlatin;
+				inputmode = im_default;
 				break;
 			case TF_CONVERSIONMODE_ALPHANUMERIC:
-				inputmode = im_ascii;
+				inputmode = im_default;
 				break;
 			default:
 				break;
@@ -459,7 +448,7 @@ BOOL CTextService::_KeyboardSetDefaultMode()
 		_ReadBoolValue(SectionBehavior, ValueDefModeAscii, mode, FALSE);
 		if(mode)
 		{
-			inputmode = im_ascii;
+			inputmode = im_default;
 			var.vt = VT_I4;
 			var.lVal = TF_CONVERSIONMODE_ALPHANUMERIC;
 			_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
@@ -520,7 +509,6 @@ BOOL CTextService::_IsKeyVoid(WCHAR ch, BYTE vk)
 void CTextService::_ResetStatus()
 {
 	inputkey = FALSE;
-	abbrevmode = FALSE;
 	showentry = FALSE;
 	showcandlist = FALSE;
 	complement = FALSE;

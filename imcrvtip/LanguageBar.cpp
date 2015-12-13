@@ -17,11 +17,7 @@ static const struct {
 	LPCWSTR text;
 } menuItems[] =
 {
-	{im_hiragana,		IDM_HIRAGANA,		0, L"［かな］"},
-	{im_katakana,		IDM_KATAKANA,		0, L"［カナ］"},
-	{im_katakana_ank,	IDM_KATAKANA_ANK,	0, L"［－ｶﾅ］"},
-	{im_jlatin,			IDM_JLATIN,			0, L"［全英］"},
-	{im_ascii,			IDM_ASCII,			0, L"［SKK］"},
+	{im_hiragana,		IDM_HIRAGANA,		0, L"［京極］"},
 	{im_default,		IDM_DEFAULT,		0, L"［－－］"},
 	{im_disable,		IDM_NONE,			TF_LBMENUF_SEPARATOR, L""},
 	{im_disable,		IDM_CONFIG,			0, L"設定"},
@@ -268,10 +264,6 @@ STDAPI CLangBarItemButton::OnMenuSelect(UINT wID)
 		_pTextService->_StartConfigure();
 		break;
 	case IDM_HIRAGANA:
-	case IDM_KATAKANA:
-	case IDM_KATAKANA_ANK:
-	case IDM_JLATIN:
-	case IDM_ASCII:
 		for(int i = 0; i < _countof(menuItems); i++)
 		{
 			if(wID == menuItems[i].id)
@@ -396,24 +388,6 @@ STDAPI CLangBarItemButton::_Update()
 				TF_CONVERSIONMODE_ROMAN;
 			_pTextService->_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
 			break;
-		case im_katakana:
-			var.lVal = TF_CONVERSIONMODE_NATIVE | TF_CONVERSIONMODE_FULLSHAPE |
-				TF_CONVERSIONMODE_ROMAN | TF_CONVERSIONMODE_KATAKANA;
-			_pTextService->_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
-			break;
-		case im_katakana_ank:
-			var.lVal = TF_CONVERSIONMODE_NATIVE |
-				TF_CONVERSIONMODE_ROMAN | TF_CONVERSIONMODE_KATAKANA;
-			_pTextService->_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
-			break;
-		case im_jlatin:
-			var.lVal = TF_CONVERSIONMODE_ALPHANUMERIC | TF_CONVERSIONMODE_FULLSHAPE;
-			_pTextService->_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
-			break;
-		case im_ascii:
-			var.lVal = TF_CONVERSIONMODE_ALPHANUMERIC;
-			_pTextService->_SetCompartment(GUID_COMPARTMENT_KEYBOARD_INPUTMODE_CONVERSION, &var);
-			break;
 		default:
 			break;
 		}
@@ -438,18 +412,6 @@ STDAPI CLangBarItemButton::_GetIcon(HICON *phIcon, BOOL bNT62)
 		{
 		case im_hiragana:
 			iconindex = 1;
-			break;
-		case im_katakana:
-			iconindex = 2;
-			break;
-		case im_katakana_ank:
-			iconindex = 3;
-			break;
-		case im_jlatin:
-			iconindex = 4;
-			break;
-		case im_ascii:
-			iconindex = 5;
 			break;
 		default:
 			break;
