@@ -8,7 +8,7 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 	switch(sf)
 	{
 	case SKK_AFFIX:
-		if(!inputkey || (abbrevmode && !showentry))
+		if(!inputkey)
 		{
 			break;
 		}
@@ -252,7 +252,7 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 		break;
 
 	case SKK_HINT:
-		if(!inputkey || abbrevmode)
+		if(!inputkey)
 		{
 			break;
 		}
@@ -285,11 +285,6 @@ HRESULT CTextService::_HandleControl(TfEditCookie ec, ITfContext *pContext, BYTE
 		break;
 
 	case SKK_CONV_POINT:
-		if(abbrevmode && !showentry)
-		{
-			break;
-		}
-
 		switch(inputmode)
 		{
 		case im_hiragana:

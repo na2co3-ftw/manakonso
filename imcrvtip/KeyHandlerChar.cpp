@@ -23,21 +23,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 	switch(inputmode)
 	{
 	case im_hiragana:
-		if(abbrevmode)
-		{
-			kana.insert(cursoridx, 1, ch);
-			cursoridx++;
-
-			if(cx_dynamiccomp || cx_dyncompmulti)
-			{
-				_DynamicComp(ec, pContext);
-			}
-			else
-			{
-				_Update(ec, pContext);
-			}
-		}
-		else
 		{
 			//ローマ字仮名変換 待機処理
 			rkc.hacm[0] = ch;

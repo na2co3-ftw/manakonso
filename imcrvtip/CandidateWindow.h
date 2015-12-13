@@ -139,7 +139,6 @@ private:
 
 	//辞書登録前の状態バックアップ
 	int inputmode_bak;
-	BOOL abbrevmode_bak;
 	std::wstring kana_bak;
 	size_t okuriidx_bak;
 	size_t cursoridx_bak;

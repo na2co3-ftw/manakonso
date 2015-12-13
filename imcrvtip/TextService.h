@@ -308,7 +308,6 @@ public:
 	//状態
 	int inputmode;			//入力モード (無し/京極)
 	BOOL inputkey;			//見出し入力▽モード
-	BOOL abbrevmode;		//abbrevモード
 	BOOL showentry;			//候補表示▼モード
 	BOOL showcandlist;		//候補リスト表示
 	BOOL complement;		//補完

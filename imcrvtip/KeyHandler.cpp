@@ -157,7 +157,7 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 	switch(inputmode)
 	{
 	case im_hiragana:
-		if(!abbrevmode && !roman.empty() && ch != L'\0')
+		if(!roman.empty() && ch != L'\0')
 		{
 			ROMAN_KANA_CONV rkc;
 			std::wstring roman_conv = roman;
@@ -177,23 +177,20 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 	//skk-sticky-key
 	if(sf == SKK_CONV_POINT)
 	{
-		if(!abbrevmode || showentry)
+		if(inputkey && !showentry && roman.empty() && kana.empty())
 		{
-			if(inputkey && !showentry && roman.empty() && kana.empty())
+			//";;" -> ";"
+			if(kana.empty() && ch >= L'\x20')
 			{
-				//";;" -> ";"
-				if(kana.empty() && ch >= L'\x20')
-				{
-					kana.push_back(ch);
-					_HandleCharReturn(ec, pContext);
-				}
-				return S_OK;
+				kana.push_back(ch);
+				_HandleCharReturn(ec, pContext);
 			}
-			//"n;" -> "ん▽"
-			if(_ConvShift(WCHAR_MAX))
-			{
-				ch = L'\0';
-			}
+			return S_OK;
+		}
+		//"n;" -> "ん▽"
+		if(_ConvShift(WCHAR_MAX))
+		{
+			ch = L'\0';
 		}
 	}
 
@@ -219,7 +216,6 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 		switch(inputmode)
 		{
 		case im_hiragana:
-			if(!abbrevmode || showentry)
 			{
 				if(hrc != E_ABORT)
 				{
@@ -281,7 +277,7 @@ HRESULT CTextService::_HandleKey(TfEditCookie ec, ITfContext *pContext, WPARAM w
 			switch(inputmode)
 			{
 			case im_hiragana:
-				if(!abbrevmode && !romanN.empty())
+				if(!romanN.empty())
 				{
 					//「ん」または待機中の文字を送り出し
 					roman = romanN;
@@ -513,7 +509,6 @@ BOOL CTextService::_IsKeyVoid(WCHAR ch, BYTE vk)
 void CTextService::_ResetStatus()
 {
 	inputkey = FALSE;
-	abbrevmode = FALSE;
 	showentry = FALSE;
 	showcandlist = FALSE;
 	complement = FALSE;

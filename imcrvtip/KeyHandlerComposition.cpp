@@ -492,7 +492,7 @@ HRESULT CTextService::_SetText(TfEditCookie ec, ITfContext *pContext, const std:
 						{
 						case im_hiragana:
 							//接辞
-							if(!abbrevmode && kana.size() >= 2)
+							if(kana.size() >= 2)
 							{
 								if(kana.front() == L'>')
 								{

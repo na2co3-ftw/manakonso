@@ -21,12 +21,6 @@ enum InputMode
 //skk function code
 #define SKK_NULL		0x00	// NUL
 
-#define SKK_KANA		0x71	// かな／カナ	q
-#define SKK_CONV_CHAR	0x11	// ｶﾅ全英変換	c-q
-#define SKK_JLATIN		0x4C	// 全英			L
-#define SKK_ASCII		0x6C	// アスキー		l
-#define SKK_JMODE		0x0A	// ひらがな		c-j(LF)
-#define SKK_ABBREV		0x2F	// abbrev		/
 #define SKK_AFFIX		0x3E	// 接辞			> <
 #define SKK_NEXT_CAND	0x20	// 次候補		SP	c-n
 #define SKK_PREV_CAND	0x78	// 前候補		x	c-p

@@ -1256,7 +1256,6 @@ void CCandidateWindow::_GetChSf(UINT uVKey, WCHAR &ch, BYTE &sf, BYTE vkoff)
 void CCandidateWindow::_BackUpStatus()
 {
 	inputmode_bak = _pTextService->inputmode;
-	abbrevmode_bak = _pTextService->abbrevmode;
 	kana_bak = _pTextService->kana;
 	okuriidx_bak = _pTextService->okuriidx;
 	cursoridx_bak = _pTextService->cursoridx;
@@ -1270,7 +1269,6 @@ void CCandidateWindow::_BackUpStatus()
 void CCandidateWindow::_ClearStatus()
 {
 	//_pTextService->inputmode //そのまま
-	_pTextService->abbrevmode = FALSE;
 	_pTextService->kana.clear();
 	_pTextService->okuriidx = 0;
 	_pTextService->cursoridx = 0;
@@ -1288,7 +1286,6 @@ void CCandidateWindow::_RestoreStatusReg()
 {
 	_pTextService->inputmode = inputmode_bak;
 	_pTextService->_UpdateLanguageBar();
-	_pTextService->abbrevmode = abbrevmode_bak;
 	_pTextService->kana = kana_bak;
 	_pTextService->okuriidx = okuriidx_bak;
 	_pTextService->cursoridx = cursoridx_bak;
@@ -1305,7 +1302,6 @@ void CCandidateWindow::_RestoreStatusReg()
 void CCandidateWindow::_ClearStatusReg()
 {
 	inputmode_bak = im_default;
-	abbrevmode_bak = FALSE;
 	kana_bak.clear();
 	okuriidx_bak = 0;
 	cursoridx_bak = 0;

@@ -15,7 +15,7 @@ WCHAR CTextService::_GetCh(BYTE vk, BYTE vkoff)
 	{
 	case im_hiragana:
 		keystate[VK_CAPITAL] = 0;
-		if(abbrevmode || purgedicmode)
+		if(purgedicmode)
 		{
 			keystate[VK_KANA] = 0;
 		}
