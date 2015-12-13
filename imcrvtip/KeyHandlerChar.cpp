@@ -5,7 +5,6 @@
 HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM wParam, WCHAR ch, WCHAR chO)
 {
 	ROMAN_KANA_CONV rkc;
-	ASCII_JLATIN_CONV ajc;
 	HRESULT ret = S_OK;
 
 	if(showentry)
@@ -24,8 +23,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 	switch(inputmode)
 	{
 	case im_hiragana:
-	case im_katakana:
-	case im_katakana_ank:
 		if(abbrevmode)
 		{
 			kana.insert(cursoridx, 1, ch);
@@ -56,12 +53,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					switch(inputmode)
 					{
 					case im_hiragana:
-						roman.append(rkc.yula);
-						break;
-					case im_katakana:
-						roman.append(rkc.yula);
-						break;
-					case im_katakana_ank:
 						roman.append(rkc.yula);
 						break;
 					default:
@@ -103,12 +94,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					case im_hiragana:
 						roman.assign(rkc.yula);
 						break;
-					case im_katakana:
-						roman.assign(rkc.yula);
-						break;
-					case im_katakana_ank:
-						roman.assign(rkc.yula);
-						break;
 					default:
 						break;
 					}
@@ -121,12 +106,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					switch(inputmode)
 					{
 					case im_hiragana:
-						kana_ins = rkc.yula;
-						break;
-					case im_katakana:
-						kana_ins = rkc.yula;
-						break;
-					case im_katakana_ank:
 						kana_ins = rkc.yula;
 						break;
 					default:
@@ -208,12 +187,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					case im_hiragana:
 						roman.assign(rkc.yula);
 						break;
-					case im_katakana:
-						roman.assign(rkc.yula);
-						break;
-					case im_katakana_ank:
-						roman.assign(rkc.yula);
-						break;
 					default:
 						break;
 					}
@@ -240,52 +213,6 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 			}
 			break;
 		}
-		break;
-
-	case im_jlatin:
-		//ASCII全英変換
-		roman.push_back(ch);
-		wcsncpy_s(ajc.ascii, roman.c_str(), _TRUNCATE);
-		ret = _ConvAsciiJLatin(&ajc);
-
-		if(ret == E_ABORT && wParam == VK_PACKET && ch != TKB_NEXT_PAGE && ch != TKB_PREV_PAGE)
-		{
-			ajc.jlatin[0] = ch;
-			ajc.jlatin[1] = L'\0';
-			ret = S_OK;
-		}
-
-		switch(ret)
-		{
-		case S_OK:		//一致
-			kana.assign(ajc.jlatin);
-			if(pContext != NULL)
-			{
-				cursoridx = kana.size();
-				_Update(ec, pContext, TRUE);
-			}
-			_HandleCharReturn(ec, pContext);
-			break;
-		case E_PENDING:	//途中まで一致
-		case E_ABORT:	//不一致
-			roman.clear();
-			_HandleCharReturn(ec, pContext);
-			break;
-		default:
-			break;
-		}
-		break;
-
-	case im_ascii:	//かなキーロックONのときのみ
-		ajc.ascii[0] = ch;
-		ajc.ascii[1] = L'\0';
-		kana.assign(ajc.ascii);
-		if(pContext != NULL)
-		{
-			cursoridx = kana.size();
-			_Update(ec, pContext, TRUE);
-		}
-		_HandleCharReturn(ec, pContext);
 		break;
 
 	default:

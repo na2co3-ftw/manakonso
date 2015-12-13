@@ -54,11 +54,7 @@ IDR_SYSTRAY_MENU MENU
 {
     POPUP ""
     {
-        MENUITEM "［かな］", IDM_HIRAGANA
-        MENUITEM "［カナ］", IDM_KATAKANA
-        MENUITEM "［－ｶﾅ］", IDM_KATAKANA_ANK
-        MENUITEM "［全英］", IDM_JLATIN
-        MENUITEM "［SKK］",  IDM_ASCII
+        MENUITEM "［京極］", IDM_HIRAGANA
         MENUITEM "［－－］", IDM_DEFAULT
         MENUITEM SEPARATOR
         MENUITEM "設定",     IDM_CONFIG

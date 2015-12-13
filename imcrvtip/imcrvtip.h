@@ -12,11 +12,7 @@ enum InputMode
 {
 	im_disable = -1,	//無効
 	im_default,			//デフォルト
-	im_hiragana,		//ひらがな
-	im_katakana,		//カタカナ
-	im_katakana_ank,	//半角ｶﾀｶﾅ
-	im_jlatin,			//全英
-	im_ascii			//ASCII
+	im_hiragana,		//京極
 };
 
 #define CKEYMAPNUM		0x80	// 0x00-0x7F

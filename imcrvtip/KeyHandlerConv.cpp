@@ -14,8 +14,6 @@ WCHAR CTextService::_GetCh(BYTE vk, BYTE vkoff)
 	switch(inputmode)
 	{
 	case im_hiragana:
-	case im_katakana:
-	case im_katakana_ank:
 		keystate[VK_CAPITAL] = 0;
 		if(abbrevmode || purgedicmode)
 		{
@@ -25,10 +23,6 @@ WCHAR CTextService::_GetCh(BYTE vk, BYTE vkoff)
 		{
 			keystate[vkoff] = 0;
 		}
-		break;
-	case im_jlatin:
-	case im_ascii:
-		keystate[VK_KANA] = 0;
 		break;
 	default:
 		break;
@@ -53,24 +47,7 @@ BYTE CTextService::_GetSf(BYTE vk, WCHAR ch)
 	{
 		switch(inputmode)
 		{
-		case im_ascii:
-		case im_jlatin:
-			if(vk_shift)
-			{
-				k = vkeymap_shift.keylatin[vk];
-			}
-			else if(vk_ctrl)
-			{
-				k = vkeymap_ctrl.keylatin[vk];
-			}
-			else
-			{
-				k = vkeymap.keylatin[vk];
-			}
-			break;
 		case im_hiragana:
-		case im_katakana:
-		case im_katakana_ank:
 			if(vk_shift)
 			{
 				k = vkeymap_shift.keyjmode[vk];
@@ -93,45 +70,12 @@ BYTE CTextService::_GetSf(BYTE vk, WCHAR ch)
 	{
 		switch(inputmode)
 		{
-		case im_ascii:
-		case im_jlatin:
-			k = ckeymap.keylatin[ch];
-			break;
 		case im_hiragana:
-		case im_katakana:
-		case im_katakana_ank:
 			k = ckeymap.keyjmode[ch];
 			break;
 		default:
 			break;
 		}
-	}
-
-	//カタカナ/ｶﾀｶﾅモードかつ確定入力モードのとき「ひらがな」を有効にする
-	switch(inputmode)
-	{
-	case im_katakana:
-	case im_katakana_ank:
-		if(!inputkey)
-		{
-			if(vk < VKEYMAPNUM)
-			{
-				if((vkeymap.keylatin[vk] == SKK_JMODE) ||
-					(vk_shift && (vkeymap_shift.keylatin[vk] == SKK_JMODE)) ||
-					(vk_ctrl && (vkeymap_ctrl.keylatin[vk] == SKK_JMODE)))
-				{
-					k = SKK_KANA;
-				}
-			}
-			if(k != SKK_KANA && ch < CKEYMAPNUM)
-			{
-				if(ckeymap.keylatin[ch] == SKK_JMODE)
-				{
-					k = SKK_KANA;
-				}
-			}
-		}
-		break;
 	}
 
 	switch(ch)
@@ -373,14 +317,13 @@ void CTextService::_StartSubConv(WCHAR command)
 		switch(inputmode)
 		{
 		case im_hiragana:
-		case im_katakana:
 			if(okuriidx != 0)
 			{
-				_ConvKanaToKana(kana.substr(0, okuriidx), inputmode, kanaconv, im_katakana);
+				kanaconv.assign(kana.substr(0, okuriidx));
 			}
 			else
 			{
-				_ConvKanaToKana(kana, inputmode, kanaconv, im_katakana);
+				kanaconv.assign(kana);
 			}
 
 			if(!kanaconv.empty())
@@ -763,12 +706,6 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 				case im_hiragana:
 					chN = rkc.yula[0];
 					break;
-				case im_katakana:
-					chN = rkc.yula[0];
-					break;
-				case im_katakana_ank:
-					chN = rkc.yula[0];
-					break;
 				default:
 					break;
 				}
@@ -797,12 +734,6 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 			switch(inputmode)
 			{
 			case im_hiragana:
-				kana_ins = rkc.yula;
-				break;
-			case im_katakana:
-				kana_ins = rkc.yula;
-				break;
-			case im_katakana_ank:
 				kana_ins = rkc.yula;
 				break;
 			default:
@@ -844,12 +775,6 @@ BOOL CTextService::_ConvShift(WCHAR ch)
 				switch(inputmode)
 				{
 				case im_hiragana:
-					kana_ins = rkc.yula;
-					break;
-				case im_katakana:
-					kana_ins = rkc.yula;
-					break;
-				case im_katakana_ank:
 					kana_ins = rkc.yula;
 					break;
 				default:
@@ -908,12 +833,6 @@ BOOL CTextService::_ConvN()
 			switch(inputmode)
 			{
 			case im_hiragana:
-				kana_ins = rkc.yula;
-				break;
-			case im_katakana:
-				kana_ins = rkc.yula;
-				break;
-			case im_katakana_ank:
 				kana_ins = rkc.yula;
 				break;
 			default:

@@ -491,8 +491,6 @@ HRESULT CTextService::_SetText(TfEditCookie ec, ITfContext *pContext, const std:
 						switch(inputmode)
 						{
 						case im_hiragana:
-						case im_katakana:
-						case im_katakana_ank:
 							//接辞
 							if(!abbrevmode && kana.size() >= 2)
 							{
