@@ -161,7 +161,6 @@ public:
 	BYTE _GetSf(BYTE vk, WCHAR ch);
 	HRESULT _ConvRomanKana(ROMAN_KANA_CONV *pconv);
 	HRESULT _SearchRomanKanaNode(const ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV *pconv, int depth);
-	HRESULT _ConvAsciiJLatin(ASCII_JLATIN_CONV *pconv);
 	void _StartConv(TfEditCookie ec, ITfContext *pContext);
 	void _StartSubConv(WCHAR command);
 	void _NextConv();
@@ -203,7 +202,6 @@ public:
 	void _LoadKana();
 	BOOL _AddKanaTree(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int depth);
 	void _AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, int depth);
-	void _LoadJLatin();
 
 	// InputModeWindow
 	void _StartInputModeWindow();
@@ -292,9 +290,6 @@ private:
 
 	//ローマ字仮名変換木
 	ROMAN_KANA_NODE roman_kana_tree;
-	//ASCII全英変換テーブル
-	// メンバーasciiで昇順ソート
-	std::vector<ASCII_JLATIN_CONV> ascii_jlatin_conv;
 
 public:
 	ID2D1Factory *_pD2DFactory;

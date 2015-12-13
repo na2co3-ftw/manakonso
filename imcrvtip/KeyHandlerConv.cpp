@@ -142,32 +142,6 @@ HRESULT CTextService::_SearchRomanKanaNode(const ROMAN_KANA_NODE &tree, ROMAN_KA
 	return ret;
 }
 
-HRESULT CTextService::_ConvAsciiJLatin(ASCII_JLATIN_CONV *pconv)
-{
-	HRESULT ret = E_ABORT;	//一致なし
-
-	if(pconv == NULL)
-	{
-		return ret;
-	}
-
-	auto v_itr = std::lower_bound(ascii_jlatin_conv.begin(), ascii_jlatin_conv.end(),
-		pconv->ascii[0], [] (ASCII_JLATIN_CONV m, WCHAR v) { return (m.ascii[0] < v); });
-
-	if(v_itr != ascii_jlatin_conv.end() && v_itr->ascii[0] == pconv->ascii[0])
-	{
-		*pconv = *v_itr;
-		ret = S_OK;	//一致
-	}
-
-	if(ret == E_ABORT)
-	{
-		ZeroMemory(pconv, sizeof(*pconv));
-	}
-
-	return ret;
-}
-
 void CTextService::_StartConv(TfEditCookie ec, ITfContext *pContext)
 {
 	CANDIDATES candidates_sel;

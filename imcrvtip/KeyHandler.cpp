@@ -349,7 +349,6 @@ void CTextService::_KeyboardOpenCloseChanged(BOOL showinputmode)
 		_LoadVKeyMap();
 		_LoadConvPoint();
 		_LoadKana();
-		_LoadJLatin();
 
 		_GetActiveFlags();
 
