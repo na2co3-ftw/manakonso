@@ -243,6 +243,13 @@ your applications for third parties to access over the Internet.)
  · REDIST.TXT Files. You may copy and distribute the object code form of
    code listed in the redist.txt file in the software and on the REDIST list
    located at http://go.microsoft.com/fwlink/?LinkId=523763&clcid=0x409 .
+ · Sample Code, Templates and Styles. You may copy, modify and distribute
+   the source and object code form of code marked as “sample”, “template”,
+   “simple styles” and “sketch styles”.
+ · Image Library. You may copy and distribute images and animations in
+   the Image Library(ies) as described in the software documentation.
+ · Third Party Distribution. You may permit distributors of your applications
+   to copy and distribute the Distributable Code as part of those applications.
 
  Distribution Requirements.
  For any Distributable Code you distribute, you must:
@@ -266,6 +273,7 @@ your applications for third parties to access over the Internet.)
    that (i) the code be disclosed or distributed in source code form;
    or (ii) others have the right to modify it.
 
+   *   *   *
 
 This is the "REDIST list" that is referenced in the "Distributable Code"
 section of the Microsoft Software License Terms for the
