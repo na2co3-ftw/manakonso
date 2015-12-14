@@ -225,49 +225,53 @@ purpose and non-infringement.
 -------------------------------------------------------------------------------
 
 
-MICROSOFT SOFTWARE LICENSE TERMS
-MICROSOFT VISUAL STUDIO COMMUNITY 2013
+MICROSOFT SOFTWARE LICENSE TERMS FOR THE FOLLOWING MSDN SUBSCRIPTIONS:
+
+VISUAL STUDIO ENTERPRISE WITH MSDN, VISUAL STUDIO PROFESSIONAL WITH MSDN,
+VISUAL STUDIO TEST PROFESSIONAL WITH MSDN, MSDN PLATFORMS,
+MSDN OPERATING SYSTEMS
 
 DISTRIBUTABLE CODE.
 The software contains code that you are permitted to distribute in
-applications you develop if you comply with the terms below.
+applications you develop as described in this Section.
 (For this Section the term “distribution” also means deployment of
 your applications for third parties to access over the Internet.)
 
- Distribution Rights.
+ Right to Use and Distribute.
  The code and text files listed below are “Distributable Code.”
 
  · REDIST.TXT Files. You may copy and distribute the object code form of
-   code listed on the REDIST list located at
-   https://go.microsoft.com/fwlink/?LinkId=313603.
+   code listed in the redist.txt file in the software and on the REDIST list
+   located at http://go.microsoft.com/fwlink/?LinkId=523763&clcid=0x409 .
 
  Distribution Requirements.
  For any Distributable Code you distribute, you must:
 
  · add significant primary functionality to it in your applications;
- · distribute Distributable Code included in a setup program only as part of
-   that setup program without modification; and
  · require distributors and external end users to agree to terms that protect
-   the Distributable Code at least as much as this agreement.
+   it at least as much as this agreement;
+ · indemnify, defend, and hold harmless Microsoft from any claims,
+   including attorneys’ fees, related to the distribution or use of
+   your applications, except to the extent that any claim is based solely
+   on the Distributable Code.
 
  Distribution Restrictions.
  You may not:
 
- · alter any copyright, trademark or patent notice in the Distributable Code;
  · use Microsoft’s trademarks in your applications’ names or in a way that
-   suggests your applications come from or are endorsed by Microsoft; or
+   suggests your applications come from or are endorsed by Microsoft;
  · modify or distribute the source code of any Distributable Code so that any
-   part of it becomes subject to an Excluded License. An “Excluded License”
+   part of it becomes subject to an Excluded License. An Excluded License
    is one that requires, as a condition of use, modification or distribution,
    that (i) the code be disclosed or distributed in source code form;
    or (ii) others have the right to modify it.
 
 
 This is the "REDIST list" that is referenced in the "Distributable Code"
-section of the Microsoft Software License Terms for certain editions of
-Visual Studio 2013 ("the software").
-If you have a validly licensed copy of such software, you may copy and
-distribute with your program the unmodified form of the files listed below,
+section of the Microsoft Software License Terms for the
+Microsoft Visual Studio 2015 Software Development Kit ("the software").
+If you have a validly licensed copy of the software, you may copy and
+distribute the unmodified object code form of the files listed below,
 subject to the License Terms for the software.
 
 Visual C++ Runtime:
@@ -275,8 +279,8 @@ Subject to the License Terms for the software, you may copy and distribute
 the following MSM files, unmodified, as a part of the installation package
 of your program:
 
-Microsoft_VC120_CRT_x64.msm
-Microsoft_VC120_CRT_x86.msm
+Microsoft_VC140_CRT_x64.msm
+Microsoft_VC140_CRT_x86.msm
 
 
 -------------------------------------------------------------------------------
