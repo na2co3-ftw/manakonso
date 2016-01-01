@@ -277,9 +277,10 @@ BOOL GetUserUUID(LPWSTR *ppszUUID)
 {
 	BOOL bRet = FALSE;
 	PSECURITY_LOGON_SESSION_DATA pLogonSessionData = NULL;
-	//8c210750-6502-4a83-ae5c-88d86cb96f24
+	//3B69C3A4-6439-40F2-9A26-FF581928E364
 	const GUID NamespaceLogonInfo =
-	{0x8c210750, 0x6502, 0x4a83, {0xae, 0x5c, 0x88, 0xd8, 0x6c, 0xb9, 0x6f, 0x24}};
+	{0x3b69c3a4, 0x6439, 0x40f2,{ 0x9a, 0x26, 0xff, 0x58, 0x19, 0x28, 0xe3, 0x64}};
+
 
 	if(ppszUUID == NULL)
 	{
