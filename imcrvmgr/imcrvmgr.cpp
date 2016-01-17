@@ -1,7 +1,7 @@
 ﻿
 #include "parseskkdic.h"
 #include "utf8.h"
-#include "imcrvmgr.h"
+#include "immanamgr.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 HANDLE SrvStart();
@@ -447,7 +447,7 @@ void SrvProc(WCHAR command, const std::wstring &argument, std::wstring &result)
 		break;
 
 	case REQ_EXEC_CNF:
-		StartProcess(hInst, IMCRVCNFEXE);
+		StartProcess(hInst, IMmanaCNFEXE);
 
 		result = REP_OK;
 		result += L"\n";

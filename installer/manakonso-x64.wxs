@@ -102,8 +102,8 @@
 
     <UIRef Id="WixUI_Minimal" />
     <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
-    <Property Id="ARPPRODUCTICON" Value="CorvusSKK.ico" />
-    <Icon Id="CorvusSKK.ico" SourceFile="..\imcrvtip\Icon\CorvusSKK.ico" />
+    <Property Id="ARPPRODUCTICON" Value="manakonso.ico" />
+    <Icon Id="manakonso.ico" SourceFile="..\immanatip\Icon\manakonso.ico" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
 

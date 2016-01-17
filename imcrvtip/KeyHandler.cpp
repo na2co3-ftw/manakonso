@@ -1,6 +1,6 @@
 ﻿
 #include "configxml.h"
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "EditSession.h"
 #include "TextService.h"
 

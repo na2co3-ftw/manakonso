@@ -1,7 +1,7 @@
 ﻿
 #include "configxml.h"
 #include "convtype.h"
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 static const struct {
@@ -77,9 +77,9 @@ void CTextService::_CreateConfigPath()
 
 	if(GetUserUUID(&pszUserUUID))
 	{
-		_snwprintf_s(mgrpipename, _TRUNCATE, L"%s%s", IMCRVMGRPIPE, pszUserUUID);
-		_snwprintf_s(mgrmutexname, _TRUNCATE, L"%s%s", IMCRVMGRMUTEX, pszUserUUID);
-		_snwprintf_s(cnfmutexname, _TRUNCATE, L"%s%s", IMCRVCNFMUTEX, pszUserUUID);
+		_snwprintf_s(mgrpipename, _TRUNCATE, L"%s%s", IMmanaMGRPIPE, pszUserUUID);
+		_snwprintf_s(mgrmutexname, _TRUNCATE, L"%s%s", IMmanaMGRMUTEX, pszUserUUID);
+		_snwprintf_s(cnfmutexname, _TRUNCATE, L"%s%s", IMmanaCNFMUTEX, pszUserUUID);
 
 		LocalFree(pszUserUUID);
 	}

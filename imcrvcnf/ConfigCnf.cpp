@@ -1,6 +1,6 @@
 ﻿
 #include "configxml.h"
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 
 LPCWSTR TextServiceDesc = TEXTSERVICE_DESC;
 
@@ -44,7 +44,7 @@ void CreateConfigPath()
 
 	if(GetUserUUID(&pszUserUUID))
 	{
-		_snwprintf_s(cnfmutexname, _TRUNCATE, L"%s%s", IMCRVCNFMUTEX, pszUserUUID);
+		_snwprintf_s(cnfmutexname, _TRUNCATE, L"%s%s", IMmanaCNFMUTEX, pszUserUUID);
 
 		LocalFree(pszUserUUID);
 	}

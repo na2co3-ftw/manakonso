@@ -1,6 +1,6 @@
 ﻿
 #include "eucjis2004.h"
-#include "imcrvmgr.h"
+#include "immanamgr.h"
 
 #define SURROGATEPAIR_UCPMAX	0x10FFFF
 #define SURROGATEPAIR_UCPMIN	0x10000

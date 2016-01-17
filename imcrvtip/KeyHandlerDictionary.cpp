@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 void CTextService::_ConnectDic()
@@ -276,7 +276,7 @@ void CTextService::_StartManager()
 		return;
 	}
 
-	StartProcess(g_hInst, IMCRVMGREXE);
+	StartProcess(g_hInst, IMmanaMGREXE);
 }
 
 void CTextService::_StartConfigure()
@@ -299,6 +299,6 @@ void CTextService::_StartConfigure()
 	}
 	else
 	{
-		StartProcess(g_hInst, IMCRVCNFEXE);
+		StartProcess(g_hInst, IMmanaCNFEXE);
 	}
 }

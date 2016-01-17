@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvtip.h"
+#include "immanatip.h"
 
 #define CLSID_STRLEN 38
 #define TEXTSERVICE_MODEL   L"Apartment"

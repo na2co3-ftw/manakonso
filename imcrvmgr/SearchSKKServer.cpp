@@ -2,7 +2,7 @@
 #include "eucjis2004.h"
 #include "utf8.h"
 #include "parseskkdic.h"
-#include "imcrvmgr.h"
+#include "immanamgr.h"
 
 SOCKET sock = INVALID_SOCKET;
 

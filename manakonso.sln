@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "installer", "installer\installer.vcxproj", "{C65505E2-5456-473C-91B1-C6D91B294DC3}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -13,18 +13,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "installer", "installer\inst
 		{740F50A9-EA25-4FFB-890D-57D53FD6F026} = {740F50A9-EA25-4FFB-890D-57D53FD6F026}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imcrvtip", "imcrvtip\imcrvtip.vcxproj", "{740F50A9-EA25-4FFB-890D-57D53FD6F026}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "immanatip", "imcrvtip\imcrvtip.vcxproj", "{740F50A9-EA25-4FFB-890D-57D53FD6F026}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EB999F4D-AD29-4049-BCCB-FABFD01DFC97} = {EB999F4D-AD29-4049-BCCB-FABFD01DFC97}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imcrvmgr", "imcrvmgr\imcrvmgr.vcxproj", "{289FD85F-FCDB-413D-BBF3-997583DF0FEE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "immanamgr", "imcrvmgr\imcrvmgr.vcxproj", "{289FD85F-FCDB-413D-BBF3-997583DF0FEE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EB999F4D-AD29-4049-BCCB-FABFD01DFC97} = {EB999F4D-AD29-4049-BCCB-FABFD01DFC97}
 		{3DD6BBBB-4BCF-4991-A568-0D04B37D5E51} = {3DD6BBBB-4BCF-4991-A568-0D04B37D5E51}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imcrvcnf", "imcrvcnf\imcrvcnf.vcxproj", "{56319425-6482-41CF-8B63-BC33D6EEBB52}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "immanacnf", "imcrvcnf\imcrvcnf.vcxproj", "{56319425-6482-41CF-8B63-BC33D6EEBB52}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EB999F4D-AD29-4049-BCCB-FABFD01DFC97} = {EB999F4D-AD29-4049-BCCB-FABFD01DFC97}
 	EndProjectSection

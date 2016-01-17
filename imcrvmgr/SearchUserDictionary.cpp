@@ -1,7 +1,7 @@
 ﻿
 #include "parseskkdic.h"
 #include "configxml.h"
-#include "imcrvmgr.h"
+#include "immanamgr.h"
 
 //ユーザー辞書
 SKKDIC userdic;

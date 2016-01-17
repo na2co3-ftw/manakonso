@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM wParam, WCHAR ch, WCHAR chO)

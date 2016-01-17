@@ -1,6 +1,6 @@
 ﻿
-#ifndef IMCRVTIP_H
-#define IMCRVTIP_H
+#ifndef IMmanaTIP_H
+#define IMmanaTIP_H
 
 #include <tsattrs.h>
 
@@ -200,4 +200,4 @@ extern const IID IID_ITfFnGetPreferredTouchKeyboardLayout;
 #define ILOT_CLEANINSTALL            0x00000040
 #define ILOT_DISABLED                0x00000080
 
-#endif //IMCRVTIP_H
+#endif //IMmanaTIP_H

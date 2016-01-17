@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 #include "resource.h"
 
 HINSTANCE hInst;
@@ -82,7 +82,7 @@ int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam)
 	switch(uMsg)
 	{
 	case PSCB_INITIALIZED:
-		//imcrvmgr.exeから実行されるときimcrvtip.dllで
+		//immanamgr.exeから実行されるときimmanatip.dllで
 		//AllowSetForegroundWindow関数が実行済みのはず
 		SetForegroundWindow(hwndDlg);
 		break;

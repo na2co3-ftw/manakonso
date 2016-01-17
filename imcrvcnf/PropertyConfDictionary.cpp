@@ -2,7 +2,7 @@
 #include "eucjis2004.h"
 #include "parseskkdic.h"
 #include "configxml.h"
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 #include "resource.h"
 
 //見出し語位置

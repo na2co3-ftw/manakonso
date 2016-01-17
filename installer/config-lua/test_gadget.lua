@@ -1,7 +1,7 @@
 ﻿package.path = ".\\?.lua;" .. package.path
 package.cpath = ".\\?.dll;" .. package.cpath
 
-crvmgr = require("test_c")
+manamgr = require("test_c")
 require("init")
 
 
@@ -70,7 +70,7 @@ end},
 		string.match(s, "^[2][0-3]:[0-5][0-9]:[0-5][0-9]$"))) then return "" end
 	return s
 end},
-{"skk", "(skk-version)", "CorvusSKK X.Y.Z"},
+{"skk", "(skk-version)", "manakonso X.Y.Z"},
 {"1feet", "(skk-gadget-units-conversion \"feet\" (string-to-number (car skk-num-list)) \"cm\")", function(s)
 	local n = 30.48 * 1
 	if (math.tointeger(n)) then n = math.tointeger(n) end

@@ -41,16 +41,16 @@
 #define REP_OK				L'T'	//hit
 #define REP_FALSE			L'F'	//nothing
 
-#define IMCRVMGREXE			L"immanamgr.exe"
-#define IMCRVCNFEXE			L"immanacnf.exe"
+#define IMmanaMGREXE			L"immanamgr.exe"
+#define IMmanaCNFEXE			L"immanacnf.exe"
 #ifndef _DEBUG
-#define IMCRVKRNLOBJ		L"manakonso-"
+#define IMmanaKRNLOBJ		L"manakonso-"
 #else
-#define IMCRVKRNLOBJ		L"manakonso-debug-"
+#define IMmanaKRNLOBJ		L"manakonso-debug-"
 #endif
-#define IMCRVMGRMUTEX		IMCRVKRNLOBJ L"mgr-"
-#define IMCRVCNFMUTEX		IMCRVKRNLOBJ L"cnf-"
-#define IMCRVMGRPIPE		L"\\\\.\\pipe\\" IMCRVKRNLOBJ
+#define IMmanaMGRMUTEX		IMmanaKRNLOBJ L"mgr-"
+#define IMmanaCNFMUTEX		IMmanaKRNLOBJ L"cnf-"
+#define IMmanaMGRPIPE		L"\\\\.\\pipe\\" IMmanaKRNLOBJ
 
 #define BOM L'\uFEFF'
 

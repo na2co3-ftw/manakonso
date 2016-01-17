@@ -1,6 +1,6 @@
 ﻿
 #include "configxml.h"
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 #include "resource.h"
 
 static LPCWSTR defaultHost = L"localhost";

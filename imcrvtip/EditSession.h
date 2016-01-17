@@ -2,7 +2,7 @@
 #ifndef EDITSESSION_H
 #define EDITSESSION_H
 
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 class CEditSessionBase : public ITfEditSession

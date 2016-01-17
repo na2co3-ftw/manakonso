@@ -2,7 +2,7 @@
 #include <initguid.h>
 
 #include "configxml.h"
-#include "imcrvtip.h"
+#include "immanatip.h"
 
 HINSTANCE g_hInst;
 

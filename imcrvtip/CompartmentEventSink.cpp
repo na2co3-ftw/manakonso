@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 STDAPI CTextService::OnChange(REFGUID rguid)

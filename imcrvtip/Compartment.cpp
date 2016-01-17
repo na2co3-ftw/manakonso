@@ -1,5 +1,5 @@
 ﻿
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "TextService.h"
 
 HRESULT CTextService::_SetCompartment(REFGUID rguid, const VARIANT *pvar)

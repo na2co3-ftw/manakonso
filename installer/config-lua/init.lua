@@ -1,5 +1,5 @@
 ﻿--[[
-	 CorvusSKK Lua拡張スクリプト
+	 manakonso Lua拡張スクリプト
 
 
 	 Cから呼ばれるLuaの関数
@@ -46,44 +46,44 @@
 	Luaから呼ばれるCの関数
 
 		ユーザー辞書検索
-			crvmgr.search_user_dictionary(key, okuri)
+			manamgr.search_user_dictionary(key, okuri)
 				key : 見出し語 string
 				okuri : 送り仮名 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		SKK辞書検索
-			crvmgr.search_skk_dictionary(key)
+			manamgr.search_skk_dictionary(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		SKK辞書サーバー検索
-			crvmgr.search_skk_server(key)
+			manamgr.search_skk_server(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		SKK辞書サーバー情報検索
-			crvmgr.search_skk_server_info()
+			manamgr.search_skk_server_info()
 				戻り値 : SKK Serverプロトコル"2"の結果 バージョン番号 string
 						SKK Serverプロトコル"3"の結果 ホスト名 string 
 		Unicodeコードポイント変換
-			crvmgr.search_unicode(key)
+			manamgr.search_unicode(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		JIS X 0213面区点番号変換
-			crvmgr.search_jisx0213(key)
+			manamgr.search_jisx0213(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		JIS X 0208区点番号変換
-			crvmgr.search_jisx0208(key)
+			manamgr.search_jisx0208(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		文字コード表記変換 (ASCII, JIS X 0201(片仮名, 8bit), JIS X 0213 / Unicode)
-			crvmgr.search_character_code(key)
+			manamgr.search_character_code(key)
 				key : 見出し語 string
 				戻り値 : "/<C1><;A1>/<C2><;A2>/.../<Cn><;An>/\n" or "" string
 		補完
-			crvmgr.complement(key)
+			manamgr.complement(key)
 				key : 見出し語 string
 				戻り値 : "/<K1>/<K2>/.../<Kn>/\n" or "" string
 		辞書追加
-			crvmgr.add(okuriari, key, candidate, annotation, okuri)
+			manamgr.add(okuriari, key, candidate, annotation, okuri)
 				okuriari : boolean (送りあり:true/送りなし:false)
 				key : 見出し語 string
 				candidate : 候補 string
@@ -91,13 +91,13 @@
 				okuri : 送り仮名 string
 				戻り値 : なし
 		辞書削除
-			crvmgr.delete(okuriari, key, candidate)
+			manamgr.delete(okuriari, key, candidate)
 				okuriari : boolean (送りあり:true/送りなし:false)
 				key : 見出し語 string
 				candidate : 候補 string
 				戻り値 : なし
 		辞書保存
-			crvmgr.save()
+			manamgr.save()
 				戻り値 : なし
 
 
@@ -105,7 +105,7 @@
 
 		バージョン (skk-version)に使用
 			SKK_VERSION
-				"CorvusSKK X.Y.Z" string
+				"manakonso X.Y.Z" string
 --]]
 
 
@@ -562,7 +562,7 @@ end
 
 -- skk-server-version
 local function skk_server_version(t)
-	local v, h = crvmgr.search_skk_server_info()
+	local v, h = manamgr.search_skk_server_info()
 
 	if (v == "" or h == "") then
 		return ""
@@ -1072,30 +1072,30 @@ local function skk_search(key, okuri)
 	local ret = ""
 
 	-- ユーザー辞書検索
-	ret = ret .. crvmgr.search_user_dictionary(key, okuri)
+	ret = ret .. manamgr.search_user_dictionary(key, okuri)
 
 	-- SKK辞書検索
-	ret = ret .. crvmgr.search_skk_dictionary(key)
+	ret = ret .. manamgr.search_skk_dictionary(key)
 
 	-- SKK辞書サーバー検索
-	ret = ret .. crvmgr.search_skk_server(key)
+	ret = ret .. manamgr.search_skk_server(key)
 
 	if okuri == "" then
 		-- Unicodeコードポイント変換
-		ret = ret .. crvmgr.search_unicode(key)
+		ret = ret .. manamgr.search_unicode(key)
 
 		-- JIS X 0213面区点番号変換
-		ret = ret .. crvmgr.search_jisx0213(key)
+		ret = ret .. manamgr.search_jisx0213(key)
 
 		-- JIS X 0208区点番号変換
-		ret = ret .. crvmgr.search_jisx0208(key)
+		ret = ret .. manamgr.search_jisx0208(key)
 
 		local cccplen = string.len(charcode_conv_prefix)
 		if (cccplen < string.len(key) and string.sub(key, 1, cccplen) == charcode_conv_prefix) then
 			local subkey = string.sub(key, cccplen + 1)
 
 			-- 文字コード表記変換
-			ret = ret .. crvmgr.search_character_code(subkey)
+			ret = ret .. manamgr.search_character_code(subkey)
 		end
 	end
 
@@ -1136,7 +1136,7 @@ end
 
 -- 補完
 function lua_skk_complement(key)
-	return crvmgr.complement(key)
+	return manamgr.complement(key)
 end
 
 -- 見出し語変換
@@ -1230,15 +1230,15 @@ function lua_skk_add(okuriari, key, candidate, annotation, okuri)
 	end
 	--]]
 
-	crvmgr.add(okuriari, key, candidate, annotation, okuri)
+	manamgr.add(okuriari, key, candidate, annotation, okuri)
 end
 
 -- 辞書削除
 function lua_skk_delete(okuriari, key, candidate)
-	crvmgr.delete(okuriari, key, candidate)
+	manamgr.delete(okuriari, key, candidate)
 end
 
 -- 辞書保存
 function lua_skk_save()
-	crvmgr.save()
+	manamgr.save()
 end

@@ -3,7 +3,7 @@
 
 Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言語 凪霧")のIMEを開発中です。
 
-[CorvusSKK](https://github.com/nathancorvussolis/corvusskk) を基にして開発しています。
+[manakonso](https://github.com/nathanmanasolis/manakonso) を基にして開発しています。
 
 
 ## ライセンス

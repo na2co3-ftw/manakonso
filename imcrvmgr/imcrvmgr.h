@@ -1,6 +1,6 @@
 ﻿
-#ifndef IMCRVMGR_H
-#define IMCRVMGR_H
+#ifndef IMmanaMGR_H
+#define IMmanaMGR_H
 
 #include "common.h"
 #include "parseskkdic.h"
@@ -109,4 +109,4 @@ extern DWORD timeout;	//タイムアウト
 
 extern BOOL precedeokuri;	//送り仮名が一致した候補を優先する
 
-#endif //IMCRVMGR_H
+#endif //IMmanaMGR_H

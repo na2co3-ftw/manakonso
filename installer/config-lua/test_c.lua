@@ -1,5 +1,5 @@
 ﻿
-SKK_VERSION="CorvusSKK X.Y.Z"
+SKK_VERSION="manakonso X.Y.Z"
 
 local _M = {}
 

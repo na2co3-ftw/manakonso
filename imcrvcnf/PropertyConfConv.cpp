@@ -1,6 +1,6 @@
 ﻿
 #include "configxml.h"
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 #include "convtable.h"
 #include "resource.h"
 

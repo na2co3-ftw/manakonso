@@ -1,10 +1,10 @@
 ﻿
-#ifndef IMCRVCNF_H
-#define IMCRVCNF_H
+#ifndef IMmanaCNF_H
+#define IMmanaCNF_H
 
 #include "common.h"
 
-// imcrvcnf
+// immanacnf
 void CreateProperty();
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 
@@ -62,4 +62,4 @@ extern WCHAR pathconfigxml[MAX_PATH];	//設定
 extern WCHAR pathskkdic[MAX_PATH];	//取込SKK辞書
 extern WCHAR pathskkidx[MAX_PATH];	//取込SKK辞書インデックス
 
-#endif //IMCRVCNF_H
+#endif //IMmanaCNF_H

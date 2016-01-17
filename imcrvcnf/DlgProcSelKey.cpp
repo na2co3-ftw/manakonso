@@ -1,6 +1,6 @@
 ﻿
 #include "configxml.h"
-#include "imcrvcnf.h"
+#include "immanacnf.h"
 #include "resource.h"
 
 static LPCWSTR listSelKey[MAX_SELKEY_C] = {L"Aa",L"Ss",L"Dd",L"Ff",L"Jj",L"Kk",L"Ll",L"Gg",L"Hh"};

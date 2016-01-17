@@ -1,7 +1,7 @@
 ﻿
 #include "configxml.h"
 #include "utf8.h"
-#include "imcrvmgr.h"
+#include "immanamgr.h"
 
 LPCWSTR TextServiceDesc = TEXTSERVICE_DESC;
 LPCWSTR DictionaryManagerClass = TEXTSERVICE_NAME L"DictionaryManager";
@@ -96,8 +96,8 @@ void CreateConfigPath()
 
 	if(GetUserUUID(&pszUserUUID))
 	{
-		_snwprintf_s(mgrpipename, _TRUNCATE, L"%s%s", IMCRVMGRPIPE, pszUserUUID);
-		_snwprintf_s(mgrmutexname, _TRUNCATE, L"%s%s", IMCRVMGRMUTEX, pszUserUUID);
+		_snwprintf_s(mgrpipename, _TRUNCATE, L"%s%s", IMmanaMGRPIPE, pszUserUUID);
+		_snwprintf_s(mgrmutexname, _TRUNCATE, L"%s%s", IMmanaMGRMUTEX, pszUserUUID);
 
 		LocalFree(pszUserUUID);
 	}
@@ -205,14 +205,14 @@ void InitLua()
 	luaL_openlibs(lua);
 
 	luaL_newlib(lua, luaFuncs);
-	lua_setglobal(lua, "crvmgr");
+	lua_setglobal(lua, "manamgr");
 
 	//skk-version
 	_snprintf_s(version, _TRUNCATE, "%s", WCTOU8(TEXTSERVICE_NAME L" " TEXTSERVICE_VER));
 	lua_pushstring(lua, version);
 	lua_setglobal(lua, "SKK_VERSION");
 
-	//%AppData%\CorvusSKK\init.lua
+	//%AppData%\manakonso\init.lua
 	if(luaL_dofile(lua, WCTOU8(pathinitlua)) == LUA_OK)
 	{
 		return;
@@ -230,8 +230,8 @@ void InitLua()
 		}
 	}
 
-	//%SystemRoot%\System32\IME\IMCRVSKK\init.lua
-	// or %SystemRoot%\SysWOW64\IME\IMCRVSKK\init.lua
+	//%SystemRoot%\System32\IME\IMmanaSKK\init.lua
+	// or %SystemRoot%\SysWOW64\IME\IMmanaSKK\init.lua
 	if(luaL_dofile(lua, WCTOU8(pathinitlua)) == LUA_OK)
 	{
 		return;

@@ -2,7 +2,7 @@
 #ifndef TEXTSERVICE_H
 #define TEXTSERVICE_H
 
-#include "imcrvtip.h"
+#include "immanatip.h"
 #include "convtype.h"
 #include "parseskkdic.h"
 #include "configxml.h"
@@ -269,7 +269,7 @@ private:
 	WCHAR pathconfigxml[MAX_PATH];	//設定
 	FILETIME ftconfigxml;			//更新時刻
 
-	//imcrvmgr.exe との名前付きパイプ
+	//immanamgr.exe との名前付きパイプ
 	WCHAR mgrpipename[MAX_KRNLOBJNAME];
 	HANDLE hPipe;
 	WCHAR pipebuf[PIPEBUFSIZE];
