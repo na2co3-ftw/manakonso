@@ -1058,7 +1058,7 @@ local function skk_search(key, okuri)
 	-- SKK辞書検索
 	ret = ret .. crvmgr.search_skk_dictionary(key)
 
-	if okuri == "" then
+	if (okuri == "") then
 		-- Unicodeコードポイント変換
 		ret = ret .. crvmgr.search_unicode(key)
 
