@@ -11,15 +11,12 @@
 #define MAX_PRESERVEDKEY	8
 #define MAX_SELKEY_C		9
 
-#define MAX_SKKSERVER_HOST	(255 + 1)
-#define MAX_SKKSERVER_PORT	(5 + 1)
-
 #define MAX_WIDTH_DEFAULT	800
 
 #define PIPEBUFSIZE			0x2000	//named pipe, 16KB with wchar_t
 #define DICBUFSIZE			0x1000	//entry, 8KB with wchar_t
 #define READBUFSIZE			0x800	//read skk dictionary, 4KB with wchar_t/char
-#define RECVBUFSIZE			0x800	//receive from skk server, 2KB with char
+#define RECVBUFSIZE			0x800	//receive from online dictionary, 2KB with char
 
 //request
 #define REQ_SEARCH			L'1'	//辞書検索

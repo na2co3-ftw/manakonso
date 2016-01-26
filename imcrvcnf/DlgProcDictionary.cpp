@@ -22,9 +22,6 @@ INT_PTR CALLBACK DlgProcDictionary(HWND hDlg, UINT message, WPARAM wParam, LPARA
 	WCHAR pathBak[MAX_PATH];
 	BOOL check;
 	BOOL checkBak;
-	WCHAR num[32];
-	WCHAR host[MAX_SKKSERVER_HOST];
-	WCHAR port[MAX_SKKSERVER_PORT];
 	std::wstring strxmlval;
 	FILE *fp;
 	static HWND hEdit;
@@ -43,26 +40,6 @@ INT_PTR CALLBACK DlgProcDictionary(HWND hDlg, UINT message, WPARAM wParam, LPARA
 		ListView_InsertColumn(hWndListView, 0, &lvc);
 
 		LoadDictionary(hDlg);
-
-		LoadCheckButton(hDlg, IDC_CHECKBOX_SKKSRV, SectionServer, ValueServerServ);
-
-		ReadValue(pathconfigxml, SectionServer, ValueServerHost, strxmlval);
-		if(strxmlval.empty()) strxmlval = defaultHost;
-		SetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_HOST, strxmlval.c_str());
-
-		ReadValue(pathconfigxml, SectionServer, ValueServerPort, strxmlval);
-		if(strxmlval.empty()) strxmlval = defaultPort;
-		SetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_PORT, strxmlval.c_str());
-
-		LoadCheckButton(hDlg, IDC_RADIO_UTF8, SectionServer, ValueServerEncoding);
-		if(!IsDlgButtonChecked(hDlg, IDC_RADIO_UTF8))
-		{
-			CheckDlgButton(hDlg, IDC_RADIO_EUC, BST_CHECKED);
-		}
-
-		ReadValue(pathconfigxml, SectionServer, ValueServerTimeOut, strxmlval);
-		if(strxmlval.empty()) strxmlval = defaultTimeOut;
-		SetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_TIMEOUT, strxmlval.c_str());
 
 		return TRUE;
 
@@ -277,23 +254,6 @@ INT_PTR CALLBACK DlgProcDictionary(HWND hDlg, UINT message, WPARAM wParam, LPARA
 			SaveDictionary(hDlg);
 
 			WriterEndSection(pXmlWriter);	//End of SectionDictionary
-
-			WriterStartSection(pXmlWriter, SectionServer);	//Start of SectionServer
-
-			SaveCheckButton(hDlg, IDC_CHECKBOX_SKKSRV, ValueServerServ);
-
-			GetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_HOST, host, _countof(host));
-			WriterKey(pXmlWriter, ValueServerHost, host);
-
-			GetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_PORT, port, _countof(port));
-			WriterKey(pXmlWriter, ValueServerPort, port);
-
-			SaveCheckButton(hDlg, IDC_RADIO_UTF8, ValueServerEncoding);
-
-			GetDlgItemTextW(hDlg, IDC_EDIT_SKKSRV_TIMEOUT, num, _countof(num));
-			WriterKey(pXmlWriter, ValueServerTimeOut, num);
-
-			WriterEndSection(pXmlWriter);	//End of SectionServer
 
 			return TRUE;
 		default:

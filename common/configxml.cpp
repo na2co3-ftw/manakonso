@@ -38,18 +38,6 @@ LPCWSTR AttributeJLatin = L"jl";
 
 LPCWSTR SectionDictionary = L"dictionary";
 
-//server section
-
-LPCWSTR SectionServer = L"server";
-
-//server keys
-
-LPCWSTR ValueServerServ = L"serv";
-LPCWSTR ValueServerHost = L"host";
-LPCWSTR ValueServerPort = L"port";
-LPCWSTR ValueServerEncoding = L"encoding";
-LPCWSTR ValueServerTimeOut = L"timeout";
-
 //behavior section
 
 LPCWSTR SectionBehavior = L"behavior";

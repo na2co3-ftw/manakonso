@@ -39,8 +39,6 @@ std::wstring ConvertKey(const std::wstring &searchkey, const std::wstring &okuri
 std::wstring ConvertCandidate(const std::wstring &searchkey, const std::wstring &candidate, const std::wstring &okuri);
 int lua_search_skk_dictionary(lua_State *lua);
 int lua_search_user_dictionary(lua_State *lua);
-int lua_search_skk_server(lua_State *lua);
-int lua_search_skk_server_info(lua_State *lua);
 int lua_search_unicode(lua_State *lua);
 int lua_search_jisx0213(lua_State *lua);
 int lua_search_jisx0208(lua_State *lua);
@@ -59,19 +57,6 @@ BOOL LoadSKKUserDic();
 void SaveSKKUserDic(void *p);
 void StartSaveSKKUserDic(BOOL bThread);
 void BackUpSKKUserDic();
-
-// SearchSKKServer
-std::wstring SearchSKKServer(const std::wstring &searchkey);
-void ConnectSKKServer();
-void DisconnectSKKServer();
-std::wstring GetSKKServerInfo(CHAR req);
-
-//client
-#define SKK_REQ		'1'
-#define SKK_VER		'2'
-#define SKK_HST		'3'
-//server
-#define SKK_HIT		'1'
 
 #define BACKUP_GENS		3
 
@@ -99,13 +84,6 @@ extern WCHAR pathinitlua[MAX_PATH];		//init.lua
 extern WCHAR krnlobjsddl[MAX_KRNLOBJNAME];	//SDDL
 extern WCHAR mgrpipename[MAX_KRNLOBJNAME];	//名前付きパイプ
 extern WCHAR mgrmutexname[MAX_KRNLOBJNAME];	//ミューテックス
-
-// 辞書サーバー設定
-extern BOOL serv;		//SKK辞書サーバーを使用する
-extern WCHAR host[MAX_SKKSERVER_HOST];	//ホスト
-extern WCHAR port[MAX_SKKSERVER_PORT];	//ポート
-extern DWORD encoding;	//エンコーディング
-extern DWORD timeout;	//タイムアウト
 
 extern BOOL precedeokuri;	//送り仮名が一致した候補を優先する
 

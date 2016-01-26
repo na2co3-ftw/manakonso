@@ -18,21 +18,12 @@ WCHAR krnlobjsddl[MAX_KRNLOBJNAME];		//SDDL
 WCHAR mgrpipename[MAX_KRNLOBJNAME];		//名前付きパイプ
 WCHAR mgrmutexname[MAX_KRNLOBJNAME];	//ミューテックス
 
-// 辞書サーバー設定
-BOOL serv = FALSE;		//SKK辞書サーバーを使用する
-WCHAR host[MAX_SKKSERVER_HOST] = {L'\0'};	//ホスト
-WCHAR port[MAX_SKKSERVER_PORT] = {L'\0'};	//ポート
-DWORD encoding = 0;		//エンコーディング
-DWORD timeout = 1000;	//タイムアウト
-
 BOOL precedeokuri = FALSE;	//送り仮名が一致した候補を優先する
 
 const luaL_Reg luaFuncs[] =
 {
 	{"search_skk_dictionary", lua_search_skk_dictionary},
 	{"search_user_dictionary", lua_search_user_dictionary},
-	{"search_skk_server", lua_search_skk_server},
-	{"search_skk_server_info", lua_search_skk_server_info},
 	{"search_unicode", lua_search_unicode},
 	{"search_jisx0213", lua_search_jisx0213},
 	{"search_jisx0208", lua_search_jisx0208},
@@ -105,58 +96,7 @@ void CreateConfigPath()
 
 void LoadConfig()
 {
-	BOOL servtmp;
-	WCHAR hosttmp[MAX_SKKSERVER_HOST];	//ホスト
-	WCHAR porttmp[MAX_SKKSERVER_PORT];	//ポート
-	DWORD encodingtmp;
-	DWORD timeouttmp;
 	std::wstring strxmlval;
-
-	ReadValue(pathconfigxml, SectionServer, ValueServerServ, strxmlval);
-	servtmp = _wtoi(strxmlval.c_str());
-	if(servtmp != TRUE && servtmp != FALSE)
-	{
-		servtmp = FALSE;
-	}
-
-	ReadValue(pathconfigxml, SectionServer, ValueServerHost, strxmlval);
-	wcsncpy_s(hosttmp, strxmlval.c_str(), _TRUNCATE);
-
-	ReadValue(pathconfigxml, SectionServer, ValueServerPort, strxmlval);
-	wcsncpy_s(porttmp, strxmlval.c_str(), _TRUNCATE);
-
-	ReadValue(pathconfigxml, SectionServer, ValueServerEncoding, strxmlval);
-	encodingtmp = _wtoi(strxmlval.c_str());
-	if(encodingtmp != 1)
-	{
-		encodingtmp = 0;
-	}
-
-	ReadValue(pathconfigxml, SectionServer, ValueServerTimeOut, strxmlval);
-	timeouttmp = _wtoi(strxmlval.c_str());
-	if(timeouttmp > 60000)
-	{
-		timeouttmp = 1000;
-	}
-
-	//変更があったら接続し直す
-	if(servtmp != serv || wcscmp(hosttmp, host) != 0 || wcscmp(porttmp, port) != 0 ||
-		encodingtmp != encoding || timeouttmp != timeout)
-	{
-		serv = servtmp;
-		wcsncpy_s(host, hosttmp, _TRUNCATE);
-		wcsncpy_s(port, porttmp, _TRUNCATE);
-		encoding = encodingtmp;
-		timeout = timeouttmp;
-
-		DisconnectSKKServer();
-
-		if(serv)
-		{
-			ConnectSKKServer();
-			GetSKKServerInfo(SKK_VER);
-		}
-	}
 
 	ReadValue(pathconfigxml, SectionBehavior, ValuePrecedeOkuri, strxmlval);
 	precedeokuri = _wtoi(strxmlval.c_str());

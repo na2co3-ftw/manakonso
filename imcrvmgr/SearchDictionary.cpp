@@ -33,9 +33,6 @@ void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, 
 		//SKK辞書
 		candidate += SearchSKKDic(searchkey);
 
-		//SKK辞書サーバー
-		candidate += SearchSKKServer(searchkey);
-
 		//Unicodeコードポイント
 		candidate += SearchUnicode(searchkey);
 
@@ -237,27 +234,6 @@ int lua_search_user_dictionary(lua_State *lua)
 	lua_pushstring(lua, WCTOU8(candidate.c_str()));
 
 	return 1;
-}
-
-int lua_search_skk_server(lua_State *lua)
-{
-	std::wstring searchkey = U8TOWC(lua_tostring(lua, 1));
-	std::wstring candidate = SearchSKKServer(searchkey);
-
-	lua_pushstring(lua, WCTOU8(candidate.c_str()));
-
-	return 1;
-}
-
-int lua_search_skk_server_info(lua_State *lua)
-{
-	std::wstring server_ver = GetSKKServerInfo(SKK_VER);
-	std::wstring server_hst = GetSKKServerInfo(SKK_HST);
-
-	lua_pushstring(lua, WCTOU8(server_ver.c_str()));
-	lua_pushstring(lua, WCTOU8(server_hst.c_str()));
-
-	return 2;
 }
 
 int lua_search_unicode(lua_State *lua)

@@ -65,18 +65,6 @@ extern LPCWSTR AttributeJLatin;
 
 extern LPCWSTR SectionDictionary;
 
-//server section
-
-extern LPCWSTR SectionServer;
-
-//server keys
-
-extern LPCWSTR ValueServerServ;
-extern LPCWSTR ValueServerHost;
-extern LPCWSTR ValueServerPort;
-extern LPCWSTR ValueServerEncoding;
-extern LPCWSTR ValueServerTimeOut;
-
 //behavior section
 
 extern LPCWSTR SectionBehavior;
