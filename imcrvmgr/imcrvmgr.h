@@ -4,7 +4,6 @@
 
 #include "common.h"
 #include "parseskkdic.h"
-#include "lua.hpp"
 
 typedef struct {
 	SKKDIC userdic;
@@ -17,11 +16,6 @@ typedef struct {
 void CreateConfigPath();
 void LoadConfig();
 BOOL IsFileUpdated(LPCWSTR path, FILETIME *ft);
-void InitLua();
-void UninitLua();
-
-// ConvGadget
-std::wstring ConvGadget(const std::wstring &key, const std::wstring &candidate);
 
 // ConvNum
 std::wstring ConvNum(const std::wstring &key, const std::wstring &candidate);
@@ -37,16 +31,6 @@ void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, 
 std::wstring SearchSKKDic(const std::wstring &searchkey);
 std::wstring ConvertKey(const std::wstring &searchkey, const std::wstring &okuri);
 std::wstring ConvertCandidate(const std::wstring &searchkey, const std::wstring &candidate, const std::wstring &okuri);
-int lua_search_skk_dictionary(lua_State *lua);
-int lua_search_user_dictionary(lua_State *lua);
-int lua_search_unicode(lua_State *lua);
-int lua_search_jisx0213(lua_State *lua);
-int lua_search_jisx0208(lua_State *lua);
-int lua_search_character_code(lua_State *lua);
-int lua_complement(lua_State *lua);
-int lua_add(lua_State *lua);
-int lua_delete(lua_State *lua);
-int lua_save(lua_State *lua);
 
 // SearchUserDictionary
 std::wstring SearchUserDic(const std::wstring &searchkey, const std::wstring &okuri);
@@ -66,8 +50,6 @@ extern LPCWSTR DictionaryManagerClass;
 extern CRITICAL_SECTION csUserDataSave;
 extern BOOL bUserDicChg;
 
-extern lua_State *lua;
-
 extern SKKDIC userdic;
 extern USEROKURI userokuri;
 extern KEYORDER complements;
@@ -79,7 +61,6 @@ extern WCHAR pathuserdic[MAX_PATH];		//ユーザー辞書
 extern WCHAR pathuserbak[MAX_PATH];		//ユーザー辞書バックアッププレフィックス
 extern WCHAR pathskkdic[MAX_PATH];		//取込SKK辞書
 extern WCHAR pathskkidx[MAX_PATH];		//取込SKK辞書インデックス
-extern WCHAR pathinitlua[MAX_PATH];		//init.lua
 
 extern WCHAR krnlobjsddl[MAX_KRNLOBJNAME];	//SDDL
 extern WCHAR mgrpipename[MAX_KRNLOBJNAME];	//名前付きパイプ

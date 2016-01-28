@@ -12,28 +12,12 @@ WCHAR pathuserdic[MAX_PATH];	//ユーザー辞書
 WCHAR pathuserbak[MAX_PATH];	//ユーザー辞書バックアッププレフィックス
 WCHAR pathskkdic[MAX_PATH];		//取込SKK辞書
 WCHAR pathskkidx[MAX_PATH];		//取込SKK辞書インデックス
-WCHAR pathinitlua[MAX_PATH];	//init.lua
 
 WCHAR krnlobjsddl[MAX_KRNLOBJNAME];		//SDDL
 WCHAR mgrpipename[MAX_KRNLOBJNAME];		//名前付きパイプ
 WCHAR mgrmutexname[MAX_KRNLOBJNAME];	//ミューテックス
 
 BOOL precedeokuri = FALSE;	//送り仮名が一致した候補を優先する
-
-const luaL_Reg luaFuncs[] =
-{
-	{"search_skk_dictionary", lua_search_skk_dictionary},
-	{"search_user_dictionary", lua_search_user_dictionary},
-	{"search_unicode", lua_search_unicode},
-	{"search_jisx0213", lua_search_jisx0213},
-	{"search_jisx0208", lua_search_jisx0208},
-	{"search_character_code", lua_search_character_code},
-	{"complement", lua_complement},
-	{"add", lua_add},
-	{"delete", lua_delete},
-	{"save", lua_save},
-	{NULL, NULL}
-};
 
 void CreateConfigPath()
 {
@@ -44,7 +28,6 @@ void CreateConfigPath()
 	ZeroMemory(pathuserbak, sizeof(pathuserbak));
 	ZeroMemory(pathskkdic, sizeof(pathskkdic));
 	ZeroMemory(pathskkidx, sizeof(pathskkidx));
-	ZeroMemory(pathinitlua, sizeof(pathinitlua));
 
 	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, NULL, &appdatafolder) == S_OK)
 	{
@@ -62,7 +45,6 @@ void CreateConfigPath()
 		_snwprintf_s(pathuserbak, _TRUNCATE, L"%s\\%s", appdir, fnuserbak);
 		_snwprintf_s(pathskkdic, _TRUNCATE, L"%s\\%s", appdir, fnskkdic);
 		_snwprintf_s(pathskkidx, _TRUNCATE, L"%s\\%s", appdir, fnskkidx);
-		_snwprintf_s(pathinitlua, _TRUNCATE, L"%s\\%s", appdir, fninitlua);
 	}
 
 	ZeroMemory(krnlobjsddl, sizeof(krnlobjsddl));
@@ -130,61 +112,4 @@ BOOL IsFileUpdated(LPCWSTR path, FILETIME *ft)
 	}
 
 	return ret;
-}
-
-void InitLua()
-{
-	CHAR version[64];
-
-	lua = luaL_newstate();
-	if(lua == NULL)
-	{
-		return;
-	}
-
-	luaL_openlibs(lua);
-
-	luaL_newlib(lua, luaFuncs);
-	lua_setglobal(lua, "crvmgr");
-
-	//skk-version
-	_snprintf_s(version, _TRUNCATE, "%s", WCTOU8(TEXTSERVICE_NAME L" " TEXTSERVICE_VER));
-	lua_pushstring(lua, version);
-	lua_setglobal(lua, "SKK_VERSION");
-
-	//%AppData%\CorvusSKK\init.lua
-	if(luaL_dofile(lua, WCTOU8(pathinitlua)) == LUA_OK)
-	{
-		return;
-	}
-
-	ZeroMemory(pathinitlua, sizeof(pathinitlua));
-
-	if(GetModuleFileNameW(NULL, pathinitlua, _countof(pathinitlua)) != 0)
-	{
-		WCHAR *pdir = wcsrchr(pathinitlua, L'\\');
-		if(pdir != NULL)
-		{
-			*(pdir + 1) = L'\0';
-			wcsncat_s(pathinitlua, fninitlua, _TRUNCATE);
-		}
-	}
-
-	//%SystemRoot%\System32\IME\IMCRVSKK\init.lua
-	// or %SystemRoot%\SysWOW64\IME\IMCRVSKK\init.lua
-	if(luaL_dofile(lua, WCTOU8(pathinitlua)) == LUA_OK)
-	{
-		return;
-	}
-
-	UninitLua();
-}
-
-void UninitLua()
-{
-	if(lua != NULL)
-	{
-		lua_close(lua);
-		lua = NULL;
-	}
 }

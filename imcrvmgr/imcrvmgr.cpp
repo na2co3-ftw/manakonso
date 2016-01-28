@@ -17,7 +17,6 @@ HINSTANCE hInst;
 HANDLE hMutex;
 HANDLE hThreadSrv;
 BOOL bSrvThreadExit;
-lua_State *lua;
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -60,8 +59,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		LoadConfig();
 	}
 
-	InitLua();
-
 	hInst = hInstance;
 
 	ZeroMemory(&wc, sizeof(wc));
@@ -84,7 +81,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	if(!hWnd)
 	{
-		UninitLua();
 		WSACleanup();
 		return 0;
 	}
@@ -105,7 +101,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 		}
 	}
 
-	UninitLua();
 	WSACleanup();
 
 	return (int) msg.wParam;
@@ -305,24 +300,7 @@ void SrvProc(WCHAR command, const std::wstring &argument, std::wstring &result)
 		fmt.assign(L"$1");
 		key = std::regex_replace(argument, re, fmt);
 
-		if(lua != NULL)
-		{
-			lua_getglobal(lua,"lua_skk_complement");
-			lua_pushstring(lua, WCTOU8(key.c_str()));
-			if(lua_pcall(lua, 1, 1, 0) == LUA_OK)
-			{
-				if(lua_isstring(lua, -1))
-				{
-					candidate = U8TOWC(lua_tostring(lua, -1));
-					ParseSKKDicCandiate(candidate, sc);
-				}
-			}
-			lua_pop(lua, 1);
-		}
-		else
-		{
-			SearchComplement(key, sc);
-		}
+		SearchComplement(key, sc);
 
 		if(!sc.empty())
 		{
@@ -387,20 +365,7 @@ void SrvProc(WCHAR command, const std::wstring &argument, std::wstring &result)
 		fmt.assign(L"$4");
 		okuri = std::regex_replace(argument, re, fmt);
 
-		if(lua != NULL)
-		{
-			lua_getglobal(lua, "lua_skk_add");
-			lua_pushboolean(lua, (command == REQ_USER_ADD_0 ? 1 : 0));
-			lua_pushstring(lua, WCTOU8(key.c_str()));
-			lua_pushstring(lua, WCTOU8(candidate.c_str()));
-			lua_pushstring(lua, WCTOU8(annotation.c_str()));
-			lua_pushstring(lua, WCTOU8(okuri.c_str()));
-			lua_pcall(lua, 5, 1, 0);
-		}
-		else
-		{
-			AddUserDic(command, key, candidate, annotation, okuri);
-		}
+		AddUserDic(command, key, candidate, annotation, okuri);
 
 		result = REP_OK;
 		result += L"\n";
@@ -414,33 +379,14 @@ void SrvProc(WCHAR command, const std::wstring &argument, std::wstring &result)
 		fmt.assign(L"$2");
 		candidate = std::regex_replace(argument, re, fmt);
 
-		if(lua != NULL)
-		{
-			lua_getglobal(lua, "lua_skk_delete");
-			lua_pushboolean(lua, (command == REQ_USER_DEL_0 ? 1 : 0));
-			lua_pushstring(lua, WCTOU8(key.c_str()));
-			lua_pushstring(lua, WCTOU8(candidate.c_str()));
-			lua_pcall(lua, 3, 0, 0);
-		}
-		else
-		{
-			DelUserDic(command, key, candidate);
-		}
+		DelUserDic(command, key, candidate);
 
 		result = REP_OK;
 		result += L"\n";
 		break;
 
 	case REQ_USER_SAVE:
-		if(lua != NULL)
-		{
-			lua_getglobal(lua, "lua_skk_save");
-			lua_pcall(lua, 0, 0, 0);
-		}
-		else
-		{
-			StartSaveSKKUserDic(TRUE);
-		}
+		StartSaveSKKUserDic(TRUE);
 
 		result = REP_OK;
 		result += L"\n";

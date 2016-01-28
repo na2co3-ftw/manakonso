@@ -34,15 +34,6 @@
       <Component Guid="*" Id="TIP_X86">
         <File Id="F_immanatip_x86" Name="immanatip.dll" Source="..\Win32\Release\immanatip.dll" SelfRegCost="1" />
       </Component>
-      <Component Guid="*" Id="LUAEXE_X86">
-        <File Id="F_luaexe_x86" Name="lua.exe" Source="..\Win32\Release\lua.exe" />
-      </Component>
-      <Component Guid="*" Id="LUADLL_X86">
-        <File Id="F_luadll_x86" Name="lua53.dll" Source="..\Win32\Release\lua53.dll" />
-      </Component>
-      <Component Guid="*" Id="INITLUA_X86">
-        <File Id="F_initlua_x86" Name="init.lua" Source="config-lua\init.lua" />
-      </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="IMMANAKONSO_X64">
@@ -54,15 +45,6 @@
       </Component>
       <Component Guid="*" Id="TIP_X64" Win64="yes">
         <File Id="F_immanatip_x64" Name="immanatip.dll" Source="..\x64\Release\immanatip.dll" SelfRegCost="1" />
-      </Component>
-      <Component Guid="*" Id="LUAEXE_X64" Win64="yes">
-        <File Id="F_luaexe_x64" Name="lua.exe" Source="..\x64\Release\lua.exe" />
-      </Component>
-      <Component Guid="*" Id="LUADLL_X64" Win64="yes">
-        <File Id="F_luadll_x64" Name="lua53.dll" Source="..\x64\Release\lua53.dll" />
-      </Component>
-      <Component Guid="*" Id="INITLUA_X64" Win64="yes">
-        <File Id="F_initlua_x64" Name="init.lua" Source="config-lua\init.lua" />
       </Component>
     </DirectoryRef>
 
@@ -77,15 +59,9 @@
       <ComponentRef Id="CNF_X86" />
       <ComponentRef Id="MGR_X86" />
       <ComponentRef Id="TIP_X86" />
-      <ComponentRef Id="LUAEXE_X86" />
-      <ComponentRef Id="LUADLL_X86" />
-      <ComponentRef Id="INITLUA_X86" />
       <ComponentRef Id="CNF_X64" />
       <ComponentRef Id="MGR_X64" />
       <ComponentRef Id="TIP_X64" />
-      <ComponentRef Id="LUAEXE_X64" />
-      <ComponentRef Id="LUADLL_X64" />
-      <ComponentRef Id="INITLUA_X64" />
       <ComponentRef Id="RegistryRun" />
     </Feature>
 

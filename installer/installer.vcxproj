@@ -20,12 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
-    <None Include="config-lua\init.lua" />
-    <None Include="config-lua\test_c.lua" />
-    <None Include="config-lua\test_gadget.lua" />
-    <None Include="config-lua\test_num.lua" />
-    <None Include="config-lua\test_search.lua" />
-    <None Include="config-lua\test_time.lua" />
     <None Include="manakonso-version.wxi" />
     <None Include="manakonso-x64.wxs" />
     <None Include="manakonso-x86.wxs" />
@@ -120,17 +114,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>copy /y "config-lua\init.lua" "$(SolutionDir)$(Platform)\$(Configuration)\"</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\init.lua"</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>copy /y "config-lua\init.lua" "$(SolutionDir)$(Platform)\$(Configuration)\"</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>
+    </NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>
+    </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>
+    </NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>copy /y "config-lua\init.lua" "$(SolutionDir)$(Platform)\$(Configuration)\"</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\init.lua"</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>copy /y "config-lua\init.lua" "$(SolutionDir)$(Platform)\$(Configuration)\"</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>
+    </NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>
+    </NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>
+    </NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>

@@ -21,7 +21,6 @@ LPCWSTR fnuserdic = L"userdict.txt";	//ユーザー辞書
 LPCWSTR fnuserbak = L"userdict.bk";		//ユーザー辞書バックアッププレフィックス
 LPCWSTR fnskkdic = L"skkdict.dic";		//取込SKK辞書
 LPCWSTR fnskkidx = L"skkdict.idx";		//取込SKK辞書インデックス
-LPCWSTR fninitlua = L"init.lua";		//init.lua
 
 const TF_DISPLAYATTRIBUTE c_daDisplayAttributeInputMark =
 {

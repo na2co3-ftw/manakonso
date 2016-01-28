@@ -4,9 +4,6 @@
     <Filter Include="Installer Files">
       <UniqueIdentifier>{e310d37e-24d5-4eb8-b088-2fe2aa5b345c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="config-lua">
-      <UniqueIdentifier>{d18340a9-2f90-446e-a016-5c017ad0c446}</UniqueIdentifier>
-    </Filter>
     <Filter Include="config-sample">
       <UniqueIdentifier>{a4c9d6dd-8349-4e02-b744-23321ddbb9f3}</UniqueIdentifier>
     </Filter>
@@ -65,24 +62,6 @@
     </None>
     <None Include="license.rtf">
       <Filter>Installer Files</Filter>
-    </None>
-    <None Include="config-lua\init.lua">
-      <Filter>config-lua</Filter>
-    </None>
-    <None Include="config-lua\test_c.lua">
-      <Filter>config-lua</Filter>
-    </None>
-    <None Include="config-lua\test_gadget.lua">
-      <Filter>config-lua</Filter>
-    </None>
-    <None Include="config-lua\test_num.lua">
-      <Filter>config-lua</Filter>
-    </None>
-    <None Include="config-lua\test_search.lua">
-      <Filter>config-lua</Filter>
-    </None>
-    <None Include="config-lua\test_time.lua">
-      <Filter>config-lua</Filter>
     </None>
     <None Include="..\README.md">
       <Filter>Installer Files</Filter>
