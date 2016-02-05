@@ -3,7 +3,6 @@
 #include "configxml.h"
 #include "utf8.h"
 #include "imcrvmgr.h"
-#include <set>
 
 void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, SKKDICCANDIDATES &sc)
 {
