@@ -158,6 +158,8 @@ std::wstring ConvertKey(const std::wstring &searchkey, const std::wstring &okuri
 		ret = std::regex_replace(searchkey, re, fmt);
 	}
 
+	ret = std::regex_replace(ret, std::wregex(L"[\\x00-\\x19]"), std::wstring(L""));
+
 	return ret;
 }
 
@@ -184,6 +186,8 @@ std::wstring ConvertCandidate(const std::wstring &searchkey, const std::wstring 
 		candidate_tmp[0] == L'(' && candidate_tmp[candidate_tmp.size() - 1] == L')') {
 		ret = ParseConcat(candidate_tmp);
 	}
+
+	ret = std::regex_replace(ret, std::wregex(L"[\\x00-\\x19]"), std::wstring(L""));
 
 	return ret;
 }
