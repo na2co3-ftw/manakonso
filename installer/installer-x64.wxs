@@ -1,40 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-  <?include manakonso-version.wxi ?>
+  <?include installer-version.wxi ?>
 
-  <Product Id="*" Name="manakonso" Version="$(var.version)" Manufacturer="na2co3"
-    Language="1033" UpgradeCode="0C5A2A8D-91BF-4F5E-A922-0E0E6238C541">
+  <Product Id="*" Name="京極入致" Version="$(var.version)" Manufacturer="na2co3"
+    Language="1041" Codepage="65001" UpgradeCode="0C5A2A8D-91BF-4F5E-A922-0E0E6238C541">
 
-    <Package Id="*" Compressed="yes" Description="manakonso" Comments="ver. $(var.version)"
+    <Package Id="*" Compressed="yes" Description="manakonso (x64)" Comments="ver. $(var.version)"
       Platform="x64" InstallerVersion="405" InstallScope="perMachine" InstallPrivileges="elevated" />
 
-    <Media Id="1" Cabinet="manakonso.cab" CompressionLevel="high" EmbedCab="yes" />
+    <Media Id="1" Cabinet="x64.cab" CompressionLevel="high" EmbedCab="yes" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="SystemFolder" Name="SystemFolder">
-        <Directory Id="IME_X86" Name="IME">
-          <Directory Id="IMMANAKONSO_X86" Name="IMMANAKONSO" />
-        </Directory>
-      </Directory>
       <Directory Id="System64Folder" Name="System64Folder">
         <Directory Id="IME_X64" Name="IME">
           <Directory Id="IMMANAKONSO_X64" Name="IMMANAKONSO" />
         </Directory>
       </Directory>
     </Directory>
-
-    <DirectoryRef Id="IMMANAKONSO_X86">
-      <Component Guid="*" Id="CNF_X86">
-        <File Id="F_immanacnf_x86" Name="immanacnf.exe" Source="..\Win32\Release\immanacnf.exe" />
-      </Component>
-      <Component Guid="*" Id="MGR_X86">
-        <File Id="F_immanamgr_x86" Name="immanamgr.exe" Source="..\Win32\Release\immanamgr.exe" />
-      </Component>
-      <Component Guid="*" Id="TIP_X86">
-        <File Id="F_immanatip_x86" Name="immanatip.dll" Source="..\Win32\Release\immanatip.dll" SelfRegCost="1" />
-      </Component>
-    </DirectoryRef>
 
     <DirectoryRef Id="IMMANAKONSO_X64">
       <Component Guid="*" Id="CNF_X64" Win64="yes">
@@ -48,7 +31,7 @@
       </Component>
     </DirectoryRef>
 
-    <Component Id="RegistryRun" Guid="*" Win64="yes" Directory="TARGETDIR">
+    <Component Guid="*" Id="REG_X64" Directory="TARGETDIR" Win64="yes">
       <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Run">
         <RegistryValue Action="write" Type="string" Name="immanamgr"
           Value="&quot;[%SystemRoot]\System32\IME\IMMANAKONSO\immanamgr.exe&quot;" />
@@ -56,36 +39,21 @@
     </Component>
 
     <Feature Id="Default" Title="Main" Level="1">
-      <ComponentRef Id="CNF_X86" />
-      <ComponentRef Id="MGR_X86" />
-      <ComponentRef Id="TIP_X86" />
       <ComponentRef Id="CNF_X64" />
       <ComponentRef Id="MGR_X64" />
       <ComponentRef Id="TIP_X64" />
-      <ComponentRef Id="RegistryRun" />
+      <ComponentRef Id="REG_X64" />
     </Feature>
 
     <DirectoryRef Id="TARGETDIR">
-      <Merge Id="CRT_X86" DiskId="1" Language="0"
-        SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC140_CRT_x86.msm" />
       <Merge Id="CRT_X64" DiskId="1" Language="0"
         SourceFile="$(env.CommonProgramFiles)\Merge Modules\Microsoft_VC140_CRT_x64.msm" />
     </DirectoryRef>
     <Feature Id="CRT" Title="VCRuntime" AllowAdvertise="no" Display="hidden" Level="1">
-      <MergeRef Id="CRT_X86" />
       <MergeRef Id="CRT_X64" />
     </Feature>
 
-    <UIRef Id="WixUI_Minimal" />
-    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
-    <Property Id="ARPPRODUCTICON" Value="CorvusSKK.ico" />
-    <Icon Id="CorvusSKK.ico" SourceFile="..\imcrvtip\Icon\CorvusSKK.ico" />
-
     <MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
-
-    <InstallExecuteSequence>
-      <ScheduleReboot After="InstallFinalize" />
-    </InstallExecuteSequence>
 
     <Condition Message="This application does not support this version of Windows.">
       <![CDATA[VersionNT64 >= 600]]>

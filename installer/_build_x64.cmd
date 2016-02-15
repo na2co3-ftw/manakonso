@@ -1,12 +1,12 @@
 @echo off
 setlocal
 
-pushd %~dp0
+pushd "%~dp0"
 
 call _version.cmd
 
-"%WIX%bin\candle.exe" manakonso-x64.wxs -nologo -out "%TARGETDIR%\manakonso-%VERSION%-x64.wixobj"
-"%WIX%bin\light.exe" "%TARGETDIR%\manakonso-%VERSION%-x64.wixobj" -nologo -out "%TARGETDIR%\manakonso-%VERSION%-x64.msi" -ext bin\WixUIExtension.dll -sw1056
+"%WIX%bin\candle.exe" installer-x64.wxs -nologo -out "%TARGETDIR%\x64.wixobj"
+"%WIX%bin\light.exe" "%TARGETDIR%\x64.wixobj" -nologo -out "%TARGETDIR%\x64.msi" -sw1056 -sw1076
 
 popd
 

@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-pushd %~dp0
+pushd "%~dp0"
 
 call "%VS140COMNTOOLS%VsDevCmd.bat"
 

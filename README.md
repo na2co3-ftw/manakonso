@@ -6,59 +6,47 @@ Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言�
 [CorvusSKK](https://github.com/nathancorvussolis/corvusskk) を基にして開発しています。
 
 
-## ライセンス
-
-Microsoft Public License (MS-PL)
-
-詳細は LICENSE.TXT を見てください。
-
-
 ## インストール
 
 ### 対応OS
 
-* Windows Vista (32-bit / 64-bit) SP2
+* Windows Vista (32-bit / 64-bit)
+
+    + SP2
+    + [KB971644](https://support.microsoft.com/ja-jp/kb/971644) または [KB971512](https://support.microsoft.com/ja-jp/kb/971512)
+
 * Windows 7     (32-bit / 64-bit)
+
+    + SP1
+
 * Windows 8     (32-bit / 64-bit)
 * Windows 8.1   (32-bit / 64-bit)
 * Windows 10    (32-bit / 64-bit)
 
 
-### DirectX 9 以上をサポートしたGPU (推奨)
+### インストール
 
-表示オプションでDirect2Dを使用するには、DirectX 9 以上をサポートしたGPUが必要です。
-
-サポートしていない場合は自動的にGDIで描画されます。(多分)
-
-
-### Vista 用更新プログラムのインストール
-
-Windows Vista SP2 では、以下のプラットフォーム更新プログラムのいずれかを予めインストールしてください。
-
-Windows 7 以降ではインストールは不要です。
-
-* KB971644 (Windows Update から)
-* KB971512
-
-    (x64) https://www.microsoft.com/ja-JP/download/details.aspx?id=4390
-
-    (x86) https://www.microsoft.com/ja-JP/download/details.aspx?id=3274
-
-
-### manakonso のインストール
-
-manakonso-X.Y.Z.zip を展開し、32bit版 Windows では manakonso-X.Y.Z-x86.msi、64bit版 Windows では manakonso-X.Y.Z-x64.msi を実行してください。 (X, Y, Z はバージョン番号)
-
-32bit版 Windows では %SystemRoot%\System32\IME\IMMANAKONSO、64bit版 Windows では %SystemRoot%\System32\IME\IMMANAKONSO および %SystemRoot%\SysWOW64\IME\IMMANAKONSO にインストールされます。
+manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン番号)
 
 アップデートの後はOSを再起動しておくと安全です。
 
+インストール先
 
-### manakonso のアンインストール
+* 32bit版 Windows
+
+    + %SystemRoot%\System32\IME\IMMANAKONSO
+
+* 64bit版 Windows
+
+    + %SystemRoot%\System32\IME\IMMANAKONSO
+    + %SystemRoot%\SysWOW64\IME\IMMANAKONSO
+
+
+### アンインストール
 
 コントロールパネルの「プログラムと機能」からアンインストールしてください。
 
-または、インストールに使用した msi ファイルを再度実行し「Remove」を選択してください。
+または、インストールに使用した exe ファイルを再度実行し「Uninstall」を選択してください。
 
 アンインストールの後はOSを再起動しておくと安全です。
 
@@ -110,4 +98,35 @@ IME ON/OFF のキーのみ、IME ON → OFF のときにも反映されます。
 
 Visual Studio Express 2015 for Windows Desktop Update 1
 
-WiX Toolset v3.10.1
+WiX Toolset v3.10.2
+
+pandoc 1.16.0.2
+
+
+### ビルド手順
+
+ビルド
+
+    > installer\_solution_build.cmd
+    > installer\_build.cmd
+
+ビルド ＆ 署名
+
+    > installer\_solution_build.cmd
+    > installer\_sign.cmd <URL 1> <pfx file 1> <password 1> <URL 2> <pfx file 2> <password 2>
+
+	    * <URL 1> : SHA-1 Authenticode timestamp server
+		* <pfx file 1> : pfx file for SHA-1 file digest algorithm
+	    * <URL 2> : SHA-256 RFC-3161 timestamp server
+		* <pfx file 2> : pfx file for SHA-256 file digest algorithm
+
+クリア
+
+    > installer\_solution_clean.cmd
+    > installer\_clean.cmd
+
+---
+
+Copyright (C) 2015-2016 na2co3
+
+[@na2co3_ftw](https://twitter.com/na2co3_ftw)

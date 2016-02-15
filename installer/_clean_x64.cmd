@@ -1,11 +1,11 @@
 @echo off
 setlocal
 
-pushd %~dp0
+pushd "%~dp0"
 
 call _version.cmd
 
-del "%TARGETDIR%\manakonso-%VERSION%-x64.*"
+del "%TARGETDIR%\x64.*"
 
 popd
 
