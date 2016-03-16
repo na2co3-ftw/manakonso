@@ -8,6 +8,7 @@ Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言�
 
 ## インストール
 
+
 ### 対応OS
 
 * Windows Vista (32-bit / 64-bit)
@@ -20,7 +21,9 @@ Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言�
     + SP1
 
 * Windows 8     (32-bit / 64-bit)
+
 * Windows 8.1   (32-bit / 64-bit)
+
 * Windows 10    (32-bit / 64-bit)
 
 
@@ -62,7 +65,7 @@ manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン�
 
 Windows ストアアプリ、Microsoft Edge 等で使用するには、設定ファイル (config.xml) にアクセス許可を付加させる必要があります。
 
-Windows 8 以降で動作する設定ダイアログでOKボタンを押して保存を行うとアクセス許可の付加が自動的におこなわれます。
+Windows 8 以降で動作する設定ダイアログでOKボタンを押して保存をおこなうとアクセス許可の付加が自動的におこなわれます。
 
 また、Windows 8 以前から Windows 8 以降へ Windows をアップグレードしたときは、manakonsoを一旦アンインストールした上でインストールし直してください。
 
@@ -73,7 +76,7 @@ Windows 8 以降で動作する設定ダイアログでOKボタンを押して�
 
 Adobe Reader X 以降で使用するには、設定ファイル (config.xml) にアクセス許可を付加させる必要があります。
 
-設定ダイアログでOKボタンを押して保存を行うとアクセス許可の付加が自動的におこなわれます。
+設定ダイアログでOKボタンを押して保存をおこなうとアクセス許可の付加が自動的におこなわれます。
 
 
 

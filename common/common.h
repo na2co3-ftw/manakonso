@@ -5,18 +5,18 @@
 #include "version.h"
 
 #define MAX_KRNLOBJNAME		256
-#define CONV_POINT_NUM		256
-#define KEYRELEN			256
-#define PRESERVEDKEY_NUM	2		//ON/OFF
-#define MAX_PRESERVEDKEY	8
-#define MAX_SELKEY_C		9
-
-#define MAX_WIDTH_DEFAULT	800
-
 #define PIPEBUFSIZE			0x2000	//named pipe, 16KB with wchar_t
-#define DICBUFSIZE			0x1000	//entry, 8KB with wchar_t
 #define READBUFSIZE			0x800	//read skk dictionary, 4KB with wchar_t/char
 #define RECVBUFSIZE			0x800	//receive from online dictionary, 2KB with char
+
+#define COMPMULTIDISP_NUM	3		//複数補完/複数動的補完の表示数
+#define MAX_SELKEY_C		9		//候補一覧選択キー最大数
+#define MAX_SELKEY			7		//候補一覧選択キー数
+#define MAX_WIDTH_DEFAULT	800		//候補一覧の最大幅
+#define PRESERVEDKEY_NUM	2		//キー設定ON/OFF
+#define MAX_PRESERVEDKEY	8		//キー設定ON/OFF最大数
+#define MAX_KEYRE			256		//キー１/２ 読み込みバッファ
+#define MAX_CONV_POINT		256		//変換位置指定最大数
 
 //request
 #define REQ_SEARCH			L'1'	//辞書検索
@@ -62,7 +62,6 @@ extern LPCWSTR fnconfigxml;	//設定
 extern LPCWSTR fnuserdic;	//ユーザー辞書
 extern LPCWSTR fnuserbak;	//ユーザー辞書バックアッププレフィックス
 extern LPCWSTR fnskkdic;	//取込SKK辞書
-extern LPCWSTR fnskkidx;	//取込SKK辞書インデックス
 
 #define DISPLAY_COLOR_NUM	8
 #define DISPLAYATTRIBUTE_INFO_NUM	7

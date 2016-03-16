@@ -80,6 +80,8 @@ extern LPCWSTR ValueSrchAllOkuri;
 extern LPCWSTR ValueDelCvPosCncl;
 extern LPCWSTR ValueDelOkuriCncl;
 extern LPCWSTR ValueBackIncEnter;
+
+extern LPCWSTR ValueCompMultiNum;
 extern LPCWSTR ValueStaCompMulti;
 extern LPCWSTR ValueDynamicComp;
 extern LPCWSTR ValueDynCompMulti;

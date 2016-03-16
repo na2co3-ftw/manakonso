@@ -3,7 +3,7 @@
 
   <?include installer-version.wxi ?>
 
-  <Product Id="*" Name="京極入致" Version="$(var.version)" Manufacturer="na2co3"
+  <Product Id="*" Name="京極入致 (x64)" Version="$(var.version)" Manufacturer="na2co3"
     Language="1041" Codepage="65001" UpgradeCode="0C5A2A8D-91BF-4F5E-A922-0E0E6238C541">
 
     <Package Id="*" Compressed="yes" Description="manakonso (x64)" Comments="ver. $(var.version)"
@@ -54,6 +54,10 @@
     </Feature>
 
     <MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
+
+    <InstallExecuteSequence>
+      <ScheduleReboot After="InstallFinalize" />
+    </InstallExecuteSequence>
 
     <Condition Message="This application does not support this version of Windows.">
       <![CDATA[VersionNT64 >= 600]]>

@@ -28,7 +28,8 @@ std::wstring SearchCharacterCode(const std::wstring &searchkey);
 
 // SearchDictionary
 void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, SKKDICCANDIDATES &sc);
-std::wstring SearchSKKDic(const std::wstring &searchkey);
+std::wstring SearchSKKDic(const std::wstring &searchkey, const std::wstring &okuri);
+void MakeSKKDicPos();
 std::wstring ConvertKey(const std::wstring &searchkey, const std::wstring &okuri);
 std::wstring ConvertCandidate(const std::wstring &searchkey, const std::wstring &candidate, const std::wstring &okuri);
 
@@ -60,7 +61,6 @@ extern WCHAR pathconfigxml[MAX_PATH];	//設定
 extern WCHAR pathuserdic[MAX_PATH];		//ユーザー辞書
 extern WCHAR pathuserbak[MAX_PATH];		//ユーザー辞書バックアッププレフィックス
 extern WCHAR pathskkdic[MAX_PATH];		//取込SKK辞書
-extern WCHAR pathskkidx[MAX_PATH];		//取込SKK辞書インデックス
 
 extern WCHAR krnlobjsddl[MAX_KRNLOBJNAME];	//SDDL
 extern WCHAR mgrpipename[MAX_KRNLOBJNAME];	//名前付きパイプ

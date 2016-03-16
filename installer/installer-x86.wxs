@@ -3,7 +3,7 @@
 
   <?include installer-version.wxi ?>
 
-  <Product Id="*" Name="京極入致" Version="$(var.version)" Manufacturer="na2co3"
+  <Product Id="*" Name="京極入致 (x86)" Version="$(var.version)" Manufacturer="na2co3"
     Language="1041" Codepage="65001" UpgradeCode="01BBC999-7558-42B2-BE97-A6516C351E6E">
 
     <Package Id="*" Compressed="yes" Description="manakonso (x86)" Comments="ver. $(var.version)"

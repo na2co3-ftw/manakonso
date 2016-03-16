@@ -109,6 +109,13 @@ void CTextService::_LoadBehavior()
 	_ReadBoolValue(SectionBehavior, ValueDelCvPosCncl, cx_delcvposcncl, TRUE);
 	_ReadBoolValue(SectionBehavior, ValueDelOkuriCncl, cx_delokuricncl, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueBackIncEnter, cx_backincenter, TRUE);
+
+	ReadValue(pathconfigxml, SectionBehavior, ValueCompMultiNum, strxmlval);
+	cx_compmultinum = _wtoi(strxmlval.c_str());
+	if(cx_compmultinum > MAX_SELKEY_C || cx_compmultinum < 1)
+	{
+		cx_compmultinum = COMPMULTIDISP_NUM;
+	}
 	_ReadBoolValue(SectionBehavior, ValueStaCompMulti, cx_stacompmulti, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueDynamicComp, cx_dynamiccomp, FALSE);
 	_ReadBoolValue(SectionBehavior, ValueDynCompMulti, cx_dyncompmulti, FALSE);
@@ -298,7 +305,7 @@ void CTextService::_LoadPreservedKey()
 void CTextService::_LoadCKeyMap()
 {
 	WCHAR key[2];
-	WCHAR keyre[KEYRELEN];
+	WCHAR keyre[MAX_KEYRE];
 	std::wstring s;
 	std::wregex re;
 	std::wstring strxmlval;
@@ -413,7 +420,7 @@ void CTextService::_LoadCKeyMap()
 void CTextService::_LoadVKeyMap()
 {
 	WCHAR key[3];
-	WCHAR keyre[KEYRELEN];
+	WCHAR keyre[MAX_KEYRE];
 	std::wstring s;
 	std::wregex re;
 	std::wstring strxmlval;
@@ -605,7 +612,7 @@ void CTextService::_LoadConvPoint()
 		int i = 0;
 		FORWARD_ITERATION_I(l_itr, list)
 		{
-			if(i >= CONV_POINT_NUM)
+			if(i >= MAX_CONV_POINT)
 			{
 				break;
 			}

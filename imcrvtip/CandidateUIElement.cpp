@@ -22,8 +22,10 @@ CCandidateWindow::CCandidateWindow(CTextService *pTextService, CCandidateList *p
 
 	_hwnd = NULL;
 	_hwndParent = NULL;
-
 	_preEnd = FALSE;
+	_rect = {0, 0, 0, 0};
+	_depth = 0;
+	_vertical = FALSE;
 
 	_dwUIElementId = 0;
 	_bShow = FALSE;
@@ -35,6 +37,7 @@ CCandidateWindow::CCandidateWindow(CTextService *pTextService, CCandidateList *p
 	_CandCount.clear();
 	_PageIndex.clear();
 	_CandStr.clear();
+	_uPageCandNum = 0;
 
 	hFont = NULL;
 

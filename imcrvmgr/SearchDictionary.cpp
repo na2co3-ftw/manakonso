@@ -4,6 +4,11 @@
 #include "utf8.h"
 #include "imcrvmgr.h"
 
+//エントリの行頭位置
+typedef std::vector<long> POS;
+POS skkdicpos_a; //送りありエントリ
+POS skkdicpos_n; //送りなしエントリ
+
 void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, SKKDICCANDIDATES &sc)
 {
 	std::wstring candidate;
@@ -14,7 +19,7 @@ void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, 
 	candidate += SearchUserDic(searchkey, okuri);
 
 	//SKK辞書
-	candidate += SearchSKKDic(searchkey);
+	candidate += SearchSKKDic(searchkey, okuri);
 
 	if (okuri.empty()) {
 		//Unicodeコードポイント
@@ -63,61 +68,82 @@ void SearchDictionary(const std::wstring &searchkey, const std::wstring &okuri, 
 	}
 }
 
-std::wstring SearchSKKDic(const std::wstring &searchkey)
+std::wstring SearchSKKDic(const std::wstring &searchkey, const std::wstring &okuri)
 {
-	FILE *fpdic, *fpidx;
-	std::wstring key, candidate, wsbuf;
-	WCHAR wbuf[DICBUFSIZE];
+	FILE *fp;
+	std::wstring candidate, wsbuf, kbuf, cbuf;
+	WCHAR wbuf[READBUFSIZE];
+	PWCHAR pwb;
 	long pos, left, mid, right;
-	int cmpkey;
-	size_t pidx;
+	size_t cidx;
 
-	_wfopen_s(&fpidx, pathskkidx, RB);
-	if(fpidx == NULL)
+	_wfopen_s(&fp, pathskkdic, RB);
+	if(fp == NULL)
 	{
 		return candidate;
 	}
-	_wfopen_s(&fpdic, pathskkdic, RB);
-	if(fpdic == NULL)
-	{
-		fclose(fpidx);
-		return candidate;
-	}
-
-	key = searchkey + L"\x20";
 
 	left = 0;
-	fseek(fpidx, 0, SEEK_END);
-	right = (ftell(fpidx) / sizeof(pos)) - 1;
+	if(okuri.empty())
+	{
+		right = (long)skkdicpos_n.size() - 1;
+	}
+	else
+	{
+		right = (long)skkdicpos_a.size() - 1;
+	}
 
 	while(left <= right)
 	{
-		mid = (left + right) / 2;
-		fseek(fpidx, mid * sizeof(pos), SEEK_SET);
-		fread(&pos, sizeof(pos), 1, fpidx);
+		mid = left + (right - left) / 2;
+		if(okuri.empty())
+		{
+			pos = skkdicpos_n[mid];
+		}
+		else
+		{
+			pos = skkdicpos_a[mid];
+		}
+		fseek(fp, pos, SEEK_SET);
 
-		fseek(fpdic, pos, SEEK_SET);
-		memset(wbuf, 0, sizeof(wbuf));
+		wsbuf.clear();
+		kbuf.clear();
+		cbuf.clear();
 
-		fgetws(wbuf, _countof(wbuf), fpdic);
-		wsbuf = wbuf;
+		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != NULL)
+		{
+			wsbuf += wbuf;
 
-		cmpkey = wcsncmp(key.c_str(), wsbuf.c_str(), key.size());
+			if(!wsbuf.empty() && wsbuf.back() == L'\n')
+			{
+				break;
+			}
+		}
+
+		if(pwb == NULL)
+		{
+			break;
+		}
+
+		if((cidx = wsbuf.find_last_of(L'/')) != std::wstring::npos)
+		{
+			wsbuf.erase(cidx + 1);
+			wsbuf.push_back(L'\n');
+		}
+
+		if((cidx = wsbuf.find_first_of(L'\x20')) != std::wstring::npos)
+		{
+			kbuf = wsbuf.substr(0, cidx);
+			if((cidx = wsbuf.find_first_of(L'/', cidx)) != std::wstring::npos)
+			{
+				cbuf = wsbuf.substr(cidx);
+			}
+		}
+
+		int cmpkey = searchkey.compare(kbuf);
 		if(cmpkey == 0)
 		{
-			if((pidx = wsbuf.find_last_of(L'/')) != std::string::npos)
-			{
-				wsbuf.erase(pidx);
-				wsbuf.append(L"/\n");
-			}
-
-			if((pidx = wsbuf.find_first_of(L'\x20')) != std::string::npos)
-			{
-				if((pidx = wsbuf.find_first_of(L'/', pidx)) != std::string::npos)
-				{
-					candidate = wsbuf.substr(pidx);
-				}
-			}
+			candidate = cbuf;
 			break;
 		}
 		else if(cmpkey > 0)
@@ -130,10 +156,82 @@ std::wstring SearchSKKDic(const std::wstring &searchkey)
 		}
 	}
 
-	fclose(fpdic);
-	fclose(fpidx);
+	fclose(fp);
 
 	return candidate;
+}
+
+void MakeSKKDicPos()
+{
+	FILE *fp;
+	WCHAR wbuf[READBUFSIZE];
+	PWCHAR pwb, pwn;
+	long pos;
+	int okuri = -1;
+
+	skkdicpos_a.clear();
+	skkdicpos_a.shrink_to_fit();
+	skkdicpos_n.clear();
+	skkdicpos_n.shrink_to_fit();
+
+	_wfopen_s(&fp, pathskkdic, RB);
+	if(fp == NULL)
+	{
+		return;
+	}
+
+	fseek(fp, 2, SEEK_SET); //skip BOM
+	pos = ftell(fp);
+
+	while(true)
+	{
+		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != NULL)
+		{
+			if((pwn = wcschr(wbuf, L'\n')) != NULL)
+			{
+				if((pwn != wbuf) && (*(pwn - 1) == L'\r'))
+				{
+					*(pwn - 1) = L'\n';
+					*pwn = L'\0';
+				}
+				break;
+			}
+		}
+
+		if(pwb == NULL)
+		{
+			break;
+		}
+
+		if(wcscmp(EntriesAri, wbuf) == 0)
+		{
+			okuri = 1;
+		}
+		else if(wcscmp(EntriesNasi, wbuf) == 0)
+		{
+			okuri = 0;
+		}
+		else
+		{
+			switch(okuri)
+			{
+			case 1:
+				skkdicpos_a.push_back(pos);
+				break;
+			case 0:
+				skkdicpos_n.push_back(pos);
+				break;
+			default:
+				break;
+			}
+		}
+
+		pos = ftell(fp);
+	}
+
+	fclose(fp);
+
+	std::reverse(skkdicpos_a.begin(), skkdicpos_a.end());
 }
 
 std::wstring ConvertKey(const std::wstring &searchkey, const std::wstring &okuri)
