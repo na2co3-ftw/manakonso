@@ -99,7 +99,7 @@ IME ON/OFF のキーのみ、IME ON → OFF のときにも反映されます。
 
 ## 開発環境
 
-Visual Studio Express 2015 for Windows Desktop Update 1
+Visual Studio Express 2015 for Windows Desktop Update 2
 
 WiX Toolset v3.10.2
 
