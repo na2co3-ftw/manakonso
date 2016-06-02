@@ -20,22 +20,22 @@ BOOL precedeokuri = FALSE;	//送り仮名が一致した候補を優先する
 
 void CreateConfigPath()
 {
-	PWSTR appdatafolder = NULL;
+	PWSTR knownfolderpath = nullptr;
 
 	ZeroMemory(pathconfigxml, sizeof(pathconfigxml));
 	ZeroMemory(pathuserdic, sizeof(pathuserdic));
 	ZeroMemory(pathuserbak, sizeof(pathuserbak));
 	ZeroMemory(pathskkdic, sizeof(pathskkdic));
 
-	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, NULL, &appdatafolder) == S_OK)
+	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 	{
 		WCHAR appdir[MAX_PATH];
 
-		_snwprintf_s(appdir, _TRUNCATE, L"%s\\%s", appdatafolder, TextServiceDesc);
+		_snwprintf_s(appdir, _TRUNCATE, L"%s\\%s", knownfolderpath, TextServiceDesc);
 
-		CoTaskMemFree(appdatafolder);
+		CoTaskMemFree(knownfolderpath);
 
-		CreateDirectoryW(appdir, NULL);
+		CreateDirectoryW(appdir, nullptr);
 		SetCurrentDirectoryW(appdir);
 
 		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s", appdir, fnconfigxml);
@@ -43,12 +43,78 @@ void CreateConfigPath()
 		_snwprintf_s(pathuserbak, _TRUNCATE, L"%s\\%s", appdir, fnuserbak);
 		_snwprintf_s(pathskkdic, _TRUNCATE, L"%s\\%s", appdir, fnskkdic);
 	}
+}
 
+void UpdateConfigPath()
+{
+	PWSTR knownfolderpath = nullptr;
+
+	//%AppData%\\CorvusSKK\\config.xml
+	//%AppData%\\CorvusSKK\\skkdict.txt
+	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
+	{
+		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s", knownfolderpath, TextServiceDesc, fnconfigxml);
+		_snwprintf_s(pathskkdic, _TRUNCATE, L"%s\\%s\\%s", knownfolderpath, TextServiceDesc, fnskkdic);
+
+		CoTaskMemFree(knownfolderpath);
+	}
+
+	if(GetFileAttributesW(pathconfigxml) == INVALID_FILE_ATTRIBUTES)
+	{
+#ifdef _DEBUG
+		//<module directory>\\config.xml
+		if(GetModuleFileNameW(hInst, pathconfigxml, _countof(pathconfigxml)) != 0)
+		{
+			WCHAR *pdir = wcsrchr(pathconfigxml, L'\\');
+			if(pdir != nullptr)
+			{
+				*(pdir + 1) = L'\0';
+				wcsncat_s(pathconfigxml, fnconfigxml, _TRUNCATE);
+			}
+		}
+#else
+		//%SystemRoot%\\IME\\IMCRVSKK\\config.xml
+		if(SHGetKnownFolderPath(FOLDERID_Windows, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
+		{
+			_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s\\%s", knownfolderpath, L"IME", TEXTSERVICE_DIR, fnconfigxml);
+
+			CoTaskMemFree(knownfolderpath);
+		}
+#endif
+	}
+
+	if(GetFileAttributesW(pathskkdic) == INVALID_FILE_ATTRIBUTES)
+	{
+#ifdef _DEBUG
+		//<module directory>\\skkdict.txt
+		if(GetModuleFileNameW(hInst, pathskkdic, _countof(pathskkdic)) != 0)
+		{
+			WCHAR *pdir = wcsrchr(pathskkdic, L'\\');
+			if(pdir != nullptr)
+			{
+				*(pdir + 1) = L'\0';
+				wcsncat_s(pathskkdic, fnskkdic, _TRUNCATE);
+			}
+		}
+#else
+		//%SystemRoot%\\IME\\IMCRVSKK\\skkdict.txt
+		if(SHGetKnownFolderPath(FOLDERID_Windows, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
+		{
+			_snwprintf_s(pathskkdic, _TRUNCATE, L"%s\\%s\\%s\\%s", knownfolderpath, L"IME", TEXTSERVICE_DIR, fnskkdic);
+
+			CoTaskMemFree(knownfolderpath);
+		}
+#endif
+	}
+}
+
+void CreateIpcName()
+{
 	ZeroMemory(krnlobjsddl, sizeof(krnlobjsddl));
 	ZeroMemory(mgrpipename, sizeof(mgrpipename));
 	ZeroMemory(mgrmutexname, sizeof(mgrmutexname));
 
-	LPWSTR pszUserSid = NULL;
+	LPWSTR pszUserSid = nullptr;
 
 	if(GetUserSid(&pszUserSid))
 	{
@@ -62,7 +128,7 @@ void CreateConfigPath()
 		LocalFree(pszUserSid);
 	}
 
-	LPWSTR pszUserUUID = NULL;
+	LPWSTR pszUserUUID = nullptr;
 
 	if(GetUserUUID(&pszUserUUID))
 	{
@@ -85,18 +151,18 @@ void LoadConfig()
 	}
 }
 
-BOOL IsFileUpdated(LPCWSTR path, FILETIME *ft)
+BOOL IsFileModified(LPCWSTR path, FILETIME *ft)
 {
 	BOOL ret = FALSE;
 	HANDLE hFile;
 	FILETIME ftn;
 
-	if(path != NULL && ft != NULL)
+	if(path != nullptr && ft != nullptr)
 	{
-		hFile = CreateFileW(path, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		hFile = CreateFileW(path, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if(hFile != INVALID_HANDLE_VALUE)
 		{
-			if(GetFileTime(hFile, NULL, NULL, &ftn))
+			if(GetFileTime(hFile, nullptr, nullptr, &ftn))
 			{
 				if(((ULARGE_INTEGER *)ft)->QuadPart != ((ULARGE_INTEGER *)&ftn)->QuadPart)
 				{

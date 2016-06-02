@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -24,26 +24,36 @@
     <None Include="installer-version.wxi" />
     <None Include="installer-x64.wxs" />
     <None Include="installer-x86.wxs" />
-    <None Include="license.rtf" />
     <None Include="resource-md\markdown.css" />
+    <None Include="theme-bundle\license.rtf" />
     <None Include="_build.cmd" />
     <None Include="_build_bundle.cmd" />
     <None Include="_build_x64.cmd" />
     <None Include="_build_x86.cmd" />
     <None Include="_clean.cmd" />
+    <None Include="_clean_sub.cmd" />
     <None Include="_clean_x64.cmd" />
     <None Include="_clean_x86.cmd" />
     <None Include="_debug_reg.cmd" />
     <None Include="_debug_unreg.cmd" />
-    <None Include="_make_readme.cmd" />
+    <None Include="_build_sub.cmd" />
     <None Include="_sign.cmd" />
     <None Include="_solution_build.cmd" />
     <None Include="_solution_clean.cmd" />
     <None Include="_version.cmd" />
+    <None Include="ucrt\Windows6.0-KB3118401-x64.msu" />
+    <None Include="ucrt\Windows6.0-KB3118401-x86.msu" />
+    <None Include="ucrt\Windows6.1-KB3118401-x64.msu" />
+    <None Include="ucrt\Windows6.1-KB3118401-x86.msu" />
+    <None Include="ucrt\Windows8-RT-KB3118401-x64.msu" />
+    <None Include="ucrt\Windows8-RT-KB3118401-x86.msu" />
+    <None Include="ucrt\Windows8.1-KB3118401-x64.msu" />
+    <None Include="ucrt\Windows8.1-KB3118401-x86.msu" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\LICENSE.TXT" />
     <Text Include="config-sample\kanatable.txt" />
+    <Text Include="config-share\skkdict.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config-sample\config - act.xml" />
@@ -52,6 +62,7 @@
     <Xml Include="config-sample\config - gact10.xml" />
     <Xml Include="config-sample\config - kana.xml" />
     <Xml Include="config-sample\config - roman.xml" />
+    <Xml Include="config-share\config.xml" />
     <Xml Include="theme-bundle\RtfSidebarTheme.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -119,36 +130,48 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>echo build</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>echo clean</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>echo rebuild</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\config.xml" &gt; nul
+del /f "$(SolutionDir)$(Platform)\$(Configuration)\skkdict.txt" &gt; nul
+</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>echo build</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>echo clean</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>echo rebuild</NMakeReBuildCommandLine>
+    <NMakeBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\config.xml" &gt; nul
+del /f "$(SolutionDir)$(Platform)\$(Configuration)\skkdict.txt" &gt; nul
+</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
+</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>build\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <NMakeBuildCommandLine>echo build</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>echo rebuild</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>echo clean</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>echo build &gt; nul</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>echo rebuild &gt; nul</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>echo clean &gt; nul</NMakeCleanCommandLine>
+    <OutDir>build\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <NMakeBuildCommandLine>echo build</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine>echo rebuild</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine>echo clean</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>echo build &gt; nul</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>echo rebuild &gt; nul</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>echo clean &gt; nul</NMakeCleanCommandLine>
+    <OutDir>build\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>

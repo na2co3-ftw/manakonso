@@ -13,16 +13,18 @@ Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言�
 
 * Windows Vista (32-bit / 64-bit)
 
-    + SP2
-    + [KB971644](https://support.microsoft.com/ja-jp/kb/971644) または [KB971512](https://support.microsoft.com/ja-jp/kb/971512)
+    + Service Pack 2
+    + プラットフォーム更新プログラム ( [KB971644](https://support.microsoft.com/en-us/kb/971644) または [KB971512](https://support.microsoft.com/en-us/kb/971512) )
 
 * Windows 7     (32-bit / 64-bit)
 
-    + SP1
+    + Service Pack 1
 
 * Windows 8     (32-bit / 64-bit)
 
 * Windows 8.1   (32-bit / 64-bit)
+
+    + S14 Update ( [KB2919355](https://support.microsoft.com/en-us/kb/2919355) )
 
 * Windows 10    (32-bit / 64-bit)
 
@@ -44,6 +46,10 @@ manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン�
     + %SystemRoot%\System32\IME\IMMANAKONSO
     + %SystemRoot%\SysWOW64\IME\IMMANAKONSO
 
+* 共通
+
+    + %SystemRoot%\IME\IMCRVSKK
+
 
 ### アンインストール
 
@@ -52,13 +58,6 @@ manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン�
 または、インストールに使用した exe ファイルを再度実行し「Uninstall」を選択してください。
 
 アンインストールの後はOSを再起動しておくと安全です。
-
-
-### 初期設定
-
-任意のユーザーアカウントで初めて使用するときは、設定ダイアログでOKボタンを押して初期設定を保存してください。
-
-設定ダイアログで保存した後は、IME OFF → ON で新しい設定が反映されます。
 
 
 ### Windows ストアアプリ、Microsoft Edge
@@ -99,11 +98,11 @@ IME ON/OFF のキーのみ、IME ON → OFF のときにも反映されます。
 
 ## 開発環境
 
-Visual Studio Express 2015 for Windows Desktop Update 2
+Visual Studio Community 2015 Update 2
 
 WiX Toolset v3.10.2
 
-pandoc 1.16.0.2
+pandoc 1.17.0.2
 
 
 ### ビルド手順

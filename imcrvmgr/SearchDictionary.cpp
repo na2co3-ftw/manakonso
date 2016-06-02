@@ -1,6 +1,4 @@
 ﻿
-#include "parseskkdic.h"
-#include "configxml.h"
 #include "utf8.h"
 #include "imcrvmgr.h"
 
@@ -78,7 +76,7 @@ std::wstring SearchSKKDic(const std::wstring &searchkey, const std::wstring &oku
 	size_t cidx;
 
 	_wfopen_s(&fp, pathskkdic, RB);
-	if(fp == NULL)
+	if(fp == nullptr)
 	{
 		return candidate;
 	}
@@ -110,7 +108,7 @@ std::wstring SearchSKKDic(const std::wstring &searchkey, const std::wstring &oku
 		kbuf.clear();
 		cbuf.clear();
 
-		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != NULL)
+		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != nullptr)
 		{
 			wsbuf += wbuf;
 
@@ -120,7 +118,7 @@ std::wstring SearchSKKDic(const std::wstring &searchkey, const std::wstring &oku
 			}
 		}
 
-		if(pwb == NULL)
+		if(pwb == nullptr)
 		{
 			break;
 		}
@@ -175,7 +173,7 @@ void MakeSKKDicPos()
 	skkdicpos_n.shrink_to_fit();
 
 	_wfopen_s(&fp, pathskkdic, RB);
-	if(fp == NULL)
+	if(fp == nullptr)
 	{
 		return;
 	}
@@ -185,9 +183,9 @@ void MakeSKKDicPos()
 
 	while(true)
 	{
-		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != NULL)
+		while((pwb = fgetws(wbuf, _countof(wbuf), fp)) != nullptr)
 		{
-			if((pwn = wcschr(wbuf, L'\n')) != NULL)
+			if((pwn = wcschr(wbuf, L'\n')) != nullptr)
 			{
 				if((pwn != wbuf) && (*(pwn - 1) == L'\r'))
 				{
@@ -198,7 +196,7 @@ void MakeSKKDicPos()
 			}
 		}
 
-		if(pwb == NULL)
+		if(pwb == nullptr)
 		{
 			break;
 		}

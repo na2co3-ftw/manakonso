@@ -52,7 +52,7 @@ CLangBarItemButton::CLangBarItemButton(CTextService *pTextService, REFGUID guid)
 	_LangBarItemInfo.ulSort = 1;
 	wcsncpy_s(_LangBarItemInfo.szDescription, LangbarItemDesc, _TRUNCATE);
 
-	_pLangBarItemSink = NULL;
+	_pLangBarItemSink = nullptr;
 
 	_pTextService = pTextService;
 	_pTextService->AddRef();
@@ -67,12 +67,12 @@ CLangBarItemButton::~CLangBarItemButton()
 
 STDAPI CLangBarItemButton::QueryInterface(REFIID riid, void **ppvObj)
 {
-	if(ppvObj == NULL)
+	if(ppvObj == nullptr)
 	{
 		return E_INVALIDARG;
 	}
 
-	*ppvObj = NULL;
+	*ppvObj = nullptr;
 
 	if(IsEqualIID(riid, IID_IUnknown) ||
 		IsEqualIID(riid, IID_ITfLangBarItem) ||
@@ -112,7 +112,7 @@ STDAPI_(ULONG) CLangBarItemButton::Release()
 
 STDAPI CLangBarItemButton::GetInfo(TF_LANGBARITEMINFO *pInfo)
 {
-	if(pInfo == NULL)
+	if(pInfo == nullptr)
 	{
 		return E_INVALIDARG;
 	}
@@ -124,7 +124,7 @@ STDAPI CLangBarItemButton::GetInfo(TF_LANGBARITEMINFO *pInfo)
 
 STDAPI CLangBarItemButton::GetStatus(DWORD *pdwStatus)
 {
-	if(pdwStatus == NULL)
+	if(pdwStatus == nullptr)
 	{
 		return E_INVALIDARG;
 	}
@@ -143,7 +143,7 @@ STDAPI CLangBarItemButton::GetStatus(DWORD *pdwStatus)
 
 STDAPI CLangBarItemButton::Show(BOOL fShow)
 {
-	if(_pLangBarItemSink == NULL)
+	if(_pLangBarItemSink == nullptr)
 	{
 		return E_FAIL;
 	}
@@ -155,16 +155,16 @@ STDAPI CLangBarItemButton::GetTooltipString(BSTR *pbstrToolTip)
 {
 	BSTR bstrToolTip;
 
-	if(pbstrToolTip == NULL)
+	if(pbstrToolTip == nullptr)
 	{
 		return E_INVALIDARG;
 	}
 
-	*pbstrToolTip = NULL;
+	*pbstrToolTip = nullptr;
 
 	bstrToolTip = SysAllocString(LangbarItemDesc);
 
-	if(bstrToolTip == NULL)
+	if(bstrToolTip == nullptr)
 	{
 		return E_OUTOFMEMORY;
 	}
@@ -199,8 +199,8 @@ STDAPI CLangBarItemButton::OnClick(TfLBIClick click, POINT pt, const RECT *prcAr
 					if(hSubMenu)
 					{
 						TPMPARAMS tpm;
-						TPMPARAMS *ptpm = NULL;
-						if(prcArea != NULL)
+						TPMPARAMS *ptpm = nullptr;
+						if(prcArea != nullptr)
 						{
 							tpm.cbSize = sizeof(tpm);
 							tpm.rcExclude = *prcArea;
@@ -241,7 +241,7 @@ STDAPI CLangBarItemButton::OnClick(TfLBIClick click, POINT pt, const RECT *prcAr
 
 STDAPI CLangBarItemButton::InitMenu(ITfMenu *pMenu)
 {
-	if(pMenu == NULL)
+	if(pMenu == nullptr)
 	{
 		return E_INVALIDARG;
 	}
@@ -250,7 +250,7 @@ STDAPI CLangBarItemButton::InitMenu(ITfMenu *pMenu)
 	{
 		pMenu->AddMenuItem(menuItems[i].id, menuItems[i].flag |
 			(_pTextService->inputmode == menuItems[i].inputmode ? TF_LBMENUF_RADIOCHECKED : 0),
-			NULL, NULL, menuItems[i].text, (ULONG)wcslen(menuItems[i].text), NULL);
+			nullptr, nullptr, menuItems[i].text, (ULONG)wcslen(menuItems[i].text), nullptr);
 	}
 
 	return S_OK;
@@ -304,23 +304,23 @@ STDAPI CLangBarItemButton::GetIcon(HICON *phIcon)
 {
 	_GetIcon(phIcon, IsWindowsVersion62OrLater());
 
-	return (*phIcon != NULL) ? S_OK : E_FAIL;
+	return (*phIcon != nullptr) ? S_OK : E_FAIL;
 }
 
 STDAPI CLangBarItemButton::GetText(BSTR *pbstrText)
 {
 	BSTR bstrText;
 
-	if(pbstrText == NULL)
+	if(pbstrText == nullptr)
 	{
 		return E_INVALIDARG;
 	}
 
-	*pbstrText = NULL;
+	*pbstrText = nullptr;
 
 	bstrText = SysAllocString(LangbarItemDesc);
 
-	if(bstrText == NULL)
+	if(bstrText == nullptr)
 	{
 		return E_OUTOFMEMORY;
 	}
@@ -337,14 +337,14 @@ STDAPI CLangBarItemButton::AdviseSink(REFIID riid, IUnknown *punk, DWORD *pdwCoo
 		return CONNECT_E_CANNOTCONNECT;
 	}
 
-	if(_pLangBarItemSink != NULL)
+	if(_pLangBarItemSink != nullptr)
 	{
 		return CONNECT_E_ADVISELIMIT;
 	}
 
 	if(punk->QueryInterface(IID_PPV_ARGS(&_pLangBarItemSink)) != S_OK)
 	{
-		_pLangBarItemSink = NULL;
+		_pLangBarItemSink = nullptr;
 		return E_NOINTERFACE;
 	}
 
@@ -360,7 +360,7 @@ STDAPI CLangBarItemButton::UnadviseSink(DWORD dwCookie)
 		return CONNECT_E_NOCONNECTION;
 	}
 
-	if(_pLangBarItemSink == NULL)
+	if(_pLangBarItemSink == nullptr)
 	{
 		return CONNECT_E_NOCONNECTION;
 	}
@@ -393,7 +393,7 @@ STDAPI CLangBarItemButton::_Update()
 		}
 	}
 
-	if(_pLangBarItemSink == NULL)
+	if(_pLangBarItemSink == nullptr)
 	{
 		return E_FAIL;
 	}
@@ -434,14 +434,14 @@ STDAPI CLangBarItemButton::_GetIcon(HICON *phIcon, BOOL bNT62)
 	}
 
 	//DPIを考慮
-	HDC hdc = GetDC(NULL);
+	HDC hdc = GetDC(nullptr);
 	int dpi = GetDeviceCaps(hdc, LOGPIXELSY);
-	ReleaseDC(NULL, hdc);
+	ReleaseDC(nullptr, hdc);
 	int size = MulDiv(16, dpi, 96);
 
 	*phIcon = (HICON)LoadImageW(g_hInst, MAKEINTRESOURCEW(iconid), IMAGE_ICON, size, size, LR_SHARED);
 
-	return (*phIcon != NULL) ? S_OK : E_FAIL;
+	return (*phIcon != nullptr) ? S_OK : E_FAIL;
 }
 
 BOOL CTextService::_InitLanguageBar()
@@ -450,8 +450,8 @@ BOOL CTextService::_InitLanguageBar()
 	BOOL fRet = FALSE;
 	BOOL fRetI = FALSE;
 
-	_pLangBarItem = NULL;
-	_pLangBarItemI = NULL;
+	_pLangBarItem = nullptr;
+	_pLangBarItemI = nullptr;
 
 	if(_pThreadMgr->QueryInterface(IID_PPV_ARGS(&pLangBarItemMgr)) == S_OK)
 	{
@@ -504,7 +504,7 @@ void CTextService::_UninitLanguageBar()
 {
 	ITfLangBarItemMgr *pLangBarItemMgr;
 
-	if(_pLangBarItem != NULL)
+	if(_pLangBarItem != nullptr)
 	{
 		if(_pThreadMgr->QueryInterface(IID_PPV_ARGS(&pLangBarItemMgr)) == S_OK)
 		{
@@ -514,7 +514,7 @@ void CTextService::_UninitLanguageBar()
 	}
 	SafeRelease(&_pLangBarItem);
 
-	if(_pLangBarItemI != NULL)
+	if(_pLangBarItemI != nullptr)
 	{
 		if(_pThreadMgr->QueryInterface(IID_PPV_ARGS(&pLangBarItemMgr)) == S_OK)
 		{
@@ -527,18 +527,18 @@ void CTextService::_UninitLanguageBar()
 
 void CTextService::_UpdateLanguageBar(BOOL showinputmode)
 {
-	if(_pLangBarItem != NULL)
+	if(_pLangBarItem != nullptr)
 	{
 		_pLangBarItem->_Update();
 	}
 
-	if(_pLangBarItemI != NULL)
+	if(_pLangBarItemI != nullptr)
 	{
 		_pLangBarItemI->_Update();
 	}
 
 	if(_ShowInputMode && showinputmode &&
-		(_pCandidateList == NULL || !_pCandidateList->_IsShowCandidateWindow()))
+		(_pCandidateList == nullptr || !_pCandidateList->_IsShowCandidateWindow()))
 	{
 		_StartInputModeWindow();
 	}
@@ -550,7 +550,7 @@ void CTextService::_UpdateLanguageBar(BOOL showinputmode)
 
 void CTextService::_GetIcon(HICON *phIcon)
 {
-	if(_pLangBarItem != NULL)
+	if(_pLangBarItem != nullptr)
 	{
 		_pLangBarItem->_GetIcon(phIcon, FALSE);
 	}

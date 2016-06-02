@@ -14,8 +14,10 @@ typedef struct {
 
 // ConfigMgr
 void CreateConfigPath();
+void UpdateConfigPath();
+void CreateIpcName();
 void LoadConfig();
-BOOL IsFileUpdated(LPCWSTR path, FILETIME *ft);
+BOOL IsFileModified(LPCWSTR path, FILETIME *ft);
 
 // ConvNum
 std::wstring ConvNum(const std::wstring &key, const std::wstring &candidate);
@@ -36,6 +38,7 @@ std::wstring ConvertCandidate(const std::wstring &searchkey, const std::wstring 
 // SearchUserDictionary
 std::wstring SearchUserDic(const std::wstring &searchkey, const std::wstring &okuri);
 void SearchComplement(const std::wstring &searchkey, SKKDICCANDIDATES &sc);
+void SearchComplementSearchCandidate(SKKDICCANDIDATES &sc, int max);
 void AddUserDic(WCHAR command, const std::wstring &searchkey, const std::wstring &candidate, const std::wstring &annotation, const std::wstring &okuri);
 void DelUserDic(WCHAR command, const std::wstring &searchkey, const std::wstring &candidate);
 BOOL LoadSKKUserDic();
@@ -43,18 +46,32 @@ void SaveSKKUserDic(void *p);
 void StartSaveSKKUserDic(BOOL bThread);
 void BackUpSKKUserDic();
 
-#define BACKUP_GENS		3
+// Server
+void SrvProc(WCHAR command, const std::wstring &argument, std::wstring &result);
+unsigned int __stdcall SrvThread(void *p);
+HANDLE SrvStart();
 
-extern LPCWSTR TextServiceDesc;
-extern LPCWSTR DictionaryManagerClass;
+#define BACKUP_GENS		3
 
 extern CRITICAL_SECTION csUserDataSave;
 extern BOOL bUserDicChg;
+extern FILETIME ftConfig, ftSKKDic;
+#ifdef _DEBUG
+extern HWND hwndEdit;
+extern HFONT hFont;
+#endif
+extern HINSTANCE hInst;
+extern HANDLE hMutex;
+extern HANDLE hThreadSrv;
+extern BOOL bSrvThreadExit;
 
 extern SKKDIC userdic;
 extern USEROKURI userokuri;
 extern KEYORDER complements;
 extern KEYORDER accompaniments;
+
+extern LPCWSTR TextServiceDesc;
+extern LPCWSTR DictionaryManagerClass;
 
 // ファイルパス
 extern WCHAR pathconfigxml[MAX_PATH];	//設定

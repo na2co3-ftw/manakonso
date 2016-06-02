@@ -151,7 +151,7 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 						}
 						else
 						{
-							if(pContext != NULL)
+							if(pContext != nullptr)
 							{
 								cursoridx = kana.size();
 								_Update(ec, pContext, TRUE);
@@ -181,7 +181,7 @@ HRESULT CTextService::_HandleChar(TfEditCookie ec, ITfContext *pContext, WPARAM 
 					roman.push_back(ch);
 				}
 
-				if(pContext != NULL)
+				if(pContext != nullptr)
 				{
 					_Update(ec, pContext);
 				}
@@ -231,7 +231,7 @@ HRESULT CTextService::_HandleCharShift(TfEditCookie ec, ITfContext *pContext)
 		cursoridx = kana.size();
 		_Update(ec, pContext, TRUE);
 
-		if(pContext != NULL)
+		if(pContext != nullptr)
 		{
 			ITfRange *pRange;
 			if(_IsComposing() && _pComposition->GetRange(&pRange) == S_OK)

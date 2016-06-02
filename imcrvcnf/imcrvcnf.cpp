@@ -14,9 +14,10 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	hInst = hInstance;
 
 	CreateConfigPath();
+	CreateIpcName();
 
-	hMutex = CreateMutexW(NULL, FALSE, cnfmutexname);
-	if(hMutex == NULL || GetLastError() == ERROR_ALREADY_EXISTS)
+	hMutex = CreateMutexW(nullptr, FALSE, cnfmutexname);
+	if(hMutex == nullptr || GetLastError() == ERROR_ALREADY_EXISTS)
 	{
 		return 0;
 	}
@@ -65,7 +66,7 @@ void CreateProperty()
 	ZeroMemory(&psh, sizeof(psh));
 	psh.dwSize = sizeof(psh);
 	psh.dwFlags = PSH_PROPSHEETPAGE | PSH_NOCONTEXTHELP | PSH_USECALLBACK;
-	psh.hwndParent = NULL;
+	psh.hwndParent = nullptr;
 	psh.hInstance = hInst;
 	psh.pszCaption = TEXTSERVICE_DESC L" ver. " TEXTSERVICE_VER;
 	psh.nPages = _countof(psp);

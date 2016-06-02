@@ -58,22 +58,50 @@ LPCWSTR sectionpreservedkeyonoff[PRESERVEDKEY_NUM] = {SectionPreservedKeyON, Sec
 
 void CTextService::_CreateConfigPath()
 {
-	PWSTR appdatafolder = NULL;
+	PWSTR knownfolderpath = nullptr;
 
 	ZeroMemory(pathconfigxml, sizeof(pathconfigxml));
 
-	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, NULL, &appdatafolder) == S_OK)
+	//%AppData%\\CorvusSKK\\config.xml
+	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 	{
-		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s", appdatafolder, TextServiceDesc, fnconfigxml);
+		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s", knownfolderpath, TextServiceDesc, fnconfigxml);
 
-		CoTaskMemFree(appdatafolder);
+		CoTaskMemFree(knownfolderpath);
 	}
 
+	if(GetFileAttributesW(pathconfigxml) == INVALID_FILE_ATTRIBUTES)
+	{
+#ifdef _DEBUG
+		//<module directory>\\config.xml
+		if(GetModuleFileNameW(g_hInst, pathconfigxml, _countof(pathconfigxml)) != 0)
+		{
+			WCHAR *pdir = wcsrchr(pathconfigxml, L'\\');
+			if(pdir != nullptr)
+			{
+				*(pdir + 1) = L'\0';
+				wcsncat_s(pathconfigxml, fnconfigxml, _TRUNCATE);
+			}
+		}
+#else
+		//%SystemRoot%\\IME\\IMCRVSKK\\config.xml
+		if(SHGetKnownFolderPath(FOLDERID_Windows, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
+		{
+			_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s\\%s", knownfolderpath, L"IME", TEXTSERVICE_DIR, fnconfigxml);
+
+			CoTaskMemFree(knownfolderpath);
+		}
+#endif
+	}
+}
+
+void CTextService::_CreateIpcName()
+{
 	ZeroMemory(mgrpipename, sizeof(mgrpipename));
 	ZeroMemory(mgrmutexname, sizeof(mgrmutexname));
 	ZeroMemory(cnfmutexname, sizeof(cnfmutexname));
 
-	LPWSTR pszUserUUID = NULL;
+	LPWSTR pszUserUUID = nullptr;
 
 	if(GetUserUUID(&pszUserUUID))
 	{
@@ -161,7 +189,7 @@ void CTextService::_LoadBehavior()
 		ReadValue(pathconfigxml, SectionDisplay, colorsxmlvalue[i].value, strxmlval);
 		if(!strxmlval.empty())
 		{
-			cx_colors[i] = wcstoul(strxmlval.c_str(), NULL, 0);
+			cx_colors[i] = wcstoul(strxmlval.c_str(), nullptr, 0);
 		}
 	}
 
@@ -252,12 +280,12 @@ void CTextService::_SetPreservedKeyONOFF(int onoff, const APPDATAXMLLIST &list)
 			{
 				if(r_itr->first == AttributeVKey)
 				{
-					preservedkey[onoff][i].uVKey = wcstoul(r_itr->second.c_str(), NULL, 0);
+					preservedkey[onoff][i].uVKey = wcstoul(r_itr->second.c_str(), nullptr, 0);
 				}
 				else if(r_itr->first == AttributeMKey)
 				{
 					preservedkey[onoff][i].uModifiers =
-						wcstoul(r_itr->second.c_str(), NULL, 0) & (TF_MOD_ALT | TF_MOD_CONTROL | TF_MOD_SHIFT);
+						wcstoul(r_itr->second.c_str(), nullptr, 0) & (TF_MOD_ALT | TF_MOD_CONTROL | TF_MOD_SHIFT);
 					if((preservedkey[onoff][i].uModifiers & (TF_MOD_ALT | TF_MOD_CONTROL | TF_MOD_SHIFT)) == 0)
 					{
 						preservedkey[onoff][i].uModifiers = TF_MOD_IGNORE_ALL_MODIFIER;
@@ -684,7 +712,7 @@ void CTextService::_LoadKana()
 
 			FORWARD_ITERATION_I(r_itr, *l_itr)
 			{
-				WCHAR *pszb = NULL;
+				WCHAR *pszb = nullptr;
 				size_t blen = 0;
 
 				if(r_itr->first == AttributeRoman)
@@ -703,7 +731,7 @@ void CTextService::_LoadKana()
 					rkc.wait = (_wtoi(r_itr->second.c_str()) & 0x2) ? TRUE : FALSE;
 				}
 
-				if(pszb != NULL)
+				if(pszb != nullptr)
 				{
 					wcsncpy_s(pszb, blen, std::regex_replace(r_itr->second, re, fmt).c_str(), _TRUNCATE);
 				}
@@ -801,9 +829,9 @@ void CTextService::_AddKanaTreeItem(ROMAN_KANA_NODE &tree, ROMAN_KANA_CONV rkc, 
 
 void CTextService::_InitFont()
 {
-	HDC hdc = GetDC(NULL);
+	HDC hdc = GetDC(nullptr);
 	int dpi = GetDeviceCaps(hdc, LOGPIXELSY);
-	ReleaseDC(NULL, hdc);
+	ReleaseDC(nullptr, hdc);
 
 	LOGFONTW logfont;
 	logfont.lfHeight = -MulDiv(cx_fontpoint, dpi, 72);
@@ -821,12 +849,12 @@ void CTextService::_InitFont()
 	logfont.lfPitchAndFamily = DEFAULT_PITCH;
 	wcscpy_s(logfont.lfFaceName, cx_fontname);
 
-	if(hFont == NULL)
+	if(hFont == nullptr)
 	{
 		hFont = CreateFontIndirectW(&logfont);
 	}
 
-	if(cx_drawapi && !_UILessMode && (_pD2DFactory == NULL))
+	if(cx_drawapi && !_UILessMode && (_pD2DFactory == nullptr))
 	{
 		//try delay load
 		__try
@@ -865,7 +893,7 @@ void CTextService::_InitFont()
 
 			if(hr == S_OK)
 			{
-				hr = _pDWFactory->CreateTextFormat(cx_fontname, NULL,
+				hr = _pDWFactory->CreateTextFormat(cx_fontname, nullptr,
 					static_cast<DWRITE_FONT_WEIGHT>(cx_fontweight),
 					(cx_fontitalic ? DWRITE_FONT_STYLE_ITALIC : DWRITE_FONT_STYLE_NORMAL),
 					DWRITE_FONT_STRETCH_NORMAL, (FLOAT)MulDiv(cx_fontpoint, dpi, 72), L"JPN", &_pDWTF);
@@ -894,10 +922,10 @@ void CTextService::_InitFont()
 
 void CTextService::_UninitFont()
 {
-	if(hFont != NULL)
+	if(hFont != nullptr)
 	{
 		DeleteObject(hFont);
-		hFont = NULL;
+		hFont = nullptr;
 	}
 
 	SafeRelease(&_pDWTF);
