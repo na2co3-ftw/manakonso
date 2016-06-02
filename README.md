@@ -48,7 +48,7 @@ manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン�
 
 * 共通
 
-    + %SystemRoot%\IME\IMCRVSKK
+    + %SystemRoot%\IME\IMMANAKONSO
 
 
 ### アンインストール
