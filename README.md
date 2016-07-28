@@ -98,11 +98,11 @@ IME ON/OFF のキーのみ、IME ON → OFF のときにも反映されます。
 
 ## 開発環境
 
-Visual Studio Community 2015 Update 2
+Visual Studio Express 2015 for Windows Desktop Update 2
 
 WiX Toolset v3.10.2
 
-pandoc 1.17.0.2
+pandoc 1.16.0.2
 
 
 ### ビルド手順
