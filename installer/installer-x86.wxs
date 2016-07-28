@@ -46,9 +46,6 @@
       <Component Guid="*" Id="CONFIG_XML">
         <File Id="F_config_xml" Name="config.xml" Source="build\config.xml" />
       </Component>
-      <Component Guid="*" Id="SKKDICT_TXT">
-        <File Id="F_skkdict_txt" Name="skkdict.txt" Source="build\skkdict.txt" />
-      </Component>
       <Component Guid="*" Id="README_HTML">
         <File Id="F_readme_html" Name="README.html" Source="build\README.html" KeyPath="yes">
           <Shortcut Id="S_readme_html" Name="README.html" Directory="IMMANAKONSO_MENU"
@@ -78,7 +75,6 @@
       <ComponentRef Id="MGR_X86" />
       <ComponentRef Id="TIP_X86" />
       <ComponentRef Id="CONFIG_XML" />
-      <ComponentRef Id="SKKDICT_TXT" />
       <ComponentRef Id="LICENSE_TXT" />
       <ComponentRef Id="README_HTML" />
       <ComponentRef Id="REG_X86" />

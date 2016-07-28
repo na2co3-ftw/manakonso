@@ -131,13 +131,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <NMakeBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
-copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
 </NMakeBuildCommandLine>
     <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\config.xml" &gt; nul
-del /f "$(SolutionDir)$(Platform)\$(Configuration)\skkdict.txt" &gt; nul
 </NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
-copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
 </NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>build\</OutDir>
@@ -145,13 +142,10 @@ copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\"
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakeBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
-copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
 </NMakeBuildCommandLine>
     <NMakeCleanCommandLine>del /f "$(SolutionDir)$(Platform)\$(Configuration)\config.xml" &gt; nul
-del /f "$(SolutionDir)$(Platform)\$(Configuration)\skkdict.txt" &gt; nul
 </NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>copy /y "config-share\config.xml" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
-copy /y "config-share\skkdict.txt" "$(SolutionDir)$(Platform)\$(Configuration)\" &gt; nul
 </NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>build\</OutDir>
