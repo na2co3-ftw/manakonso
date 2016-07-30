@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+
+<WixLocalization Culture="en-us" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="Caption">[WixBundleName] セットアップ</String>
+  <String Id="Title">[WixBundleName]</String>
+  <String Id="InstallHeader">Welcome</String>
+  <String Id="InstallMessage">[WixBundleName] をインストールします。 続行するには[\[]インストール[\]]を、インストールディレクトリを変更するには[\[]オプション[\]]を、終了するには[\[]閉じる[\]]をクリックしてください。</String>
+  <String Id="InstallVersion">バージョン [WixBundleVersion]</String>
+  <String Id="ConfirmCancelMessage">キャンセルしてよろしいですか？</String>
+  <String Id="ExecuteUpgradeRelatedBundleMessage">前のバージョン</String>
+  <String Id="HelpHeader">セットアップ ヘルプ</String>
+  <String Id="HelpText">/install | /repair | /uninstall | /layout [directory] - installs, repairs, uninstalls or
+   creates a complete local copy of the bundle in directory. Install is the default.
+
+/passive | /quiet -  displays minimal UI with no prompts or displays no UI and
+   no prompts. By default UI and all prompts are displayed.
+
+/norestart   - suppress any attempts to restart. By default UI will prompt before restart.
+/log log.txt - logs to a specific file. By default a log file is created in %TEMP%.</String>
+  <String Id="HelpCloseButton">閉じる(&amp;C)</String>
+  <String Id="InstallLicenseLinkText">[WixBundleName] &lt;a href="#"&gt;ライセンス&lt;/a&gt;.</String>
+  <String Id="InstallAcceptCheckbox">ライセンスに同意する(&amp;A)</String>
+  <String Id="InstallOptionsButton">オプション(&amp;O)</String>
+  <String Id="InstallInstallButton">インストール(&amp;I)</String>
+  <String Id="InstallCloseButton">閉じる(&amp;C)</String>
+  <String Id="OptionsHeader">セットアップオプション</String>
+  <String Id="OptionsLocationLabel">インストール先:</String>
+  <String Id="OptionsBrowseButton">参照(&amp;R)...</String>
+  <String Id="OptionsOkButton">OK(&amp;O)</String>
+  <String Id="OptionsCancelButton">キャンセル(&amp;C)</String>
+  <String Id="ProgressHeader">セットアップ状況</String>
+  <String Id="ProgressLabel">処理中:</String>
+  <String Id="OverallProgressPackageText">初期化中...</String>
+  <String Id="ProgressCancelButton">キャンセル(&amp;C)</String>
+  <String Id="ModifyHeader">変更</String>
+  <String Id="ModifyRepairButton">修復(&amp;R)</String>
+  <String Id="ModifyUninstallButton">アンインストール(&amp;U)</String>
+  <String Id="ModifyCloseButton">閉じる(&amp;C)</String>
+  <String Id="SuccessRepairHeader">修復が完了しました。</String>
+  <String Id="SuccessUninstallHeader">アンインストールが完了しました。</String>
+  <String Id="SuccessInstallHeader">インストールが完了しました。</String>
+  <String Id="SuccessHeader">セットアップ完了</String>
+  <String Id="SuccessLaunchButton">実行(&amp;L)</String>
+  <String Id="SuccessRestartText">ソフトを使用する前にシステムの再起動が必要です。</String>
+  <String Id="SuccessRestartButton">再起動する(&amp;R)</String>
+  <String Id="SuccessCloseButton">閉じる(&amp;C)</String>
+  <String Id="FailureHeader">セットアップに失敗しました。</String>
+  <String Id="FailureInstallHeader">インストールに失敗しました。</String>
+  <String Id="FailureUninstallHeader">アンインストールに失敗しました。</String>
+  <String Id="FailureRepairHeader">修復に失敗しました。</String>
+  <String Id="FailureHyperlinkLogText">1つ以上の問題が発生しました。問題を解決し、もう一度セットアップを試みてください。詳細情報は&lt;a href="#"&gt;ログファイル&lt;/a&gt;を見てください。</String>
+  <String Id="FailureRestartText">セットアップ前の状態に戻すためにシステムの再起動が必要です。</String>
+  <String Id="FailureRestartButton">再起動する(&amp;R)</String>
+  <String Id="FailureCloseButton">閉じる(&amp;C)</String>
+  <String Id="FilesInUseHeader">ファイルが使用中です。</String>
+  <String Id="FilesInUseLabel">以下のアプリケーションが更新の必要なファイルを使用しています。:</String>
+  <String Id="FilesInUseCloseRadioButton">これらのアプリケーションを一度終了し、再度実行を試みる。(&amp;A)</String>
+  <String Id="FilesInUseDontCloseRadioButton">アプリケーションを終了しない。(再起動が必要になります)(&amp;D)</String>
+  <String Id="FilesInUseOkButton">OK(&amp;O)</String>
+  <String Id="FilesInUseCancelButton">キャンセル(&amp;C)</String>
+</WixLocalization>

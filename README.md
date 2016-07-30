@@ -100,7 +100,7 @@ IME ON/OFF のキーのみ、IME ON → OFF のときにも反映されます。
 
 Visual Studio Express 2015 for Windows Desktop Update 2
 
-WiX Toolset v3.10.2
+WiX Toolset v3.10.3
 
 pandoc 1.16.0.2
 
