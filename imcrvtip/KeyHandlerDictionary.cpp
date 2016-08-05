@@ -4,6 +4,9 @@
 
 void CTextService::_ConnectDic()
 {
+	return;
+	///////
+
 	DWORD dwMode;
 
 	if(WaitNamedPipeW(mgrpipename, NMPWAIT_USE_DEFAULT_WAIT) == 0)
@@ -24,6 +27,9 @@ void CTextService::_ConnectDic()
 
 void CTextService::_DisconnectDic()
 {
+	return;
+	//////
+
 	if(hPipe != INVALID_HANDLE_VALUE)
 	{
 		CloseHandle(hPipe);
@@ -276,7 +282,7 @@ void CTextService::_StartManager()
 		return;
 	}
 
-	StartProcess(g_hInst, IMCRVMGREXE);
+	// StartProcess(g_hInst, IMCRVMGREXE);
 }
 
 void CTextService::_StartConfigure()

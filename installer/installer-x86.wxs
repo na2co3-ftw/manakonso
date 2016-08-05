@@ -34,9 +34,9 @@
       <Component Guid="*" Id="CNF_X86">
         <File Id="F_immanacnf_x86" Name="immanacnf.exe" Source="..\Win32\Release\immanacnf.exe" />
       </Component>
-      <Component Guid="*" Id="MGR_X86">
+      <!-- <Component Guid="*" Id="MGR_X86">
         <File Id="F_immanamgr_x86" Name="immanamgr.exe" Source="..\Win32\Release\immanamgr.exe" />
-      </Component>
+      </Component> -->
       <Component Guid="*" Id="TIP_X86">
         <File Id="F_immanatip_x86" Name="immanatip.dll" Source="..\Win32\Release\immanatip.dll" SelfRegCost="1" />
       </Component>
@@ -62,22 +62,22 @@
       </Component>
     </DirectoryRef>
 
-    <Component Guid="*" Id="REG_X86" Directory="TARGETDIR">
+    <!-- <Component Guid="*" Id="REG_X86" Directory="TARGETDIR">
       <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Run">
         <RegistryValue Action="write" Type="string" Name="immanamgr"
           Value="&quot;[%SystemRoot]\System32\IME\IMMANAKONSO\immanamgr.exe&quot;" />
       </RegistryKey>
       <Condition><![CDATA[NOT VersionNT64]]></Condition>
-    </Component>
+    </Component> -->
 
     <Feature Id="Default" Title="Main" Level="1">
       <ComponentRef Id="CNF_X86" />
-      <ComponentRef Id="MGR_X86" />
+      <!-- <ComponentRef Id="MGR_X86" /> -->
       <ComponentRef Id="TIP_X86" />
       <ComponentRef Id="CONFIG_XML" />
       <ComponentRef Id="LICENSE_TXT" />
       <ComponentRef Id="README_HTML" />
-      <ComponentRef Id="REG_X86" />
+      <!-- <ComponentRef Id="REG_X86" /> -->
     </Feature>
 
     <DirectoryRef Id="TARGETDIR">

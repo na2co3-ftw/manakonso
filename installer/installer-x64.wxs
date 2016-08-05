@@ -23,26 +23,26 @@
       <Component Guid="*" Id="CNF_X64" Win64="yes">
         <File Id="F_immanacnf_x64" Name="immanacnf.exe" Source="..\x64\Release\immanacnf.exe" />
       </Component>
-      <Component Guid="*" Id="MGR_X64" Win64="yes">
+      <!-- <Component Guid="*" Id="MGR_X64" Win64="yes">
         <File Id="F_immanamgr_x64" Name="immanamgr.exe" Source="..\x64\Release\immanamgr.exe" />
-      </Component>
+      </Component> -->
       <Component Guid="*" Id="TIP_X64" Win64="yes">
         <File Id="F_immanatip_x64" Name="immanatip.dll" Source="..\x64\Release\immanatip.dll" SelfRegCost="1" />
       </Component>
     </DirectoryRef>
 
-    <Component Guid="*" Id="REG_X64" Directory="TARGETDIR" Win64="yes">
+    <!-- <Component Guid="*" Id="REG_X64" Directory="TARGETDIR" Win64="yes">
       <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Run">
         <RegistryValue Action="write" Type="string" Name="immanamgr"
           Value="&quot;[%SystemRoot]\System32\IME\IMMANAKONSO\immanamgr.exe&quot;" />
       </RegistryKey>
-    </Component>
+    </Component> -->
 
     <Feature Id="Default" Title="Main" Level="1">
       <ComponentRef Id="CNF_X64" />
-      <ComponentRef Id="MGR_X64" />
+      <!-- <ComponentRef Id="MGR_X64" /> -->
       <ComponentRef Id="TIP_X64" />
-      <ComponentRef Id="REG_X64" />
+      <!-- <ComponentRef Id="REG_X64" /> -->
     </Feature>
 
     <DirectoryRef Id="TARGETDIR">
