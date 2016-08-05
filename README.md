@@ -1,10 +1,11 @@
 
-# 京極入致 (manakonso)
+# 京極入致 (manakonso) ver. 0.1.0
 
 Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言語 凪霧")のIMEを開発中です。
 
 [CorvusSKK](https://github.com/nathancorvussolis/corvusskk) を基にして開発しています。
 
+京字が入力できるだけで極字変換はできませんが、既存のIMEを使わずに京字が入力できるだけでも利便性があるということなので一旦リリースします。
 
 ## インストール
 
