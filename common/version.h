@@ -8,7 +8,7 @@
 #else
 #define TEXTSERVICE_DESC	TEXTSERVICE_NAME L"_DEBUG"
 #endif
-#define TEXTSERVICE_DIR		L"IMMANASKK"
+#define TEXTSERVICE_DIR		L"IMMANAKONSO"
 #define TEXTSERVICE_VER		L"0.1.0"
 
 //for resource
