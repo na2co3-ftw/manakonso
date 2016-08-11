@@ -1,5 +1,5 @@
 
-# 京極入致 (manakonso) ver. 0.1.0
+# 京極入致 (manakonso) ver. 0.1.1
 
 Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言語 凪霧")のIMEを開発中です。
 
@@ -35,6 +35,9 @@ Windowsで動作する[凪霧](http://maykloaayukawa.wix.com/nagili "人工言�
 manakonso-X.Y.Z.exe を実行してください。 (X, Y, Z はバージョン番号)
 
 アップデートの後はOSを再起動しておくと安全です。
+
+Windows Vista/7 では、インストールに極端に時間がかかるときがあります。
+その場合は、時間をおいて再度インストールを試みてください。
 
 インストール先
 
