@@ -38,17 +38,9 @@ FILESUBTYPE        VFT2_UNKNOWN
 
 IDI_0_SKK          ICON  "Icon\\manakonso.ico"
 IDI_X_DEFAULT      ICON  "Icon\\xDefault.ico"
-IDI_X_HIRAGANA     ICON  "Icon\\xHiragana.ico"
-IDI_X_KATAKANA     ICON  "Icon\\xKatakana.ico"
-IDI_X_KATAKANA1    ICON  "Icon\\xKatakana1.ico"
-IDI_X_JLATIN       ICON  "Icon\\xJLatin.ico"
-IDI_X_ASCII        ICON  "Icon\\xAscii.ico"
+IDI_X_YULA         ICON  "Icon\\xYula.ico"
 IDI_Z_DEFAULT      ICON  "Icon\\zDefault.ico"
-IDI_Z_HIRAGANA     ICON  "Icon\\zHiragana.ico"
-IDI_Z_KATAKANA     ICON  "Icon\\zKatakana.ico"
-IDI_Z_KATAKANA1    ICON  "Icon\\zKatakana1.ico"
-IDI_Z_JLATIN       ICON  "Icon\\zJLatin.ico"
-IDI_Z_ASCII        ICON  "Icon\\zAscii.ico"
+IDI_Z_YULA         ICON  "Icon\\zYula.ico"
 
 IDR_SYSTRAY_MENU MENU
 {

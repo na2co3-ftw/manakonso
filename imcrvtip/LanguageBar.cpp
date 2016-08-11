@@ -28,12 +28,12 @@ static const struct {
 // 16 colors (black only) icons
 static const WORD iconIDX[] =
 {
-	IDI_X_DEFAULT, IDI_X_HIRAGANA, IDI_X_KATAKANA, IDI_X_KATAKANA1, IDI_X_JLATIN, IDI_X_ASCII
+	IDI_X_DEFAULT, IDI_X_YULA
 };
 // png icons
 static const WORD iconIDZ[] =
 {
-	IDI_Z_DEFAULT, IDI_Z_HIRAGANA, IDI_Z_KATAKANA, IDI_Z_KATAKANA1, IDI_Z_JLATIN, IDI_Z_ASCII
+	IDI_Z_DEFAULT, IDI_Z_YULA
 };
 
 CLangBarItemButton::CLangBarItemButton(CTextService *pTextService, REFGUID guid)

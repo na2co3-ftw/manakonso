@@ -149,43 +149,19 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Icon\xAscii.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Icon\xDefault.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\xHiragana.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\xJLatin.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\xKatakana.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\xKatakana1.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\zAscii.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Icon\zDefault.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Icon\zHiragana.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\zJLatin.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\zKatakana.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Icon\zKatakana1.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Icon\manakonso.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Icon\xYula.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Icon\zYula.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

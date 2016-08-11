@@ -251,18 +251,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icon\manakonso.ico" />
-    <Image Include="Icon\xAscii.ico" />
     <Image Include="Icon\xDefault.ico" />
-    <Image Include="Icon\xHiragana.ico" />
-    <Image Include="Icon\xJLatin.ico" />
-    <Image Include="Icon\xKatakana.ico" />
-    <Image Include="Icon\xKatakana1.ico" />
-    <Image Include="Icon\zAscii.ico" />
+    <Image Include="Icon\xYula.ico" />
     <Image Include="Icon\zDefault.ico" />
-    <Image Include="Icon\zHiragana.ico" />
-    <Image Include="Icon\zJLatin.ico" />
-    <Image Include="Icon\zKatakana.ico" />
-    <Image Include="Icon\zKatakana1.ico" />
+    <Image Include="Icon\zYula.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
