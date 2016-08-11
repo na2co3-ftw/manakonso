@@ -173,7 +173,7 @@ INT_PTR CALLBACK DlgProcDictionary(HWND hDlg, UINT message, WPARAM wParam, LPARA
 		case IDC_BUTTON_SKK_DIC_MAKE:
 			if(IDOK == MessageBoxW(hDlg,
 				L"SKK辞書を取り込みます。\nよろしいですか？",
-				TextServiceDesc, MB_OKCANCEL | MB_ICONQUESTION))
+				TextServiceCaption, MB_OKCANCEL | MB_ICONQUESTION))
 			{
 				MakeSKKDic(hDlg);
 			}

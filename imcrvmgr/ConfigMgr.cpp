@@ -49,8 +49,8 @@ void UpdateConfigPath()
 {
 	PWSTR knownfolderpath = nullptr;
 
-	//%AppData%\\CorvusSKK\\config.xml
-	//%AppData%\\CorvusSKK\\skkdict.txt
+	//%AppData%\\manakonso\\config.xml
+	//%AppData%\\manakonso\\skkdict.txt
 	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 	{
 		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s", knownfolderpath, TextServiceDesc, fnconfigxml);
@@ -97,7 +97,7 @@ void UpdateConfigPath()
 			}
 		}
 #else
-		//%SystemRoot%\\IME\\IMCRVSKK\\skkdict.txt
+		//%SystemRoot%\\IME\\IMMANAKONSO\\skkdict.txt
 		if(SHGetKnownFolderPath(FOLDERID_Windows, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 		{
 			_snwprintf_s(pathskkdic, _TRUNCATE, L"%s\\%s\\%s\\%s", knownfolderpath, L"IME", TEXTSERVICE_DIR, fnskkdic);

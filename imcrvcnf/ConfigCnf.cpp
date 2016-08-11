@@ -3,6 +3,7 @@
 #include "imcrvcnf.h"
 
 LPCWSTR TextServiceDesc = TEXTSERVICE_DESC;
+LPCWSTR TextServiceCaption = TEXTSERVICE_DESC_ALT;
 
 IXmlWriter *pXmlWriter;
 IStream *pXmlFileStream;

@@ -590,13 +590,13 @@ void MakeSKKDicWaitThread(void *p)
 
 	if(SkkDicInfo.hr == S_OK)
 	{
-		MessageBoxW(SkkDicInfo.parent, L"完了しました。", TextServiceDesc, MB_OK | MB_ICONINFORMATION);
+		MessageBoxW(SkkDicInfo.parent, L"完了しました。", TextServiceCaption, MB_OK | MB_ICONINFORMATION);
 	}
 	else if(SkkDicInfo.hr == E_ABORT)
 	{
 		_wremove(pathskkdic);
 
-		MessageBoxW(SkkDicInfo.parent, L"中断しました。", TextServiceDesc, MB_OK | MB_ICONWARNING);
+		MessageBoxW(SkkDicInfo.parent, L"中断しました。", TextServiceCaption, MB_OK | MB_ICONWARNING);
 	}
 	else
 	{
@@ -612,7 +612,7 @@ void MakeSKKDicWaitThread(void *p)
 			break;
 		}
 		_snwprintf_s(msg, _TRUNCATE, L"失敗しました。(%s)\n\n%s", errmsg, SkkDicInfo.path);
-		MessageBoxW(SkkDicInfo.parent, msg, TextServiceDesc, MB_OK | MB_ICONERROR);
+		MessageBoxW(SkkDicInfo.parent, msg, TextServiceCaption, MB_OK | MB_ICONERROR);
 	}
 	return;
 }

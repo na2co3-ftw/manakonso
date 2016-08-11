@@ -77,10 +77,10 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	RegisterClassExW(&wc);
 
 #ifdef _DEBUG
-	hWnd = CreateWindowW(DictionaryManagerClass, TextServiceDesc,
+	hWnd = CreateWindowW(DictionaryManagerClass, TEXTSERVICE_DESC_ALT,
 		WS_OVERLAPPEDWINDOW, 0, 0, 600, 800, nullptr, nullptr, hInst, nullptr);
 #else
-	hWnd = CreateWindowW(DictionaryManagerClass, TextServiceDesc,
+	hWnd = CreateWindowW(DictionaryManagerClass, TEXTSERVICE_DESC_ALT,
 		WS_POPUP, 0, 0, 0, 0, nullptr, nullptr, hInst, nullptr);
 #endif
 

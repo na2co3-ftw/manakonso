@@ -82,7 +82,7 @@ INT_PTR CALLBACK DlgProcKana(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			if(GetSaveFileNameW(&ofn))
 			{
 				SaveKanaTxt(hDlg, ofn.lpstrFile);
-				MessageBoxW(hDlg, L"完了しました。", TextServiceDesc, MB_OK | MB_ICONINFORMATION);
+				MessageBoxW(hDlg, L"完了しました。", TextServiceCaption, MB_OK | MB_ICONINFORMATION);
 			}
 			break;
 

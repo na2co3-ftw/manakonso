@@ -62,7 +62,7 @@ void CTextService::_CreateConfigPath()
 
 	ZeroMemory(pathconfigxml, sizeof(pathconfigxml));
 
-	//%AppData%\\CorvusSKK\\config.xml
+	//%AppData%\\manakonso\\config.xml
 	if(SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 	{
 		_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s", knownfolderpath, TextServiceDesc, fnconfigxml);
@@ -84,7 +84,7 @@ void CTextService::_CreateConfigPath()
 			}
 		}
 #else
-		//%SystemRoot%\\IME\\IMCRVSKK\\config.xml
+		//%SystemRoot%\\IME\\IMMANAKONSO\\config.xml
 		if(SHGetKnownFolderPath(FOLDERID_Windows, KF_FLAG_DONT_VERIFY, nullptr, &knownfolderpath) == S_OK)
 		{
 			_snwprintf_s(pathconfigxml, _TRUNCATE, L"%s\\%s\\%s\\%s", knownfolderpath, L"IME", TEXTSERVICE_DIR, fnconfigxml);

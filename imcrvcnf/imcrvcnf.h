@@ -51,6 +51,7 @@ INT_PTR CALLBACK DlgProcKana(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK DlgProcJLatin(HWND, UINT, WPARAM, LPARAM);
 
 extern LPCWSTR TextServiceDesc;
+extern LPCWSTR TextServiceCaption;
 
 extern IXmlWriter *pXmlWriter;
 extern IStream *pXmlFileStream;
